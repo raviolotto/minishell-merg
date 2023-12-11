@@ -1,0 +1,3 @@
+appunti
+aggiungere \ al path
+controllare pipe status
