@@ -6,7 +6,7 @@
 /*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:16:18 by jcardina          #+#    #+#             */
-/*   Updated: 2023/11/27 15:57:45 by jcardina         ###   ########.fr       */
+/*   Updated: 2023/12/11 19:11:56 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct s_lex
 	char			**command2;
 	int				token;	//1 = |, 2 = >, 3 = <, 4 = >>, 5 = <<, 0 = é un comando
 	int				pipe_status;	//0 = prima pipe, 1 pipe in mezzo, 2 pipe finale
+	int				builtin;
 	struct s_lex	*next;
 }	t_lex;
 

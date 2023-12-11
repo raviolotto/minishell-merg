@@ -6,7 +6,7 @@
 /*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:45:46 by jcardina          #+#    #+#             */
-/*   Updated: 2023/11/27 16:56:32 by jcardina         ###   ########.fr       */
+/*   Updated: 2023/12/11 19:14:14 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,11 @@ char *pathfinder(char *command, char **path)
 int	build_matrix(char *str, t_lex *node, t_general *general)
 {
 	char	*tmp;
-	
+
 	node->command2 = ft_split(str, ' ');
+	node->builtin = dumb_buildin_check(node->command2[0]);
+	if (node->builtin != 0)
+		return(0);
 	tmp = pathfinder(node->command2[0], general->path);
 	free(node->command2[0]);
 	node->command2[0] = tmp;

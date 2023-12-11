@@ -6,7 +6,7 @@
 /*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 16:17:29 by jcardina          #+#    #+#             */
-/*   Updated: 2023/12/11 16:09:18 by jcardina         ###   ########.fr       */
+/*   Updated: 2023/12/11 19:15:34 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	main(int ac, char **av, char **envp)
 		{
 			parser(&general);
 			tmp = general.lexer;
-			
+
 			//differenziare comandi builtin fra quelli di sistema
 			execute_external_command(tmp->command2);
 			wait(NULL);
@@ -64,6 +64,7 @@ int	main(int ac, char **av, char **envp)
 				printf("token %i\n", tmp->token);
 				printf("pipe steatus %i\n", tmp->pipe_status);
 				printf("command %s\n", tmp->command);
+				printf("builtin == %i\n", tmp->builtin);
 				print_matrix(tmp->command2);
 				printf("\n");
 				tmp = tmp->next;
