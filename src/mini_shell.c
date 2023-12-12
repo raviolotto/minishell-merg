@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 16:17:29 by jcardina          #+#    #+#             */
-/*   Updated: 2023/12/12 17:28:08 by lmorelli         ###   ########.fr       */
+/*   Updated: 2023/12/12 19:58:54 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 static int is_whitespace_input(const char *str)
 {
-    while (*str)
+	while (*str)
 	{
-        if (iswhite(*str))
-            return 0;
-        str++;
-    }
-    return (1);
+		if (iswhite(*str))
+			return 0;
+		str++;
+	}
+	return (1);
 }
 
 void	init(t_general *general, char **envp)
