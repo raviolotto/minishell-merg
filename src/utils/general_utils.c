@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:33:01 by jcardina          #+#    #+#             */
-/*   Updated: 2023/12/12 15:18:46 by lmorelli         ###   ########.fr       */
+/*   Updated: 2023/12/12 17:25:54 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	print_matrix(char **matrix)
 int	dumb_builtin_check(char *command)
 {
 	if (ft_strncmp(command, "echo", ft_strlen(command)) == 0)
-	 	return (1);
+		return (1);
 	else if (ft_strncmp(command, "cd", ft_strlen(command)) == 0)
 		return (2);
 	else if (ft_strncmp(command, "pwd", ft_strlen(command)) == 0)

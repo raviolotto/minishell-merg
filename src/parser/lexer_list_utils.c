@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_list_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 12:12:07 by jcardina          #+#    #+#             */
-/*   Updated: 2023/11/13 16:52:09 by jcardina         ###   ########.fr       */
+/*   Updated: 2023/12/12 17:17:33 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	afalcons(t_lex *node)
 {
 	if (node->next)
 		afalcons(node->next);
+	free_matrix(node->command2);
 	free(node->command);
 	free(node);
 }

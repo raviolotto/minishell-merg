@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:45:46 by jcardina          #+#    #+#             */
-/*   Updated: 2023/12/12 15:03:44 by lmorelli         ###   ########.fr       */
+/*   Updated: 2023/12/12 17:27:54 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ char *pathfinder(char *command, char **path)
 {
 	char *result = NULL;
 	int i = 0;
+	char *fullPath;
 
 	while (path[i] != NULL)
 	{
@@ -25,7 +26,7 @@ char *pathfinder(char *command, char **path)
             exit(EXIT_FAILURE);
         }
 
-        char *fullPath = ft_strjoin(tempPath, command);
+        fullPath = ft_strjoin(tempPath, command);
         free(tempPath);
 
         if (!fullPath) {
@@ -42,8 +43,8 @@ char *pathfinder(char *command, char **path)
 	}
 	if (result == NULL)
 	{
-		fprintf(stderr, "Il comando '%s' non è stato trovato nei percorsi specificati.\n", command); // std 1.ERROR, 2. input ed 3. output? le precedenti task sonon gia´ state eseguite?
-		result = "";
+		printf("Il comando '%s' non è stato trovato nei percorsi specificati.\n", command); // std 1.ERROR, 2. input ed 3. output? le precedenti task sonon gia´ state eseguite?
+		//result = "ciao";
 	}
 	return (result);
 }
@@ -56,8 +57,11 @@ int	build_matrix(char *str, t_lex *node, t_general *general)
 	if (node->builtin != 0)
 		return(0);
 	tmp = pathfinder(node->command2[0], general->path);
-	free(node->command2[0]);
-	node->command2[0] = tmp;
+	if(tmp != NULL)
+	{
+		free(node->command2[0]);
+		node->command2[0] = tmp;
+	}
 	return (0);
 }
 

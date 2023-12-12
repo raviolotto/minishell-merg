@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 16:17:29 by jcardina          #+#    #+#             */
-/*   Updated: 2023/12/12 15:16:48 by lmorelli         ###   ########.fr       */
+/*   Updated: 2023/12/12 17:28:08 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,7 @@ int	main(int ac, char **av, char **envp)
 		if (!is_whitespace_input(general.args))
 		{
 			parser(&general);
-			// tmp = general.lexer;
-
-			// //differenziare comandi builtin fra quelli di sistema
-			// if (tmp->builtin == 0) {
-			// 	execute_external_command(tmp->command2);
-			// 	wait(NULL);
-			// } else {
-			// 	//executebuiltin(tmp->built...)
-			// }
-
+			tmp = general.lexer;
 
 			// //debug info
 			// while (tmp != NULL)
@@ -74,8 +65,8 @@ int	main(int ac, char **av, char **envp)
 			// 	printf("\n");
 			// 	tmp = tmp->next;
 			// }
-		//free memory
 		executor(&general);
+		//free memory
 		afalcons(general.lexer);
 		general.lexer = NULL;
 		}
