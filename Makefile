@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+         #
+#    By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 18:22:29 by jcardina          #+#    #+#              #
-#    Updated: 2023/11/24 16:51:19 by jcardina         ###   ########.fr        #
+#    Updated: 2023/12/12 15:13:18 by lmorelli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,10 @@ src = \
 		src/parser/path.c\
 		src/utils/general_utils.c\
 		src/ext_command.c\
+		src/builtin/pwd.c\
+		src/builtin/env.c\
+		src/executor/executor.c\
+		#src/builtin/cd.c\
 
 OBJ = $(src:%.c=%.o)
 

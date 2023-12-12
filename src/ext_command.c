@@ -39,7 +39,7 @@ int execute_external_command(char **args)
         free(res);
         return (1);
     }
-    perror("error, the command doesn't exist or you don't have the necessary permissions");
+    // perror("error, the command doesn't exist or you don't have the necessary permissions");
     free(res);
     return 0;
 }

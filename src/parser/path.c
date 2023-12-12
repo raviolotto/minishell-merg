@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:45:46 by jcardina          #+#    #+#             */
-/*   Updated: 2023/12/11 19:14:14 by jcardina         ###   ########.fr       */
+/*   Updated: 2023/12/12 15:03:44 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char *pathfinder(char *command, char **path)
 	}
 	if (result == NULL)
 	{
-		fprintf(stderr, "Il comando '%s' non è stato trovato nei percorsi specificati.\n", command);
+		fprintf(stderr, "Il comando '%s' non è stato trovato nei percorsi specificati.\n", command); // std 1.ERROR, 2. input ed 3. output? le precedenti task sonon gia´ state eseguite?
 		result = "";
 	}
 	return (result);
@@ -52,7 +52,7 @@ int	build_matrix(char *str, t_lex *node, t_general *general)
 	char	*tmp;
 
 	node->command2 = ft_split(str, ' ');
-	node->builtin = dumb_buildin_check(node->command2[0]);
+	node->builtin = dumb_builtin_check(node->command2[0]);
 	if (node->builtin != 0)
 		return(0);
 	tmp = pathfinder(node->command2[0], general->path);

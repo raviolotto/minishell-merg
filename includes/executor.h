@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 14:44:08 by jcardina          #+#    #+#             */
-/*   Updated: 2023/12/12 14:56:40 by lmorelli         ###   ########.fr       */
+/*   Created: 2023/12/12 14:50:44 by lmorelli          #+#    #+#             */
+/*   Updated: 2023/12/12 15:11:36 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef EXECUTOR_H
+#define  EXECUTOR_H
 
-void	free_matrix(char **matrix);
-char	**matrix_dup(char **matrix);
-void	print_matrix(char **matrix);
-int		dumb_builtin_check(char *command);
+void    executor(t_general *general);
 
-#endif
+# endif

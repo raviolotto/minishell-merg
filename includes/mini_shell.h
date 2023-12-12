@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_shell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:31:51 by jcardina          #+#    #+#             */
-/*   Updated: 2023/11/27 17:15:35 by jcardina         ###   ########.fr       */
+/*   Updated: 2023/12/12 14:51:53 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,11 @@
 # include "parser.h"
 # include "visual.h"
 # include "utils.h"
+# include "builtin.h"
+# include "executor.h"
 
 # include <sys/wait.h>
+# include <limits.h>  // For PATH_MAX
 
 #endif
 
