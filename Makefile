@@ -6,7 +6,7 @@
 #    By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 18:22:29 by jcardina          #+#    #+#              #
-#    Updated: 2023/12/12 15:13:18 by lmorelli         ###   ########.fr        #
+#    Updated: 2023/12/12 18:58:09 by lmorelli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ src = \
 		src/builtin/pwd.c\
 		src/builtin/env.c\
 		src/executor/executor.c\
+		src/builtin/ft_myexport.c\
 		#src/builtin/cd.c\
 
 OBJ = $(src:%.c=%.o)

@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:49:11 by lmorelli          #+#    #+#             */
-/*   Updated: 2023/12/12 15:17:06 by lmorelli         ###   ########.fr       */
+/*   Updated: 2023/12/12 19:08:00 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void    builtinmanager(t_lex *node, t_general *general)
 	// 	handle_cd();
     if (node->builtin == 3)
         handle_pwd();
-    // if (node->builtin == 4)
-    //     //handle_export
+    if (node->builtin == 4)
+        handle_export(general, node);
     // if (node->builtin == 5)
     //     //handle_unset
     if (node->builtin == 6)
