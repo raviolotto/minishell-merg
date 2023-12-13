@@ -2,5 +2,5 @@
 
 void handle_env(t_general *general)
 {
-    print_matrix(general->envp2);
+	print_matrix(general->envp2);
 }

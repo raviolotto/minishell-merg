@@ -6,7 +6,7 @@
 /*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:16:18 by jcardina          #+#    #+#             */
-/*   Updated: 2023/12/11 19:11:56 by jcardina         ###   ########.fr       */
+/*   Updated: 2023/12/13 17:30:13 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_general
 {
 	char			*args;
 	char			**envp2;
+	char			**enexp;
 	char			**path;
 	struct s_lex	*lexer;
 }	t_general;

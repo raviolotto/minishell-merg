@@ -6,7 +6,7 @@
 /*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 16:17:29 by jcardina          #+#    #+#             */
-/*   Updated: 2023/12/12 19:58:54 by jcardina         ###   ########.fr       */
+/*   Updated: 2023/12/13 17:34:34 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	init(t_general *general, char **envp)
 {
 	general->lexer = NULL;
 	general->envp2 = matrix_dup(envp);
+	general->enexp = matrux_dup(general->envp2);
 	general->path = ft_split(getenv("PATH"), ':');
 	printf(PINK"\n%s\n", INTRO);
 	printf("\n%s\n"RESET, HELLO2);
@@ -47,6 +48,10 @@ int	main(int ac, char **av, char **envp)
 	while (1)
 	{
 		general.args = readline("kitty shell>");
+		if (general.args == NULL)
+			exit(1);
+		//ricordati di freeeeeare
+		printf("%p\n", general.args);
 		if (general.args && *general.args)
 			add_history(general.args);
 		if (!is_whitespace_input(general.args))
