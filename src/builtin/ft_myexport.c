@@ -6,7 +6,7 @@
 /*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:51:44 by lmorelli          #+#    #+#             */
-/*   Updated: 2023/12/14 16:17:54 by jcardina         ###   ########.fr       */
+/*   Updated: 2023/12/14 16:51:48 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,43 +37,34 @@ int	uguallen(char *str)
 	return (i);
 }
 
-int my_setenv(char *name, char *value, char **environ)
+int my_setenv(char *name, char *value, char ***environ)
 {
 	char	*env_var;
-	//char	**matrixtmp;
+	char	**matrixtmp;
 	int		index;
 
 	env_var = ft_strjoin(name, value);
 	index = 0;
     // Cerca se la variabile d'ambiente esiste già
-	while (environ[index] != NULL)
+	while ((*environ)[index] != NULL)
 	{
-		if (ft_strncmp(environ[index], name, ft_strlen(name)) == 0)
+		if (ft_strncmp((*environ)[index], name, ft_strlen(name)) == 0)
 		{
 			write(1, "AAA\n", 4);
-			free(environ[index]);
-			environ[index] = env_var; // Aggiorna il valore della variabile
+			free((*environ)[index]);
+			(*environ)[index] = env_var; // Aggiorna il valore della variabile
 			return 0;
 		}
 		index++;
 	}
-
-	// Se la variabile d'ambiente non esiste, aggiungila alla lista
-	// gestire qui la memoria
-	// environ[index] = env_var;
-	// environ[index + 1] = NULL;
-	matrixtmp = matrix_newline(environ, env_var);
-	print_matrix(matrixtmp);
-	free_matrix(environ);
-	printf("---------------------%p\n", environ);
-	environ = matrixtmp;
-	envprint_matrix(matrixtmp);
+	matrixtmp = matrix_newline(*environ, env_var);
+	*environ = matrixtmp;
 
 	return 0; // Operazione completata con successo
 }
 
 // Funzione per gestire il comando export
-void my_export(char *arg, char **env)
+void my_export(char *arg, char ***env, char ***enexp)
 {
 	char	*name;
 	char	*value;
@@ -85,8 +76,7 @@ void my_export(char *arg, char **env)
 		value = ft_substr(arg, uguallen(arg), ft_strlen(arg));
 	if (name != NULL && value == NULL)
 	{
-		//funzione che modifica la matrice per bene;
-		//fprintf(stderr, "Errore: formato non valido per export\n");
+		*enexp = matrix_newline(*enexp, name);
 		return;
 	}
 	if (my_setenv(name, value, env) != 0)
@@ -103,7 +93,7 @@ void	handle_export(t_general *general, t_lex *node)
 	if	(node->command2[i] == NULL)
 		print_export(general->enexp);
 	while (node->command2[i]){
-		my_export(node->command2[i], general->envp2);
+		my_export(node->command2[i], &(general->envp2), &(general->enexp));
 		i++;
 	}
 }
