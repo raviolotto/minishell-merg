@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_myexport.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:51:44 by lmorelli          #+#    #+#             */
-/*   Updated: 2023/12/14 16:51:48 by jcardina         ###   ########.fr       */
+/*   Updated: 2023/12/14 18:02:44 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,10 @@ void my_export(char *arg, char ***env, char ***enexp)
 		*enexp = matrix_newline(*enexp, name);
 		return;
 	}
-	if (my_setenv(name, value, env) != 0)
-		fprintf(stderr, "Errore nell'impostare la variabile d'ambiente\n");
+	my_setenv(name, value, env);
+	my_setenv(name, value, enexp);
+	// if (my_setenv(name, value, env) != 0 && my_setenv(name, value, enexp) != 0)
+	// 	fprintf(stderr, "Errore nell'impostare la variabile d'ambiente\n");
 	free(name);
 	free(value);
 }
