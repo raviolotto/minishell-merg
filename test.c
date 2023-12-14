@@ -3,75 +3,79 @@
 #include <string.h>
 #include <unistd.h>
 
-#define MAX_PATHS 5
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-char *ft_strjoin(char const *s1, char const *s2) {
-    if (!s1 || !s2)
-        return NULL;
+char **matrix_new_line(char **matrix, char *str) {
+    // Trova la lunghezza della matrice
+    int len = 0;
+    if (matrix != NULL) {
+        while (matrix[len] != NULL) {
+            len++;
+        }
+    }
 
-    size_t len1 = strlen(s1);
-    size_t len2 = strlen(s2);
-    size_t size = len1 + len2 + 1;
-
-    char *str = malloc(sizeof(char) * size);
-    if (!str) {
-        perror("Errore nell'allocazione di memoria");
+    // Alloca memoria per una nuova matrice con spazio per len+2 puntatori (uno per la nuova stringa e uno per NULL)
+    char **newMatrix = (char **)calloc((len + 2), sizeof(char *));
+    if (newMatrix == NULL) {
+        fprintf(stderr, "Errore di allocazione di memoria per la nuova matrice.\n");
         exit(EXIT_FAILURE);
     }
 
-    strcpy(str, s1);
-    strcat(str, s2);
-
-    return str;
-}
-
-char *pathfinder(char *command, char **path) {
-    char *result = NULL;
-    int i = 0;
-
-    while (path[i] != NULL) {
-        // Chiamiamo ft_strjoin due volte per aggiungere uno slash tra path[i] e command
-        char *tempPath = ft_strjoin(path[i], "/");
-        if (!tempPath) {
-            perror("Errore nell'allocazione di memoria");
+    // Copia i dati dalla vecchia matrice alla nuova
+    for (int i = 0; i < len; i++) {
+        int strLen = strlen(matrix[i]) + 1;
+        newMatrix[i] = (char *)malloc(strLen);
+        if (newMatrix[i] == NULL) {
+            fprintf(stderr, "Errore di allocazione di memoria per la nuova stringa.\n");
             exit(EXIT_FAILURE);
         }
-
-        char *fullPath = ft_strjoin(tempPath, command);
-        free(tempPath);  // Liberiamo la memoria temporanea
-
-        if (!fullPath) {
-            perror("Errore nell'allocazione di memoria");
-            exit(EXIT_FAILURE);
-        }
-
-        if (access(fullPath, F_OK | X_OK) == 0) {
-            result = fullPath;
-            break;
-        }
-
-        free(fullPath);
-        i++;
+        strcpy(newMatrix[i], matrix[i]);
     }
 
-    // Libera la memoria allocata per il percorso completo se non trovato
-    if (result == NULL) {
-        fprintf(stderr, "Il comando '%s' non è stato trovato nei percorsi specificati.\n", command);
+    // Alloca memoria per la nuova stringa e copia il contenuto
+    int newStrLen = strlen(str) + 1;
+    newMatrix[len] = (char *)malloc(newStrLen);
+    if (newMatrix[len] == NULL) {
+        fprintf(stderr, "Errore di allocazione di memoria per la nuova stringa.\n");
+        exit(EXIT_FAILURE);
+    }
+    strcpy(newMatrix[len], str);
+
+    // Imposta il nuovo puntatore a NULL
+    newMatrix[len + 1] = NULL;
+
+    // Dealloca la vecchia matrice e restituisci la nuova
+    if (matrix != NULL) {
+        for (int i = 0; i < len; i++) {
+            free(matrix[i]);
+        }
+        free(matrix);
     }
 
-    return result;
+    return newMatrix;
 }
 
 int main() {
-    char *command = "cat";
-    char *paths[MAX_PATHS] = {"/bin", "/usr/bin", NULL};
+    char **myMatrix = NULL;
 
-    char *result = pathfinder(command, paths);
+    // Aggiungi una nuova stringa alla matrice
+    myMatrix = matrix_new_line(myMatrix, "Prima stringa");
 
-    if (result != NULL) {
-        printf("Il percorso per il comando '%s' è: %s\n", command, result);
-        free(result);
+    // Aggiungi un'altra stringa alla matrice
+    myMatrix = matrix_new_line(myMatrix, "Seconda stringa");
+
+    // Stampa la matrice
+    for (int i = 0; myMatrix[i] != NULL; i++) {
+        printf("%s\n", myMatrix[i]);
     }
+
+    // Dealloca la memoria allocata
+    for (int i = 0; myMatrix[i] != NULL; i++) {
+        free(myMatrix[i]);
+    }
+    free(myMatrix);
 
     return 0;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:33:01 by jcardina          #+#    #+#             */
-/*   Updated: 2023/12/12 17:25:54 by lmorelli         ###   ########.fr       */
+/*   Updated: 2023/12/14 16:17:32 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,3 +80,38 @@ int	dumb_builtin_check(char *command)
 		return (0);
 }
 
+int	matrixlen(char **matrix)
+{
+	int	i;
+
+	i = 0;
+	while (matrix[i] != NULL)
+	i++;
+	return (i);
+}
+
+char	**matrix_newline(char **matrix, char *str)
+{
+	int		len;
+	char	**newmatrix;
+
+	len = matrixlen(matrix);
+	newmatrix = malloc((len + 2) * sizeof(char *));
+	if(!newmatrix)
+		perror("errore allocazione di memoria");
+	len = 0;
+	while(matrix[len] != NULL)
+	{
+		write(1, "MATRIX\n", 7);
+		newmatrix[len] = ft_strdup(matrix[len]);
+		len ++;
+	}
+	///qui a differenza delle altre volte non alloco nuova memoria perhé essa é gia allocata dalla funzione my_export o my_setenv;
+	newmatrix[len] = str;
+	newmatrix[len + 1] = NULL;
+	//print_matrix(newmatrix);
+	//print_matrix(matrix);
+	//libero la vecchia matrice e faró puntare il char **matrix alla nuova;
+	//free_matrix(matrix);
+	return(newmatrix);
+}
