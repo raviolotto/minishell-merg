@@ -6,7 +6,7 @@
 /*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:51:44 by lmorelli          #+#    #+#             */
-/*   Updated: 2023/12/15 14:03:56 by jcardina         ###   ########.fr       */
+/*   Updated: 2023/12/15 15:21:31 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,17 @@ int	uguallen(char *str)
 		i--;
 	return (i);
 }
+int my_setcontrol(char *environ, char *name, char *value)
+{
+	int	len;
+
+	len = ft_strlen(name);
+	if(ft_strncmp(environ, name, len) == 0 && value && environ[len + 1] == '=')
+		return (0);
+	if(ft_strncmp(environ, name, len) == 0 && !value && environ[len + 1] == '=')
+		return (1)
+
+}
 
 int my_setenv(char *name, char *value, char ***environ)
 {
@@ -59,10 +70,10 @@ int my_setenv(char *name, char *value, char ***environ)
 			return 0;
 		}
 		if (ft_strncmp((*environ)[index], name, ft_strlen(name)) == 0 && !value)
-			return (0);
+			return (index);
 	}
 	if (!value)
-		return(1);
+		return(-1);
 	env_var = ft_strjoin(name, ft_strchr(value, '='));
 	*environ = matrix_newline(*environ, env_var);
 	return 0;
@@ -81,7 +92,7 @@ void my_export(char *arg, char ***env, char ***enexp)
 		value = ft_substr(arg, uguallen(arg), ft_strlen(arg));
 	if (name != NULL && value == NULL)
 	{
-		if(my_setenv(name, value, enexp) == 1)
+		if(my_setenv(name, value, enexp) == -1)
 			*enexp = matrix_newline(*enexp, name);
 		return;
 	}
