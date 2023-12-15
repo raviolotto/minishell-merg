@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_myexport.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:51:44 by lmorelli          #+#    #+#             */
-/*   Updated: 2023/12/14 18:02:44 by lmorelli         ###   ########.fr       */
+/*   Updated: 2023/12/15 14:03:56 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,33 +34,38 @@ int	uguallen(char *str)
 	i = 0;
 	while(str[i] != '=' && str[i] != '\0')
 		i++;
+	if(str[i - 1] == '+')
+		i--;
 	return (i);
 }
 
 int my_setenv(char *name, char *value, char ***environ)
 {
 	char	*env_var;
-	char	**matrixtmp;
 	int		index;
 
-	env_var = ft_strjoin(name, value);
-	index = 0;
-    // Cerca se la variabile d'ambiente esiste già
-	while ((*environ)[index] != NULL)
+	env_var = NULL;
+	index = -1;
+	while ((*environ)[++index] != NULL)
 	{
-		if (ft_strncmp((*environ)[index], name, ft_strlen(name)) == 0)
+		if (ft_strncmp((*environ)[index], name, ft_strlen(name)) == 0 && value)
 		{
-			write(1, "AAA\n", 4);
+			if (value[0] == '+')
+				env_var = ft_strjoin((*environ)[index], &value[2]);
+			else
+				env_var = ft_strjoin(name, value);
 			free((*environ)[index]);
 			(*environ)[index] = env_var; // Aggiorna il valore della variabile
 			return 0;
 		}
-		index++;
+		if (ft_strncmp((*environ)[index], name, ft_strlen(name)) == 0 && !value)
+			return (0);
 	}
-	matrixtmp = matrix_newline(*environ, env_var);
-	*environ = matrixtmp;
-
-	return 0; // Operazione completata con successo
+	if (!value)
+		return(1);
+	env_var = ft_strjoin(name, ft_strchr(value, '='));
+	*environ = matrix_newline(*environ, env_var);
+	return 0;
 }
 
 // Funzione per gestire il comando export
@@ -76,13 +81,12 @@ void my_export(char *arg, char ***env, char ***enexp)
 		value = ft_substr(arg, uguallen(arg), ft_strlen(arg));
 	if (name != NULL && value == NULL)
 	{
-		*enexp = matrix_newline(*enexp, name);
+		if(my_setenv(name, value, enexp) == 1)
+			*enexp = matrix_newline(*enexp, name);
 		return;
 	}
 	my_setenv(name, value, env);
 	my_setenv(name, value, enexp);
-	// if (my_setenv(name, value, env) != 0 && my_setenv(name, value, enexp) != 0)
-	// 	fprintf(stderr, "Errore nell'impostare la variabile d'ambiente\n");
 	free(name);
 	free(value);
 }
