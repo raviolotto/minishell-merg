@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:51:44 by lmorelli          #+#    #+#             */
-/*   Updated: 2023/12/18 18:11:48 by lmorelli         ###   ########.fr       */
+/*   Updated: 2023/12/18 19:15:54 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,6 @@ int is_accepted_variable(char *var)
 	
 	if (!ft_isalpha(var[0]) && var[0] != '_')
         return (0);
-	while(var[i] != '=' && var[i] != '+')
-	{
-        if (!ft_isalpha(var[i]) && var[i] != '_')
-            	return (0);
-        i++;
-    }
     return (1);
 }
 
