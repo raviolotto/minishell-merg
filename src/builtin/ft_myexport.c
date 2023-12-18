@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_myexport.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:51:44 by lmorelli          #+#    #+#             */
-/*   Updated: 2023/12/15 15:21:31 by jcardina         ###   ########.fr       */
+/*   Updated: 2023/12/18 18:11:48 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/mini_shell.h"
+
+int is_accepted_variable(char *var)
+{
+	int i = 1;
+	
+	if (!ft_isalpha(var[0]) && var[0] != '_')
+        return (0);
+	while(var[i] != '=' && var[i] != '+')
+	{
+        if (!ft_isalpha(var[i]) && var[i] != '_')
+            	return (0);
+        i++;
+    }
+    return (1);
+}
 
 void	print_export(char **matrix)
 {
@@ -46,8 +61,7 @@ int my_setcontrol(char *environ, char *name, char *value)
 	if(ft_strncmp(environ, name, len) == 0 && value && environ[len + 1] == '=')
 		return (0);
 	if(ft_strncmp(environ, name, len) == 0 && !value && environ[len + 1] == '=')
-		return (1)
-
+		return (1);
 }
 
 int my_setenv(char *name, char *value, char ***environ)
@@ -87,6 +101,8 @@ void my_export(char *arg, char ***env, char ***enexp)
 
 	name = NULL;
 	value = NULL;
+	if(is_accepted_variable(arg))
+	{	
 	name = ft_substr(arg, 0, uguallen(arg));
 	if(uguallen(arg) != ft_strlen(arg))
 		value = ft_substr(arg, uguallen(arg), ft_strlen(arg));
@@ -97,7 +113,9 @@ void my_export(char *arg, char ***env, char ***enexp)
 		return;
 	}
 	my_setenv(name, value, env);
-	my_setenv(name, value, enexp);
+	my_setenv(name, value, enexp);}
+	else
+		printf("bash: export: `%s': not a valid identifier\n", arg);
 	free(name);
 	free(value);
 }
