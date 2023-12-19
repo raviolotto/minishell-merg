@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:33:01 by jcardina          #+#    #+#             */
-/*   Updated: 2023/12/14 16:46:20 by jcardina         ###   ########.fr       */
+/*   Updated: 2023/12/19 17:32:47 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	print_matrix(char **matrix)
 	i = 0;
 	if (matrix == NULL)
 		return;
-	while(matrix[i] != NULL)
+	while(matrix[i])
 	{
 		printf("%s\n", matrix[i]);
 		i++;
@@ -109,4 +109,31 @@ char	**matrix_newline(char **matrix, char *str)
 	newmatrix[len + 1] = NULL;
 	free_matrix(matrix);
 	return(newmatrix);
+}
+
+void	print_export(char **matrix)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	if (matrix == NULL)
+		return;
+	while(matrix[i] != NULL)
+	{
+		ft_printf("declare -x ");
+		 j = 0;
+		while(matrix[i][j])
+		{
+			write(1, &matrix[i][j], 1);
+				if(matrix[i][j] == '=')
+					write(1, "\"", 1);
+			j++;
+		}
+		if(ft_strchr(matrix[i], '='))
+			write(1, "\"", 1);
+		write(1, "\n", 1);
+		i++;
+	}
+	return;
 }

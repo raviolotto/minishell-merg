@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:51:44 by lmorelli          #+#    #+#             */
-/*   Updated: 2023/12/18 19:15:54 by lmorelli         ###   ########.fr       */
+/*   Updated: 2023/12/19 16:48:51 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,20 @@ int is_accepted_variable(char *var)
     return (1);
 }
 
-void	print_export(char **matrix)
-{
-	int	i;
+// void	print_export(char **matrix)
+// {
+// 	int	i;
 
-	i = 0;
-	if (matrix == NULL)
-		return;
-	while(matrix[i] != NULL)
-	{
-		printf("declare -x %s\n", matrix[i]);
-		i++;
-	}
-	return;
-}
+// 	i = 0;
+// 	if (matrix == NULL)
+// 		return;
+// 	while(matrix[i] != NULL)
+// 	{
+// 		printf("declare -x %s\n", matrix[i]);
+// 		i++;
+// 	}
+// 	return;
+// }
 
 int	uguallen(char *str)
 {
@@ -52,10 +52,11 @@ int my_setcontrol(char *environ, char *name, char *value)
 	int	len;
 
 	len = ft_strlen(name);
-	if(ft_strncmp(environ, name, len) == 0 && value && environ[len + 1] == '=')
+	if(ft_strncmp(environ, name, len) == 0 && value && (environ[len] == '=' || environ[len] == '\0'))
 		return (0);
-	if(ft_strncmp(environ, name, len) == 0 && !value && environ[len + 1] == '=')
+	if(ft_strncmp(environ, name, len) == 0 && !value && (environ[len] == '=' || environ[len] == '\0'))
 		return (1);
+	return(-1);
 }
 
 int my_setenv(char *name, char *value, char ***environ)
@@ -67,17 +68,23 @@ int my_setenv(char *name, char *value, char ***environ)
 	index = -1;
 	while ((*environ)[++index] != NULL)
 	{
-		if (ft_strncmp((*environ)[index], name, ft_strlen(name)) == 0 && value)
+		//if (ft_strncmp((*environ)[index], name, ft_strlen(name)) == 0 && value)
+		if(my_setcontrol((*environ)[index],name,value) == 0)
 		{
 			if (value[0] == '+')
-				env_var = ft_strjoin((*environ)[index], &value[2]);
+			{
+				if(ft_strchr((*environ)[index], '=') == NULL)
+					env_var = ft_strjoin((*environ)[index], &value[1]);
+				else
+					env_var = ft_strjoin((*environ)[index], &value[2]);
+			}
 			else
 				env_var = ft_strjoin(name, value);
 			free((*environ)[index]);
 			(*environ)[index] = env_var; // Aggiorna il valore della variabile
 			return 0;
 		}
-		if (ft_strncmp((*environ)[index], name, ft_strlen(name)) == 0 && !value)
+		if (my_setcontrol((*environ)[index],name,value) == 1)
 			return (index);
 	}
 	if (!value)
