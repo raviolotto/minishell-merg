@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+         #
+#    By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 18:22:29 by jcardina          #+#    #+#              #
-#    Updated: 2023/12/15 14:29:50 by jcardina         ###   ########.fr        #
+#    Updated: 2024/01/04 20:09:24 by lmorelli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ src = \
 		src/executor/executor.c\
 		src/builtin/ft_myexport.c\
 		src/builtin/ft_myunset.c\
-		#src/builtin/cd.c\
+		src/builtin/cd.c\
 
 OBJ = $(src:%.c=%.o)
 
