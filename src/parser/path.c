@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:45:46 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/08 14:51:39 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/09 16:36:16 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,30 @@
 
 char *pathfinder(char *command, char **path)
 {
-	char *result = NULL;
-	int i = 0;
+	char *result;
+	int	i;
 	char *fullPath;
+	char *tempPath;
 
-	while (path[i] != NULL)
+	i = 0;
+	result = NULL;
+	while (path[i])
 	{
-		char *tempPath = ft_strjoin(path[i], "/");
-		if (!tempPath) {
+		tempPath = ft_strjoin(path[i], "/");
+		if (!tempPath)
+		{
             perror("Errore nell'allocazione di memoria");
             exit(EXIT_FAILURE);
         }
-
         fullPath = ft_strjoin(tempPath, command);
         free(tempPath);
-
-        if (!fullPath) {
+        if (!fullPath)
+		{
             perror("Errore nell'allocazione di memoria");
             exit(EXIT_FAILURE);
         }
-
-        if (access(fullPath, F_OK | X_OK) == 0) {
+        if (access(fullPath, F_OK | X_OK) == 0)
+		{
             result = fullPath;
             break;
         }
@@ -42,10 +45,7 @@ char *pathfinder(char *command, char **path)
 		i++;
 	}
 	if (result == NULL)
-	{
 		printf("Il comando '%s' non è stato trovato nei percorsi specificati.\n", command); // std 1.ERROR, 2. input ed 3. output? le precedenti task sonon gia´ state eseguite?
-		//result = "ciao";
-	}
 	return (result);
 }
 int	build_matrix(char *str, t_lex *node, t_general *general)

@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:33:01 by jcardina          #+#    #+#             */
-/*   Updated: 2023/12/19 17:32:47 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/09 16:32:42 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ void	free_matrix(char **matrix)
 	size_t	i;
 
 	i = 0;
-	while(matrix[i] != NULL)
+	while (matrix[i] != NULL)
 	{
-		free(matrix[i]);
+		free (matrix[i]);
 		i++;
 	}
-	free(matrix);
+	free (matrix);
 }
 
 char	**matrix_dup(char **matrix)
@@ -31,13 +31,13 @@ char	**matrix_dup(char **matrix)
 	size_t	i;
 
 	i = 0;
-	while(matrix[i] != NULL)
+	while (matrix[i] != NULL)
 		i++;
 	ret = ft_calloc(sizeof(char *), i + 1);
 	if (!ret)
 		return (NULL);
 	i = 0;
-	while(matrix[i] != NULL)
+	while (matrix[i] != NULL)
 	{
 		ret[i] = ft_strdup(matrix[i]);
 		i++;
@@ -51,13 +51,13 @@ void	print_matrix(char **matrix)
 
 	i = 0;
 	if (matrix == NULL)
-		return;
-	while(matrix[i])
+		return ;
+	while (matrix[i])
 	{
 		printf("%s\n", matrix[i]);
 		i++;
 	}
-	return;
+	return ;
 }
 
 int	dumb_builtin_check(char *command)
@@ -86,7 +86,7 @@ int	matrixlen(char **matrix)
 
 	i = 0;
 	while (matrix[i] != NULL)
-	i++;
+		i++;
 	return (i);
 }
 
@@ -97,10 +97,10 @@ char	**matrix_newline(char **matrix, char *str)
 
 	len = matrixlen(matrix);
 	newmatrix = malloc((len + 2) * sizeof(char *));
-	if(!newmatrix)
+	if (!newmatrix)
 		perror("errore allocazione di memoria");
 	len = 0;
-	while(matrix[len] != NULL)
+	while (matrix[len] != NULL)
 	{
 		newmatrix[len] = ft_strdup(matrix[len]);
 		len ++;
@@ -108,7 +108,7 @@ char	**matrix_newline(char **matrix, char *str)
 	newmatrix[len] = str;
 	newmatrix[len + 1] = NULL;
 	free_matrix(matrix);
-	return(newmatrix);
+	return (newmatrix);
 }
 
 void	print_export(char **matrix)
@@ -118,22 +118,22 @@ void	print_export(char **matrix)
 
 	i = 0;
 	if (matrix == NULL)
-		return;
-	while(matrix[i] != NULL)
+		return ;
+	while (matrix[i] != NULL)
 	{
 		ft_printf("declare -x ");
-		 j = 0;
-		while(matrix[i][j])
+		j = 0;
+		while (matrix[i][j])
 		{
 			write(1, &matrix[i][j], 1);
-				if(matrix[i][j] == '=')
-					write(1, "\"", 1);
+			if (matrix[i][j] == '=')
+				write(1, "\"", 1);
 			j++;
 		}
-		if(ft_strchr(matrix[i], '='))
+		if (ft_strchr(matrix[i], '='))
 			write(1, "\"", 1);
 		write(1, "\n", 1);
 		i++;
 	}
-	return;
+	return ;
 }

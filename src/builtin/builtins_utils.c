@@ -1,6 +1,6 @@
 #include "../../includes/mini_shell.h"
 
-void	ft_remove_char_in_str(char *str, char c)
+void	ft_supp_rm(char *str, char c)
 {
 	int	i;
 	int	j;
@@ -21,7 +21,7 @@ void	ft_remove_char_in_str(char *str, char c)
 	str[j] = '\0';
 }
 
-int	ft_find_char_index_str(char *str, char c)
+int	ft_idx_quotes(char *str, char c)
 {
 	int	i;
 
@@ -37,7 +37,7 @@ int	ft_find_char_index_str(char *str, char c)
 	return (0);
 }
 
-int	ft_count_char(char *str, char c)
+int	ft_nb_quotes(char *str, char c)
 {
 	int	i;
 	int	ret;
@@ -54,30 +54,29 @@ int	ft_count_char(char *str, char c)
 	return (ret);
 }
 
-int	ft_remove_quotes(char *str, int single_quote, int double_quotes,
-	int index_double_quotes)
+int	ft_rm_quotes(char *str, int s_quote, int d_quotes, int idx_double)
 {
-	int	index_single_quote;
+	int	idx_single;
 
-	index_single_quote = ft_find_char_index_str(str, '\'');
-	if (single_quote > 0 && double_quotes == 0)
+	idx_single = ft_idx_quotes(str, '\'');
+	if (s_quote > 0 && d_quotes == 0)
 	{
-		ft_remove_char_in_str(str, '\'');
+		ft_supp_rm(str, '\'');
 		return (1);
 	}
-	if (double_quotes > 0 && single_quote == 0)
+	if (d_quotes > 0 && s_quote == 0)
 	{
-		ft_remove_char_in_str(str, '\"');
+		ft_supp_rm(str, '\"');
 		return (1);
 	}
-	if (index_double_quotes > index_single_quote)
+	if (idx_double > idx_single)
 	{
-		ft_remove_char_in_str(str, '\'');
+		ft_supp_rm(str, '\'');
 		return (0);
 	}
-	if (index_single_quote > index_double_quotes)
+	if (idx_single > idx_double)
 	{
-		ft_remove_char_in_str(str, '\"');
+		ft_supp_rm(str, '\"');
 		return (0);
 	}
 	return (1);
@@ -85,20 +84,19 @@ int	ft_remove_quotes(char *str, int single_quote, int double_quotes,
 
 int	ft_cd_with_quotes(char *str)
 {
-	int	single_quote;
-	int	double_quotes;
-	int	total_quotes;
-	int	index_double_quotes;
+	int	s_quote;
+	int	d_quotes;
+	int	all_quotes;
 	int	res;
+	int	idx_double;
 
-	single_quote = ft_count_char(str, '\'');
-	double_quotes = ft_count_char(str, '\"');
-	total_quotes = single_quote + double_quotes;
-	index_double_quotes = ft_find_char_index_str(str, '\"');
-	if (total_quotes > 0)
+	s_quote = ft_nb_quotes(str, '\'');
+	d_quotes = ft_nb_quotes(str, '\"');
+	all_quotes = s_quote + d_quotes;
+	idx_double = ft_idx_quotes(str, '\"');
+	if (all_quotes > 0)
 	{
-		res = ft_remove_quotes(str, single_quote, double_quotes,
-				index_double_quotes);
+		res = ft_rm_quotes(str, s_quote, d_quotes, idx_double);
 		if (res == 1)
 			return (1);
 		else

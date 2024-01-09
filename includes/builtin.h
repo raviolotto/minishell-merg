@@ -8,11 +8,10 @@ void	handle_unset(t_general *general, t_lex *node);
 void	handle_env(t_general *general);
 int		my_setenv(char *name, char *value, char ***environ);
 
-void	ft_remove_char_in_str(char *str, char c);
-int		ft_find_char_index_str(char *str, char c);
-int		ft_count_char(char *str, char c);
-int		ft_remove_quotes(char *str, int single_quote, int double_quotes,
-	int index_double_quotes);
+void	ft_supp_rm(char *str, char c);
+int		ft_idx_quotes(char *str, char c);
+int		ft_nb_quotes(char *str, char c);
+int		ft_rm_quotes(char *str, int s_quote, int d_quotes, int idx_double);
 int		ft_cd_with_quotes(char *str);
 
 #endif
