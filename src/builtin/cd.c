@@ -2,6 +2,30 @@
 #include <errno.h>
 #include <string.h>
 
+void	ft_new_pwd(t_general *general)
+{
+	char	current_directory[PATH_MAX];
+	char	*new_directory;
+
+	if (getcwd(current_directory, PATH_MAX) == NULL)
+		return ;
+	ft_printf("\nNEW_PWD=%s\n", current_directory);
+	new_directory = ft_strjoin("=", current_directory);
+	my_setenv("PWD", new_directory, &(general->envp2));
+}
+
+void ft_old_pwd(t_general *general, char *dir)
+{
+	char	current_directory[PATH_MAX];
+	char	*old_directory;
+
+	if (getcwd(current_directory, PATH_MAX) == NULL)
+		return ;
+	ft_printf("\nOLD_PWD = %s\n", dir);
+	old_directory = ft_strjoin("=", current_directory);
+	my_setenv("OLDPWD", old_directory, &(general->envp2));
+}
+
 char	*ft_home_env(char **env)
 {
 	char	*home_dir;
@@ -21,7 +45,7 @@ char	*ft_home_env(char **env)
 	return (home_dir);
 }
 
-int	ft_change_dir(char *new_dir, char **command2)
+int	ft_change_dir(char *new_dir, char **command2, t_general *general)
 {
 	if (!command2[1])
 	{
@@ -38,16 +62,17 @@ int	ft_change_dir(char *new_dir, char **command2)
 			printf("kittyshell: cd: %s: %s\n", command2[1], strerror(errno));
 			return (0);
 		}
+	ft_new_pwd(general);
 	}
 	return (1);
 }
 
-int	ft_cd_only(char **env, char **command2)
+int	ft_cd_only(char **env, char **command2, t_general *general)
 {
 	char	*home_dir;
 
 	home_dir = ft_home_env(env);
-	if (ft_change_dir(home_dir, command2) != 1)
+	if (ft_change_dir(home_dir, command2, general) != 1)
 	{
 		free(home_dir);
 		return (0);
@@ -72,12 +97,13 @@ void	handle_cd(t_general *general, t_lex *node)
 		printf("kittyshell: %s: No such file or directory\n", node->command2[1]);
 		return ;
 	}
+	ft_old_pwd(general, current_directory);
 	if (!node->command2[1])
 	{
-		if (ft_cd_only(general->envp2, node->command2) != 1)
+		if (ft_cd_only(general->envp2, node->command2, general) != 1)
 			return ;
 	}
 	else
-		if (ft_change_dir(node->command2[1], node->command2) != 1)
+		if (ft_change_dir(node->command2[1], node->command2, general) != 1)
 			return ;
 }
