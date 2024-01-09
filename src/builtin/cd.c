@@ -1,8 +1,6 @@
 #include "../../includes/mini_shell.h"
 #include <errno.h>
-
-//cd dir senza permessi || cd - || cd "dir"
-
+#include <string.h>
 
 /*
 int	ft_find_char_index_str(char *str, char c)
@@ -91,7 +89,7 @@ int	ft_cd_check_quotes(char *arg)
 	return (1);
 }
 */
-char	*ft_get_home(char **env)
+char	*ft_home_env(char **env)
 {
 	char	*home_dir;
 	int		i;
@@ -110,11 +108,11 @@ char	*ft_get_home(char **env)
 	return (home_dir);
 }
 
-int	ft_change_folder(char *new_folder, char **command2)
+int	ft_change_dir(char *new_dir, char **command2)
 {
 	if (!command2[1])
 	{
-		if (chdir(new_folder) != 0)
+		if (chdir(new_dir) != 0)
 		{
 			printf("kittyshell: cd: %s\n", strerror(errno));
 			return (-1);
@@ -122,7 +120,7 @@ int	ft_change_folder(char *new_folder, char **command2)
 	}
 	else
 	{
-		if (chdir(new_folder) != 0)
+		if (chdir(new_dir) != 0)
 		{
 			printf("kittyshell: cd: %s: %s\n", command2[1], strerror(errno));
 			return (-1);
@@ -131,12 +129,12 @@ int	ft_change_folder(char *new_folder, char **command2)
 	return (1);
 }
 
-int	ft_cd_with_no_arg(char **env, char **command2)
+int	ft_cd_only(char **env, char **command2)
 {
 	char	*home_dir;
 
-	home_dir = ft_get_home(env);
-	if (ft_change_folder(home_dir, command2) != 1)
+	home_dir = ft_home_env(env);
+	if (ft_change_dir(home_dir, command2) != 1)
 	{
 		free(home_dir);
 		return (-1);
@@ -163,10 +161,10 @@ void	handle_cd(t_general *general, t_lex *node)
 	}*/
 	if (!node->command2[1])
 	{
-		if (ft_cd_with_no_arg(general->envp2, node->command2) != 1)
+		if (ft_cd_only(general->envp2, node->command2) != 1)
 			return ;
 	}
 	else
-		if (ft_change_folder(node->command2[1], node->command2) != 1)
+		if (ft_change_dir(node->command2[1], node->command2) != 1)
 			return ;
 }

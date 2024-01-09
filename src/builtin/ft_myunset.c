@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 14:28:33 by jcardina          #+#    #+#             */
-/*   Updated: 2023/12/19 17:48:42 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/08 14:45:10 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	ft_unsetenv(t_general *general, t_lex *node)
 		}
 			j++;
 	}
-	envtmp[j] == NULL;
+	envtmp[j] = NULL;
 	free_matrix(general->envp2);
 	general->envp2 = envtmp;
 }
@@ -122,7 +122,7 @@ void	ft_unsetexp(t_general *general, t_lex *node)
 		}
 			j++;
 	}
-	envtmp[j] == NULL;
+	envtmp[j] = NULL;
 	free_matrix(general->enexp);
 	general->enexp = envtmp;
 }

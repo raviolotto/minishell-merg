@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:23:21 by jcardina          #+#    #+#             */
-/*   Updated: 2023/11/24 16:48:21 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/01/08 14:49:58 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	what_token(char *str, int i)
 
 int	iswhite(char c)
 {
-	if (c == ' ' || c > 8 && c < 14)
+	if (c == ' ' || (c > 8 && c < 14))
 		return (0);
 	else
 		return (1);

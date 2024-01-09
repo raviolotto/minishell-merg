@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:45:46 by jcardina          #+#    #+#             */
-/*   Updated: 2023/12/12 17:27:54 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/08 14:51:39 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,5 @@ int	list_commander(t_general *general)
 			build_matrix(tmp->command, tmp, general);
 		tmp = tmp->next;
 	}
+	return (0);
 }
