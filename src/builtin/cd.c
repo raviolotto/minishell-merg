@@ -2,7 +2,27 @@
 #include <errno.h>
 #include <string.h>
 
-/*
+void	ft_remove_char_in_str(char *str, char c)
+{
+	int	len;
+	int	i;
+	int	j;
+
+	len = strlen(str);
+	i = 0;
+	j = 0;
+	while (i < len)
+	{
+		if (str[i] != c)
+		{
+			str[j] = str[i];
+			j++;
+		}
+		i++;
+	}
+	str[j] = '\0';
+}
+
 int	ft_find_char_index_str(char *str, char c)
 {
 	int	i;
@@ -88,7 +108,12 @@ int	ft_cd_check_quotes(char *arg)
 	}
 	return (1);
 }
-*/
+
+// int	ft_cd_with_quotes(t_lex *node)
+// {
+// 	if ((node->command[1][0] == "\'" || node->command[1][0] == "\"") && (node->command[1][ft_strlen(node->command[1])]) == "\'" || node->command[1][0] == "\"" && (node->command[1][ft_strlen(node->command[1])]))
+// }
+
 char	*ft_home_env(char **env)
 {
 	char	*home_dir;
@@ -154,11 +179,11 @@ void	handle_cd(t_general *general, t_lex *node)
 		printf("minishell: cd: too many arguments\n");
 		return ;
 	}
-	/*if (ft_cd_check_quotes(node->command2[1]) == -1)
+	if (ft_cd_check_quotes(node->command2[1]) == -1)
 	{
 		printf("minishell: %s: No such file or directory\n", node->command2[1]);
 		return ;
-	}*/
+	}
 	if (!node->command2[1])
 	{
 		if (ft_cd_only(general->envp2, node->command2) != 1)
