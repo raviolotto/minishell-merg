@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_myecho.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:58:58 by amema             #+#    #+#             */
-/*   Updated: 2024/01/11 18:36:16 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/01/11 20:45:18 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,30 @@ void	handle_echo(t_general *general, t_lex *node)
 	no_newline = 0;
 	i = 1;
 	num_args= matrixlen(node->command2);
-	if (num_args > 1 && ft_strncmp(node->command2[1], "-n", 2) == 0)
+
+	while (node->command2[i] != NULL && num_args > 1 
+			&& ft_strncmp(node->command2[i], "-n", 2) == 0)
 	{
 		no_newline = 1;
-		i = 2;
+		i++;
 	}
 	while (i < num_args)
 	{
-		if(ft_strncmp(node->command2[i], "-n", 2) == 0)
-			i++;
-		tmp = ft_strtrim(node->command2[i], "\"");
-		if(tmp)
-			ft_printf("%s", tmp);
+		//if(ft_strncmp(node->command2[i], "-n", 2) == 0)
+		//	i++;
+		//tmp = ft_strtrim(node->command2[i], "\"");
+		//if(tmp)
+		if (ft_cd_with_quotes(node->command2[i]) == 0)
+		{
+			printf("error\n");
+			return ;
+		}
+		if (node->command2[i])
+			ft_printf("%s", node->command2[i]);
 		if (i < num_args -1)
 			ft_printf(" ");
 		i++;
-		free(tmp);
+		//free(tmp);
 	}
 	if (!no_newline)
 		ft_printf("\n");

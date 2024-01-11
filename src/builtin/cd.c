@@ -51,7 +51,7 @@ int	ft_change_dir(char *new_dir, char **command2, t_general *general)
 	{
 		if (chdir(new_dir) != 0)
 		{
-			printf("kittyshell: cd: %s\n", strerror(errno));
+			printf("kitty shell: cd: %s\n", strerror(errno));
 			return (0);
 		}
 	}
@@ -59,7 +59,7 @@ int	ft_change_dir(char *new_dir, char **command2, t_general *general)
 	{
 		if (chdir(new_dir) != 0)
 		{
-			printf("kittyshell: cd: %s: %s\n", command2[1], strerror(errno));
+			printf("kitty shell: cd: %s: %s\n", command2[1], strerror(errno));
 			return (0);
 		}
 	ft_new_pwd(general);
@@ -89,12 +89,12 @@ void	handle_cd(t_general *general, t_lex *node)
 		return ;
 	if (matrixlen(node->command2) > 2)
 	{
-		printf("kittyshell: cd: too many arguments\n");
+		printf("kitty shell: cd: too many arguments\n");
 		return ;
 	}
 	if (ft_cd_with_quotes(node->command2[1]) == 0)
 	{
-		printf("kittyshell: %s: No such file or directory\n", node->command2[1]);
+		printf("kitty shell: %s: No such file or directory\n", node->command2[1]);
 		return ;
 	}
 	ft_old_pwd(general, current_directory);
