@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcardina <jcardina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:49:11 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/04 18:05:13 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/11 17:51:35 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void    builtinmanager(t_lex *node, t_general *general)
 {
-    // if (node->builtin == 1)
-    //     handle_echo
+    if (node->builtin == 1)
+         handle_echo(general, node);
     if (node->builtin == 2)
 	 	handle_cd(general, node);
     if (node->builtin == 3)

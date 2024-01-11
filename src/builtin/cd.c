@@ -1,6 +1,6 @@
 #include "../../includes/mini_shell.h"
-#include <errno.h>
-#include <string.h>
+//#include <errno.h>
+//#include <string.h>
 
 void	ft_new_pwd(t_general *general)
 {

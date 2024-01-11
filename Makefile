@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+         #
+#    By: jcardina <jcardina@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 18:22:29 by jcardina          #+#    #+#              #
-#    Updated: 2024/01/09 16:23:57 by lmorelli         ###   ########.fr        #
+#    Updated: 2024/01/11 17:50:09 by jcardina         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,19 +18,20 @@ PRINTF = lib/ft_printf/libftprintf.a
 
 src = \
 		src/mini_shell.c\
+		src/ext_command.c\
+		src/utils/general_utils.c\
 		src/parser/parser.c\
 		src/parser/lexer_list.c\
 		src/parser/lexer_list_utils.c\
 		src/parser/path.c\
-		src/utils/general_utils.c\
-		src/ext_command.c\
 		src/builtin/pwd.c\
 		src/builtin/env.c\
-		src/executor/executor.c\
 		src/builtin/ft_myexport.c\
 		src/builtin/ft_myunset.c\
 		src/builtin/cd.c\
 		src/builtin/builtins_utils.c\
+		src/builtin/ft_myecho.c\
+		src/executor/executor.c\
 
 OBJ = $(src:%.c=%.o)
 
