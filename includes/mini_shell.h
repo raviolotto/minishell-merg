@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_shell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amema <amema@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:31:51 by jcardina          #+#    #+#             */
-/*   Updated: 2023/12/18 20:03:08 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/11 15:14:43 by amema            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # include "utils.h"
 # include "builtin.h"
 # include "executor.h"
+# include "global.h"
+
 
 # include <sys/wait.h>
 # include <limits.h>  // For PATH_MAX

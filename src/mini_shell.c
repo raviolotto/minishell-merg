@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: amema <amema@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 16:17:29 by jcardina          #+#    #+#             */
-/*   Updated: 2023/12/13 17:40:15 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/01/11 15:39:17 by amema            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,17 @@ int	main(int ac, char **av, char **envp)
 			parser(&general);
 			tmp = general.lexer;
 
-			// //debug info
-			// while (tmp != NULL)
-			// {
-			// 	printf("token %i\n", tmp->token);
-			// 	printf("pipe steatus %i\n", tmp->pipe_status);
-			// 	printf("command %s\n", tmp->command);
-			// 	printf("builtin == %i\n", tmp->builtin);
-			// 	print_matrix(tmp->command2);
-			// 	printf("\n");
-			// 	tmp = tmp->next;
-			// }
+			//debug info
+		//	while (tmp != NULL)
+		//	{
+		//		printf("token %i\n", tmp->token);
+		//		printf("pipe steatus %i\n", tmp->pipe_status);
+		//		printf("command %s\n", tmp->command);
+		//		printf("builtin == %i\n", tmp->builtin);
+		//		print_matrix(tmp->command2);
+		//		printf("\n");
+		//		tmp = tmp->next;
+		//	}
 		executor(&general);
 		//free memory
 		afalcons(general.lexer);
