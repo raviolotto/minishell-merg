@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_shell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:31:51 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/11 17:29:13 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/01/12 17:13:50 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,9 @@
 # include "builtin.h"
 # include "executor.h"
 # include "global.h"
-
-
 # include <sys/wait.h>
 # include <limits.h>  // For PATH_MAX
 
 #endif
-
-//appunti
 
 //se metto una sola pipe il pipe status é due dovrebbe essere 0

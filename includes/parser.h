@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:35:26 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/12 14:24:25 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/12 17:14:15 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	free_lex(t_lex *head);
 void	afalcons(t_lex *node);
 void	lex_add_last(t_lex *head, t_lex *new);
 t_lex	*new_lex_node(void);
-
-int execute_external_command(char **args);
+int		execute_external_command(char **args);
 
 #endif

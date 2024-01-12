@@ -1,6 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/12 17:16:09 by lmorelli          #+#    #+#             */
+/*   Updated: 2024/01/12 18:39:48 by lmorelli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/mini_shell.h"
-//#include <errno.h>
-//#include <string.h>
 
 void	ft_new_pwd(t_general *general)
 {
@@ -14,16 +24,16 @@ void	ft_new_pwd(t_general *general)
 	my_setenv("PWD", new_directory, &(general->envp2));
 }
 
-void ft_old_pwd(t_general *general, char *dir)
+void ft_old_pwd(t_general *general)
 {
 	char	current_directory[PATH_MAX];
 	char	*old_directory;
 
 	if (getcwd(current_directory, PATH_MAX) == NULL)
 		return ;
-	ft_printf("\nOLD_PWD = %s\n", dir);
 	old_directory = ft_strjoin("=", current_directory);
 	my_setenv("OLDPWD", old_directory, &(general->envp2));
+	ft_printf("\nOLD_PWD = %s\n", old_directory);
 }
 
 char	*ft_home_env(char **env)
@@ -97,7 +107,7 @@ void	handle_cd(t_general *general, t_lex *node)
 		printf("kitty shell: %s: No such file or directory\n", node->command2[1]);
 		return ;
 	}
-	ft_old_pwd(general, current_directory);
+	ft_old_pwd(general);
 	if (!node->command2[1])
 	{
 		if (ft_cd_only(general->envp2, node->command2, general) != 1)

@@ -6,15 +6,13 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:36:19 by amema             #+#    #+#             */
-/*   Updated: 2024/01/12 13:19:23 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/12 17:12:41 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GLOBAL_H
 # define GLOBAL_H
 
-extern int	last_exit_status;
+extern int	g_last_exit_status;
 
-# endif
-
-
+#endif

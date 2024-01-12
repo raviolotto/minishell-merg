@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:16:18 by jcardina          #+#    #+#             */
-/*   Updated: 2023/12/19 15:02:58 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/12 17:14:51 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ typedef struct s_lex
 {
 	char			*command;
 	char			**command2;
-	int				token;	//1 = |, 2 = >, 3 = <, 4 = >>, 5 = <<, 0 = é un comando
-	int				pipe_status;	//0 = prima pipe, 1 pipe in mezzo, 2 pipe finale
+	int				token;
+	//1 = |, 2 = >, 3 = <, 4 = >>, 5 = <<, 0 = é un comando
+	int				pipe_status;
+	//0 = prima pipe, 1 pipe in mezzo, 2 pipe finale
 	int				builtin;
 	struct s_lex	*next;
 }	t_lex;
