@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/12 13:18:23 by lmorelli          #+#    #+#             */
+/*   Updated: 2024/01/12 13:18:28 by lmorelli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef BUILTIN_H
-#define BUILTIN_H
+# define BUILTIN_H
 
 void	handle_cd(t_general *general, t_lex *node);
 void	handle_pwd(void);

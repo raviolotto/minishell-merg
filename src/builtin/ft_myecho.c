@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:58:58 by amema             #+#    #+#             */
-/*   Updated: 2024/01/11 20:45:18 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/12 14:01:48 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 
 void	handle_echo(t_general *general, t_lex *node)
 {
-	int	no_newline;
-	int	i;
-	int	num_args;
+	int		no_newline;
+	int		i;
+	int		num_args;
 	char	*tmp;
 
 	no_newline = 0;
 	i = 1;
 	num_args= matrixlen(node->command2);
-
 	while (node->command2[i] != NULL && num_args > 1 
 			&& ft_strncmp(node->command2[i], "-n", 2) == 0)
 	{

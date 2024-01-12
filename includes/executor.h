@@ -6,13 +6,13 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:50:44 by lmorelli          #+#    #+#             */
-/*   Updated: 2023/12/12 15:11:36 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/12 13:18:53 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTOR_H
-#define  EXECUTOR_H
+# define EXECUTOR_H
 
-void    executor(t_general *general);
+void	executor(t_general *general);
 
 # endif

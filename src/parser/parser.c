@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:23:21 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/11 19:59:29 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/12 13:33:03 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,6 @@ int	parser(t_general *general)
 {
 	lexer(general);
 	if (list_commander(general) == 1)
-		return(1);
-	return(0);
+		return (1);
+	return (0);
 }

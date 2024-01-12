@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:33:01 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/09 16:32:42 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/12 14:31:04 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,4 +136,62 @@ void	print_export(char **matrix)
 		i++;
 	}
 	return ;
+}
+//questa funzione deve essere nello stesso file di minisplit
+static size_t	ft_counter(const char *s, char c)
+{
+	size_t	count;
+	size_t	i;
+
+	i = 0;
+	count = 0;
+	while (s[i] == c)
+		i++;
+	while (s[i])
+	{
+		if (s[i] != c)
+		{
+			++count;
+			while (s[i] && s[i] != c)
+				++i;
+		}
+		else
+			i++;
+	}
+	return (count);
+}
+
+char	**maxxisplit(char const *s, char c)
+{
+	char	**matrix;
+	size_t	i;
+	size_t	j;
+
+	if (!s)
+		return (NULL);
+	i = 0;
+	matrix = malloc(sizeof(char *) * (ft_counter(s, c) + 1));
+	if (!matrix)
+		return (NULL);
+	while (*s)
+	{
+		if (*s != c)
+		{
+			j = 0;
+			while (*s && *s != c && ++j)
+			{
+				if(*s == 34 || *s == 39)
+					{
+						j += quotes((char *)s, 0);
+						s += quotes((char *)s, 0);
+					}
+				++s;
+			}
+			matrix[i++] = ft_substr(s - j, 0, j);
+		}
+		else
+			++s;
+	}
+	matrix[i] = 0;
+	return (matrix);
 }
