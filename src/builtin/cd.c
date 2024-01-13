@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:16:09 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/12 18:39:48 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/13 15:46:21 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,23 @@ void	ft_new_pwd(t_general *general)
 	my_setenv("PWD", new_directory, &(general->envp2));
 }
 
-void ft_old_pwd(t_general *general)
+// void ft_old_pwd(t_general *general)
+// {
+// 	char	current_directory[PATH_MAX];
+// 	char	*old_directory;
+
+// 	if (getcwd(current_directory, PATH_MAX) == NULL)
+// 		return ;
+// 	old_directory = ft_strjoin("=", current_directory);
+// 	my_setenv("OLDPWD", old_directory, &(general->envp2));
+// 	ft_printf("\nOLD_PWD = %s\n", old_directory);
+// }
+
+void ft_old_pwd(t_general *general, char *old_dir)
 {
-	char	current_directory[PATH_MAX];
 	char	*old_directory;
 
-	if (getcwd(current_directory, PATH_MAX) == NULL)
-		return ;
-	old_directory = ft_strjoin("=", current_directory);
+	old_directory = ft_strjoin("=", old_dir);
 	my_setenv("OLDPWD", old_directory, &(general->envp2));
 	ft_printf("\nOLD_PWD = %s\n", old_directory);
 }
@@ -55,7 +64,7 @@ char	*ft_home_env(char **env)
 	return (home_dir);
 }
 
-int	ft_change_dir(char *new_dir, char **command2, t_general *general)
+int	ft_change_dir(char *new_dir, char **command2, t_general *general, char *old_dir)
 {
 	if (!command2[1])
 	{
@@ -69,20 +78,26 @@ int	ft_change_dir(char *new_dir, char **command2, t_general *general)
 	{
 		if (chdir(new_dir) != 0)
 		{
+			printf("something went wrong, impossible to change directory\n");
 			printf("kitty shell: cd: %s: %s\n", command2[1], strerror(errno));
 			return (0);
+		} else {
+			printf("successfull change directory\n");
+			ft_old_pwd(general, old_dir);
+			ft_new_pwd(general);
+			return (1);
 		}
-	ft_new_pwd(general);
+	
 	}
 	return (1);
 }
 
-int	ft_cd_only(char **env, char **command2, t_general *general)
+int	ft_cd_only(char **env, char **command2, t_general *general, char *old_dir)
 {
 	char	*home_dir;
 
 	home_dir = ft_home_env(env);
-	if (ft_change_dir(home_dir, command2, general) != 1)
+	if (ft_change_dir(home_dir, command2, general, old_dir) != 1)
 	{
 		free(home_dir);
 		return (0);
@@ -94,6 +109,7 @@ int	ft_cd_only(char **env, char **command2, t_general *general)
 void	handle_cd(t_general *general, t_lex *node)
 {
 	char	current_directory[PATH_MAX];
+	char 	*old_directory;
 
 	if (getcwd(current_directory, PATH_MAX) == NULL)
 		return ;
@@ -107,13 +123,16 @@ void	handle_cd(t_general *general, t_lex *node)
 		printf("kitty shell: %s: No such file or directory\n", node->command2[1]);
 		return ;
 	}
-	ft_old_pwd(general);
+
+	//store old pwd and assign later only if successfull
+	old_directory = ft_strjoin("=", current_directory);
+	
 	if (!node->command2[1])
 	{
-		if (ft_cd_only(general->envp2, node->command2, general) != 1)
+		if (ft_cd_only(general->envp2, node->command2, general, old_directory) != 1)
 			return ;
 	}
 	else
-		if (ft_change_dir(node->command2[1], node->command2, general) != 1)
+		if (ft_change_dir(node->command2[1], node->command2, general, old_directory) != 1)
 			return ;
 }
