@@ -6,13 +6,13 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 13:07:51 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/12 13:19:43 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/14 18:05:57 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/mini_shell.h"
 
-int execute_external_command(char **args)
+int	execute_external_command(char **args)
 {
 	pid_t	pid;
 	int		status;
@@ -34,7 +34,6 @@ int execute_external_command(char **args)
 		pid = fork();
 		if (pid == 0)
 		{
-			//da rivedere NULL perche potrebbe influire sulle variabili di ambiente.
 			if (execve(res, args, NULL) == -1)
 				perror("execve error");
 		}
@@ -48,11 +47,10 @@ int execute_external_command(char **args)
 		free(res);
 		return (1);
 	}
-    // perror("error, the command doesn't exist or you don't have the necessary permissions");
+// perror("error, the command doesn't exist or you don't have the necessary permissions");
 	free(res);
-	return 0;
+	return (0);
 }
-
 
 /*
 

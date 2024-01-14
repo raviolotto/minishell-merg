@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jcardina <jcardina@student.42.fr>          +#+  +:+       +#+         #
+#    By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 18:22:29 by jcardina          #+#    #+#              #
-#    Updated: 2024/01/11 17:50:09 by jcardina         ###   ########.fr        #
+#    Updated: 2024/01/14 17:43:32 by lmorelli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ src = \
 		src/builtin/ft_myexport.c\
 		src/builtin/ft_myunset.c\
 		src/builtin/cd.c\
+		src/builtin/cd_utils.c\
 		src/builtin/builtins_utils.c\
 		src/builtin/ft_myecho.c\
 		src/executor/executor.c\

@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 14:28:33 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/08 14:45:10 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/14 18:13:03 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 // 	i = 0;
 //     while (general->enexp[i])
 // 	{
-//         if (ft_strncmp(general->enexp[i], name, ft_strlen(name)) == 0)// && general->enexp[i][ft_strlen(name)] == '=')
+//         if (ft_strncmp(general->enexp[i], name, ft_strlen(name)) == 0)
+			// && general->enexp[i][ft_strlen(name)] == '=')
 // 		{
 // 			j = i;
 //             while (general->enexp[j])
@@ -44,7 +45,8 @@
 // 	if (ft_unsetexp(name, general) == 0){
 // 	while (general->envp2[i])
 // 	{
-// 		if (ft_strncmp(general->envp2[i], name, ft_strlen(name)) == 0 && (general->envp2[i][ft_strlen(name)] == '='))
+// 		if (ft_strncmp(general->envp2[i], name, ft_strlen(name)) == 0
+		//&& (general->envp2[i][ft_strlen(name)] == '='))
 // 		{
 // 			j = i;
 // 			while (general->envp2[j])
@@ -59,7 +61,6 @@
 // 	return (1);
 // }
 
-
 // void	handle_unset(t_general *general, t_lex *node)
 // {
 // 	if (node->command2[1] == NULL)
@@ -67,14 +68,14 @@
 // 	if (ft_unsetenv(node->command2[1], general) == 0)
 // 		return ;
 // 	else
-// 		printf("bash: unset: `%s': not a valid identifier\n", node->command2[1]);
+// 		printf("bash: unset: `%s': not a valid identifier\n",
+		//node->command2[1]);
 // }
-
 
 void	ft_unsetenv(t_general *general, t_lex *node)
 {
 	int		i;
-	int 	j;
+	int		j;
 	int		index;
 	char	**envtmp;
 
@@ -85,14 +86,14 @@ void	ft_unsetenv(t_general *general, t_lex *node)
 	j = 0;
 	while (general->envp2[i])
 	{
-		if(i == index)
+		if (i == index)
 			i++;
-		if(general->envp2[i])
+		if (general->envp2[i])
 		{
 			envtmp[j] = ft_strdup(general->envp2[i]);
 			i++;
 		}
-			j++;
+		j++;
 	}
 	envtmp[j] = NULL;
 	free_matrix(general->envp2);
@@ -102,7 +103,7 @@ void	ft_unsetenv(t_general *general, t_lex *node)
 void	ft_unsetexp(t_general *general, t_lex *node)
 {
 	int		i;
-	int 	j;
+	int		j;
 	int		index;
 	char	**envtmp;
 
@@ -113,14 +114,14 @@ void	ft_unsetexp(t_general *general, t_lex *node)
 	j = 0;
 	while (general->enexp[i])
 	{
-		if(i == index)
+		if (i == index)
 			i++;
-		if(general->enexp[i])
+		if (general->enexp[i])
 		{
 			envtmp[j] = ft_strdup(general->enexp[i]);
 			i++;
 		}
-			j++;
+		j++;
 	}
 	envtmp[j] = NULL;
 	free_matrix(general->enexp);
@@ -131,4 +132,4 @@ void	handle_unset(t_general *general, t_lex *node)
 {
 	ft_unsetenv(general, node);
 	ft_unsetexp(general, node);
-}	
+}

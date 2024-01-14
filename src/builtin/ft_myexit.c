@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_myexit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amema <amema@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 12:43:41 by amema             #+#    #+#             */
-/*   Updated: 2024/01/11 15:16:21 by amema            ###   ########.fr       */
+/*   Updated: 2024/01/14 18:10:46 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	exit_utils(char **args, int exit_n, int len_args)
 				exit_n = exit_n + 256;
 			ft_printf("exit\n");
 			// funzione per free-are exit
-
 		}
 		else
 		{
