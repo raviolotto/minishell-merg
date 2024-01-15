@@ -6,7 +6,7 @@
 #    By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 18:22:29 by jcardina          #+#    #+#              #
-#    Updated: 2024/01/14 17:43:32 by lmorelli         ###   ########.fr        #
+#    Updated: 2024/01/15 19:12:05 by lmorelli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ src = \
 		src/parser/lexer_list.c\
 		src/parser/lexer_list_utils.c\
 		src/parser/path.c\
+		src/parser/expander.c\
 		src/builtin/pwd.c\
 		src/builtin/env.c\
 		src/builtin/ft_myexport.c\

@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:33:01 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/12 14:31:04 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/15 16:42:51 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,19 +62,22 @@ void	print_matrix(char **matrix)
 
 int	dumb_builtin_check(char *command)
 {
-	if (ft_strncmp(command, "echo", ft_strlen(command)) == 0)
+	int i;
+
+	i = ft_strlen(command);
+	if (ft_strncmp(command, "echo", i) == 0 && i == 4)
 		return (1);
-	else if (ft_strncmp(command, "cd", ft_strlen(command)) == 0)
+	else if (ft_strncmp(command, "cd", i) == 0 && i == 2)
 		return (2);
-	else if (ft_strncmp(command, "pwd", ft_strlen(command)) == 0)
+	else if (ft_strncmp(command, "pwd", i) == 0 && i == 3)
 		return (3);
-	else if (ft_strncmp(command, "export", ft_strlen(command)) == 0)
+	else if (ft_strncmp(command, "export", i) == 0 && i == 6)
 		return (4);
-	else if (ft_strncmp(command, "unset", ft_strlen(command)) == 0)
+	else if (ft_strncmp(command, "unset", i) == 0 && i == 5)
 		return (5);
-	else if (ft_strncmp(command, "env", ft_strlen(command)) == 0)
+	else if (ft_strncmp(command, "env", i) == 0 && i == 3)
 		return (6);
-	else if (ft_strncmp(command, "exit", ft_strlen(command)) == 0)
+	else if (ft_strncmp(command, "exit", i) == 0 && i == 4)
 		return (7);
 	else
 		return (0);

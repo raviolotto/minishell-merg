@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 16:17:29 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/14 18:15:06 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/15 19:16:47 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,10 @@ int	main(int ac, char **av, char **envp)
 		//		printf("\n");
 		//		tmp = tmp->next;
 		//	}
-			print_matrix(general.lexer->command2);
+			//print_matrix(general.lexer->command2);
+	//gestionene $
+			expander(&general);
+			//print_matrix(general.lexer->command2);
 			executor(&general);
 			//free memory
 			afalcons(general.lexer);

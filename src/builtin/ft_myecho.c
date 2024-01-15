@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:58:58 by amema             #+#    #+#             */
-/*   Updated: 2024/01/14 18:10:34 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/15 17:01:38 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	handle_echo(t_general *general, t_lex *node)
 		//if(tmp)
 		if (ft_cd_with_quotes(node->command2[i]) == 0)
 		{
-			printf("error\n");
+			ft_printf("--------%s\n", node->command2[i]);
+			printf("errors\n");
 			return ;
 		}
 		if (node->command2[i])
