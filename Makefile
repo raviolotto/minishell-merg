@@ -6,7 +6,7 @@
 #    By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 18:22:29 by jcardina          #+#    #+#              #
-#    Updated: 2024/01/15 19:12:05 by lmorelli         ###   ########.fr        #
+#    Updated: 2024/01/16 18:44:49 by lmorelli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ src = \
 		src/builtin/cd_utils.c\
 		src/builtin/builtins_utils.c\
 		src/builtin/ft_myecho.c\
+		src/builtin/ft_myexit.c\
 		src/executor/executor.c\
 
 OBJ = $(src:%.c=%.o)

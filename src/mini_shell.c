@@ -6,11 +6,13 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 16:17:29 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/15 19:16:47 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/16 19:08:21 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/mini_shell.h"
+
+int g_last_exit_status;
 
 static int	is_whitespace_input(const char *str)
 {
@@ -46,6 +48,7 @@ int	main(int ac, char **av, char **envp)
 	init(&general, envp);
 	while (1)
 	{
+		g_last_exit_status = 0;
 		general.args = readline("kitty shell>");
 		if (general.args == NULL)
 			exit(1);

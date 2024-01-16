@@ -6,13 +6,14 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 13:18:23 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/14 18:07:35 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:44:01 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTIN_H
 # define BUILTIN_H
 
+void	handle_exit(char **args);
 void	handle_cd(t_general *general, t_lex *node);
 void	handle_pwd(void);
 void	handle_export(t_general *general, t_lex *node);
