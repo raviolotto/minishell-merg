@@ -6,19 +6,20 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:51:44 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/09 18:23:41 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/14 18:11:17 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/mini_shell.h"
 
-int is_accepted_variable(char *var)
+int	is_accepted_variable(char *var)
 {
-	int i = 1;
-	
+	int	i;
+
+	i = 1;
 	if (!ft_isalpha(var[0]) && var[0] != '_')
-        return (0);
-    return (1);
+		return (0);
+	return (1);
 }
 
 // void	print_export(char **matrix)
@@ -41,25 +42,28 @@ int	uguallen(char *str)
 	int	i;
 
 	i = 0;
-	while(str[i] != '=' && str[i] != '\0')
+	while (str[i] != '=' && str[i] != '\0')
 		i++;
-	if(str[i - 1] == '+')
+	if (str[i - 1] == '+')
 		i--;
 	return (i);
 }
-int my_setcontrol(char *environ, char *name, char *value)
+
+int	my_setcontrol(char *environ, char *name, char *value)
 {
 	int	len;
 
 	len = ft_strlen(name);
-	if(ft_strncmp(environ, name, len) == 0 && value && (environ[len] == '=' || environ[len] == '\0'))
+	if (ft_strncmp(environ, name, len) == 0 && value && (environ[len] == '='
+			|| environ[len] == '\0'))
 		return (0);
-	if(ft_strncmp(environ, name, len) == 0 && !value && (environ[len] == '=' || environ[len] == '\0'))
+	if (ft_strncmp(environ, name, len) == 0 && !value && (environ[len] == '='
+			|| environ[len] == '\0'))
 		return (1);
-	return(-1);
+	return (-1);
 }
 
-int my_setenv(char *name, char *value, char ***environ)
+int	my_setenv(char *name, char *value, char ***environ)
 {
 	char	*env_var;
 	int		index;
@@ -68,12 +72,11 @@ int my_setenv(char *name, char *value, char ***environ)
 	index = -1;
 	while ((*environ)[++index] != NULL)
 	{
-		//if (ft_strncmp((*environ)[index], name, ft_strlen(name)) == 0 && value)
-		if(my_setcontrol((*environ)[index],name,value) == 0)
+		if (my_setcontrol((*environ)[index], name, value) == 0)
 		{
 			if (value[0] == '+')
 			{
-				if(ft_strchr((*environ)[index], '=') == NULL)
+				if (ft_strchr((*environ)[index], '=') == NULL)
 					env_var = ft_strjoin((*environ)[index], &value[1]);
 				else
 					env_var = ft_strjoin((*environ)[index], &value[2]);
@@ -82,39 +85,39 @@ int my_setenv(char *name, char *value, char ***environ)
 				env_var = ft_strjoin(name, value);
 			free((*environ)[index]);
 			(*environ)[index] = env_var; // Aggiorna il valore della variabile
-			return 0;
+			return (0);
 		}
-		if (my_setcontrol((*environ)[index],name,value) == 1)
+		if (my_setcontrol((*environ)[index], name, value) == 1)
 			return (index);
 	}
 	if (!value)
-		return(-1);
+		return (-1);
 	env_var = ft_strjoin(name, ft_strchr(value, '='));
 	*environ = matrix_newline(*environ, env_var);
-	return 0;
+	return (0);
 }
 
-// Funzione per gestire il comando export
-void my_export(char *arg, char ***env, char ***enexp)
+void	my_export(char *arg, char ***env, char ***enexp)
 {
 	char	*name;
 	char	*value;
 
 	name = NULL;
 	value = NULL;
-	if(is_accepted_variable(arg))
-	{	
-	name = ft_substr(arg, 0, uguallen(arg));
-	if(uguallen(arg) != ft_strlen(arg))
-		value = ft_substr(arg, uguallen(arg), ft_strlen(arg));
-	if (name != NULL && value == NULL)
+	if (is_accepted_variable(arg))
 	{
-		if(my_setenv(name, value, enexp) == -1)
-			*enexp = matrix_newline(*enexp, name);
-		return;
+		name = ft_substr(arg, 0, uguallen(arg));
+		if (uguallen(arg) != ft_strlen(arg))
+			value = ft_substr(arg, uguallen(arg), ft_strlen(arg));
+		if (name != NULL && value == NULL)
+		{
+			if (my_setenv(name, value, enexp) == -1)
+				*enexp = matrix_newline(*enexp, name);
+			return ;
+		}
+		my_setenv(name, value, env);
+		my_setenv(name, value, enexp);
 	}
-	my_setenv(name, value, env);
-	my_setenv(name, value, enexp);}
 	else
 		printf("bash: export: `%s': not a valid identifier\n", arg);
 	free(name);
@@ -126,9 +129,10 @@ void	handle_export(t_general *general, t_lex *node)
 	int	i;
 
 	i = 1;
-	if	(node->command2[i] == NULL)
+	if (node->command2[i] == NULL)
 		print_export(general->enexp);
-	while (node->command2[i]){
+	while (node->command2[i])
+	{
 		my_export(node->command2[i], &(general->envp2), &(general->enexp));
 		i++;
 	}

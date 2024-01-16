@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:45:46 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/12 14:28:21 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/14 18:15:59 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ char	*pathfinder(char *command, char **path)
 		i++;
 	}
 	if (result == NULL)
-		printf("Il comando '%s' non è stato trovato nei percorsi specificati.\n", command); // std 1.ERROR, 2. input ed 3. output? le precedenti task sonon gia´ state eseguite?
+		printf("Il comando '%s' non è stato trovato nei percorsi specificati.\n", command);//da scrivere in inglese
+	// std 1.ERROR, 2. input ed 3. output? le precedenti task sonon gia´ state eseguite?
 	return (result);
 }
 

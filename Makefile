@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jcardina <jcardina@student.42.fr>          +#+  +:+       +#+         #
+#    By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 18:22:29 by jcardina          #+#    #+#              #
-#    Updated: 2024/01/11 17:50:09 by jcardina         ###   ########.fr        #
+#    Updated: 2024/01/15 19:12:05 by lmorelli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,11 +24,13 @@ src = \
 		src/parser/lexer_list.c\
 		src/parser/lexer_list_utils.c\
 		src/parser/path.c\
+		src/parser/expander.c\
 		src/builtin/pwd.c\
 		src/builtin/env.c\
 		src/builtin/ft_myexport.c\
 		src/builtin/ft_myunset.c\
 		src/builtin/cd.c\
+		src/builtin/cd_utils.c\
 		src/builtin/builtins_utils.c\
 		src/builtin/ft_myecho.c\
 		src/executor/executor.c\

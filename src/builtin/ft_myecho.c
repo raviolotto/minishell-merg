@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:58:58 by amema             #+#    #+#             */
-/*   Updated: 2024/01/12 16:54:18 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/15 17:01:38 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	handle_echo(t_general *general, t_lex *node)
 
 	no_newline = 0;
 	i = 1;
-	num_args= matrixlen(node->command2);
-	while (node->command2[i] != NULL && num_args > 1 
-			&& ft_strncmp(node->command2[i], "-n", 2) == 0)
+	num_args = matrixlen(node->command2);
+	while (node->command2[i] != NULL && num_args > 1
+		&& ft_strncmp(node->command2[i], "-n", 2) == 0)
 	{
 		no_newline = 1;
 		i++;
@@ -36,7 +36,8 @@ void	handle_echo(t_general *general, t_lex *node)
 		//if(tmp)
 		if (ft_cd_with_quotes(node->command2[i]) == 0)
 		{
-			printf("error\n");
+			ft_printf("--------%s\n", node->command2[i]);
+			printf("errors\n");
 			return ;
 		}
 		if (node->command2[i])
@@ -59,7 +60,7 @@ void	handle_echo(t_general *general, t_lex *node)
 // 	int		i;
 // 	char	*echo_args[MAX_ARGS];
 // 	int		original_stdout;
-// 	int		no_newline = 0; // Initialize to 0, meaning newline will be added by default
+// 	int		no_newline = 0;
 
 // 	(void)shell;
 // 	i = 0;
@@ -101,7 +102,8 @@ void	handle_echo(t_general *general, t_lex *node)
 // 			FILE *output_file = fopen(args[output_redirect_index + 1], "w");
 // 			if (output_file != NULL)
 // 			{
-//             // Crea una copia dei comandi e degli argomenti del comando "echo"
+//             // Crea una copia dei comandi e degli argomenti
+			//del comando "echo"
 // 				i = 0;
 // 				while (i < output_redirect_index)
 // 				{
@@ -164,7 +166,8 @@ void	handle_echo(t_general *general, t_lex *node)
 // 		}
 // 		else
 // 		{
-//             // Nessun reindirizzamento dell'output, stampa normalmente sulla console
+//             // Nessun reindirizzamento dell'output,
+			//stampa normalmente sulla console
 // 			if (no_newline)
 // 				i = 1;
 // 			else

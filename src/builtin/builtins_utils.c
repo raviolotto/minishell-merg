@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:15:36 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/12 17:15:39 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/15 17:34:10 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,25 +72,13 @@ int	ft_rm_quotes(char *str, int s_quote, int d_quotes, int idx_double)
 
 	idx_single = ft_idx_quotes(str, '\'');
 	if (s_quote > 0 && d_quotes == 0)
-	{
 		ft_supp_rm(str, '\'');
-		return (1);
-	}
-	if (d_quotes > 0 && s_quote == 0)
-	{
+	else if (d_quotes > 0 && s_quote == 0)
 		ft_supp_rm(str, '\"');
-		return (1);
-	}
-	if (idx_double > idx_single)
-	{
+	else if (idx_double > idx_single)
 		ft_supp_rm(str, '\'');
-		return (0);
-	}
-	if (idx_single > idx_double)
-	{
+	else if (idx_single > idx_double)
 		ft_supp_rm(str, '\"');
-		return (0);
-	}
 	return (1);
 }
 
@@ -99,7 +87,6 @@ int	ft_cd_with_quotes(char *str)
 	int	s_quote;
 	int	d_quotes;
 	int	all_quotes;
-	int	res;
 	int	idx_double;
 
 	s_quote = ft_nb_quotes(str, '\'');
@@ -107,12 +94,6 @@ int	ft_cd_with_quotes(char *str)
 	all_quotes = s_quote + d_quotes;
 	idx_double = ft_idx_quotes(str, '\"');
 	if (all_quotes > 0)
-	{
-		res = ft_rm_quotes(str, s_quote, d_quotes, idx_double);
-		if (res == 1)
-			return (1);
-		else
-			return (0);
-	}
+		ft_rm_quotes(str, s_quote, d_quotes, idx_double);
 	return (1);
 }

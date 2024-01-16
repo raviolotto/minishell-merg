@@ -6,18 +6,18 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 16:17:29 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/12 13:39:41 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/15 19:16:47 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/mini_shell.h"
 
-static int is_whitespace_input(const char *str)
+static int	is_whitespace_input(const char *str)
 {
 	while (*str)
 	{
 		if (iswhite(*str))
-			return 0;
+			return (0);
 		str++;
 	}
 	return (1);
@@ -32,7 +32,6 @@ void	init(t_general *general, char **envp)
 	printf(PINK"\n%s\n", INTRO);
 	printf("\n%s\n"RESET, HELLO2);
 }
-
 
 int	main(int ac, char **av, char **envp)
 {
@@ -58,7 +57,6 @@ int	main(int ac, char **av, char **envp)
 		{
 			parser(&general);
 			tmp = general.lexer;
-
 			//debug info
 		//	while (tmp != NULL)
 		//	{
@@ -70,11 +68,14 @@ int	main(int ac, char **av, char **envp)
 		//		printf("\n");
 		//		tmp = tmp->next;
 		//	}
-		print_matrix(general.lexer->command2);
-		executor(&general);
-		//free memory
-		afalcons(general.lexer);
-		general.lexer = NULL;
+			//print_matrix(general.lexer->command2);
+	//gestionene $
+			expander(&general);
+			//print_matrix(general.lexer->command2);
+			executor(&general);
+			//free memory
+			afalcons(general.lexer);
+			general.lexer = NULL;
 		}
 	}
 }
