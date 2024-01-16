@@ -6,7 +6,7 @@
 /*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:45:46 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/16 18:50:07 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/01/16 20:31:16 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,46 +14,70 @@
 
 char *handle_quotes(char *word)
 {
-    size_t len;
-	
+	size_t	len;
+	int		num_quotes;
+
 	len = ft_strlen(word);
+	num_quotes = 0;
 
-    // Check if the argument is enclosed in single or double quotes
-    if (len >= 2 &&
-        ((word[0] == '\'' && word[len - 1] == '\'') || (word[0] == '\"' && word[len - 1] == '\"')))
-    {
-        // Check for matching quotes at the beginning and end
-        if (word[0] != word[len - 1])
-        {
-            printf("Error: Unterminated quotes within the word '%s'.\n", word);
-            // Handle the error as needed
-            return ft_strdup(""); // Return an empty string to indicate an error
-        }
+	// Check if the argument is enclosed in single or double quotes
+	if (len >= 2 &&
+		((word[0] == '\'' && word[len - 1] == '\'') || (word[0] == '\"' && word[len - 1] == '\"')))
+	{
+		// Check for matching quotes at the beginning and end
+		if (word[0] != word[len - 1])
+		{
+			printf("Error: Unterminated quotes within the word '%s'.\n", word);
+			// Handle the error as needed
+			return ft_strdup(""); // Return an empty string to indicate an error
+		}
 
-        // Remove the quotes and return the substring
-        return ft_substr(word, 1, len - 2);
-    }
+		// Remove the quotes and return the substring
+		return ft_substr(word, 1, len - 2);
+	}
 
-    // Check for unterminated single quotes
-    if (word[0] == '\'' && word[len - 1] != '\'')
-    {
-        printf("Error: Unterminated single quote within the word '%s'.\n", word);
-        // Handle the error as needed
-        return ft_strdup(""); // Return an empty string to indicate an error
-    }
+	// Check for unterminated single quotes at the beginning
+	if (word[0] == '\'' && word[len - 1] != '\'')
+	{
+		printf("Error: Unterminated single quote within the word '%s'.\n", word);
+		// Handle the error as needed
+		return ft_strdup(""); // Return an empty string to indicate an error
+	}
 
-    // Check for unterminated double quotes
-    if (word[0] == '\"' && word[len - 1] != '\"')
-    {
-        printf("Error: Unterminated double quote within the word '%s'.\n", word);
-        // Handle the error as needed
-        return ft_strdup(""); // Return an empty string to indicate an error
-    }
+	// Check for unterminated double quotes at the beginning
+	if (word[0] == '\"' && word[len - 1] != '\"')
+	{
+		printf("Error: Unterminated double quote within the word '%s'.\n", word);
+		// Handle the error as needed
+		return ft_strdup(""); // Return an empty string to indicate an error
+	}
 
-    // If no quotes are found, return the word
-    return ft_strdup(word);
+	// Check for quotes at the end without matching at the beginning
+	if ((word[0] != '\'' && word[0] != '\"') && (word[len - 1] == '\'' || word[len - 1] == '\"'))
+	{
+		printf("Error: Unmatched quotes at the end within the word '%s'.\n", word);
+		// Handle the error as needed
+		return ft_strdup(""); // Return an empty string to indicate an error
+	}
+
+	// Count the number of quotes within the word
+	for (size_t i = 0; i < len; i++)
+	{
+		if (word[i] == '\'' || word[i] == '\"')
+			num_quotes++;
+	}
+
+	// Check if the total number of quotes is even
+	if (num_quotes % 2 != 0)
+	{
+		printf("Error: Unmatched quotes within the word '%s'.\n", word);
+		// Handle the error as needed
+		return ft_strdup(""); // Return an empty string to indicate an error
+	}
+
+	// If no quotes are found, return the word
+	return ft_strdup(word);
 }
-
 
 char	*pathfinder(char *command, char **path)
 {
@@ -82,61 +106,58 @@ char	*pathfinder(char *command, char **path)
 		if (access(fullpath, F_OK | X_OK) == 0)
 		{
 			result = fullpath;
-			break ;
+			break;
 		}
 		free(fullpath);
 		i++;
 	}
 	if (result == NULL)
-		printf("Il comando '%s' non è stato trovato nei percorsi specificati.\n", command);//da scrivere in inglese
+		printf("Il comando '%s' non è stato trovato nei percorsi specificati.\n", command); // da scrivere in inglese
 	// std 1.ERROR, 2. input ed 3. output? le precedenti task sonon gia´ state eseguite?
 	return (result);
 }
 
-
 int build_matrix(char *str, t_lex *node, t_general *general)
 {
-    char *tmp;
+	char *tmp;
 	int i;
 	i = 0;
-	
-    node->command2 = maxxisplit(str, ' ');
-    node->builtin = dumb_builtin_check(node->command2[0]);
-    if (node->builtin != 0)
-        return (0);
 
-    
-    while (node->command2[i] != NULL)
-    {
-        // Handle quotes for each word (token) in the command
-        char *quoted_word = handle_quotes(node->command2[i]);
-        if (quoted_word == NULL)
-        {
-            // Error handling: free allocated memory and return
-            int j = 0;
-            while (node->command2[j] != NULL)
-                free(node->command2[j++]);
-            free(node->command2);
-            return 1;
-        }
+	node->command2 = maxxisplit(str, ' ');
+	node->builtin = dumb_builtin_check(node->command2[0]);
 
-        // Replace the original word with the quoted version
-        free(node->command2[i]);
-        node->command2[i] = quoted_word;
+	while (node->command2[i] != NULL)
+	{
+		// Handle quotes for each word (token) in the command
+		char *quoted_word = handle_quotes(node->command2[i]);
+		if (quoted_word == NULL)
+		{
+			// Error handling: free allocated memory and return
+			int j = 0;
+			while (node->command2[j] != NULL)
+				free(node->command2[j++]);
+			free(node->command2);
+			return 1;
+		}
 
-        i++;
-    }
+		// Replace the original word with the quoted version
+		free(node->command2[i]);
+		node->command2[i] = quoted_word;
 
-    tmp = pathfinder(node->command2[0], general->path);
-    if (tmp != NULL)
-    {
-        free(node->command2[0]);
-        node->command2[0] = tmp;
-    }
-    return (0);
+		i++;
+	}
+
+	if (node->builtin != 0)
+		return (0);
+
+	tmp = pathfinder(node->command2[0], general->path);
+	if (tmp != NULL)
+	{
+		free(node->command2[0]);
+		node->command2[0] = tmp;
+	}
+	return (0);
 }
-
-
 
 int	list_commander(t_general *general)
 {
