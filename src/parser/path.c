@@ -3,63 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/17 15:28:02 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/17 17:56:44 by jcardina         ###   ########.fr       */
+/*   Created: 2023/11/24 16:45:46 by jcardina          #+#    #+#             */
+/*   Updated: 2024/01/17 19:51:56 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/mini_shell.h"
 
-char	*pathfinder(char *command, char **path)
+char *pathfinder(char *command, char **path)
 {
-	char	*result;
-	int		i;
-	char	*fullpath;
-	char	*temp_path;
+	char *result;
+	int	i;
+	char *fullPath;
+	char *tempPath;
 
 	i = 0;
 	result = NULL;
 	while (path[i])
 	{
-		temp_path = ft_strjoin(path[i], "/");
-		if (!temp_path)
+		tempPath = ft_strjoin(path[i], "/");
+		if (!tempPath)
 		{
-			perror("Errore nell'allocazione di memoria");
-			exit(EXIT_FAILURE);
-		}
-		fullpath = ft_strjoin(temp_path, command);
-		free(temp_path);
-		if (!fullpath)
+            perror("Errore nell'allocazione di memoria");
+            exit(EXIT_FAILURE);
+        }
+        fullPath = ft_strjoin(tempPath, command);
+        free(tempPath);
+        if (!fullPath)
 		{
-			perror("Errore nell'allocazione di memoria");
-			exit(EXIT_FAILURE);
-		}
-		if (access(fullpath, F_OK | X_OK) == 0)
+            perror("Errore nell'allocazione di memoria");
+            exit(EXIT_FAILURE);
+        }
+        if (access(fullPath, F_OK | X_OK) == 0)
 		{
-			result = fullpath;
-			break ;
-		}
-		free(fullpath);
+            result = fullPath;
+            break;
+        }
+		free(fullPath);
 		i++;
 	}
 	if (result == NULL)
-		printf("Il comando '%s' non è stato trovato nei percorsi specificati.\n", command);//da scrivere in inglese
-	// std 1.ERROR, 2. input ed 3. output? le precedenti task sonon gia´ state eseguite?
+		printf("Il comando '%s' non è stato trovato nei percorsi specificati.\n", command); // std 1.ERROR, 2. input ed 3. output? le precedenti task sonon gia´ state eseguite?
 	return (result);
 }
-
 int	build_matrix(char *str, t_lex *node, t_general *general)
 {
 	char	*tmp;
+	int i = 1;
 
-	node->command2 = maxxisplit(str, ' ');
+	node->command2 = maxxisplit (str, ' ');
+	while(i < matrixlen(node->command2))
+	{
+		//if fuzione delle quotes ok
+				ft_cd_with_quotes(node->command2[i]);
+			i++;
+	}
 	node->builtin = dumb_builtin_check(node->command2[0]);
 	if (node->builtin != 0)
-		return (0);
+		return(0);
 	tmp = pathfinder(node->command2[0], general->path);
-	if (tmp != NULL)
+	if(tmp != NULL)
 	{
 		free(node->command2[0]);
 		node->command2[0] = tmp;
@@ -72,12 +77,11 @@ int	list_commander(t_general *general)
 	t_lex	*tmp;
 
 	tmp = general->lexer;
-	while (tmp)
+	while(tmp)
 	{
-		if (tmp->token == 0)
+		if(tmp->token == 0)
 			build_matrix(tmp->command, tmp, general);
 		tmp = tmp->next;
 	}
 	return (0);
 }
-
