@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcardina <jcardina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:33:01 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/15 16:42:51 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/17 15:27:11 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	print_matrix(char **matrix)
 
 int	dumb_builtin_check(char *command)
 {
-	int i;
+	int	i;
 
 	i = ft_strlen(command);
 	if (ft_strncmp(command, "echo", i) == 0 && i == 4)
@@ -141,6 +141,7 @@ void	print_export(char **matrix)
 	return ;
 }
 //questa funzione deve essere nello stesso file di minisplit
+
 static size_t	ft_counter(const char *s, char c)
 {
 	size_t	count;
@@ -183,11 +184,11 @@ char	**maxxisplit(char const *s, char c)
 			j = 0;
 			while (*s && *s != c && ++j)
 			{
-				if(*s == 34 || *s == 39)
-					{
-						j += quotes((char *)s, 0);
-						s += quotes((char *)s, 0);
-					}
+				if (*s == 34 || *s == 39)
+				{
+					j += quotes((char *)s, 0);
+					s += quotes((char *)s, 0);
+				}
 				++s;
 			}
 			matrix[i++] = ft_substr(s - j, 0, j);

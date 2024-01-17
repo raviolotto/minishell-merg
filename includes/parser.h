@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcardina <jcardina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:35:26 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/15 19:11:33 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/17 15:31:04 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ void	afalcons(t_lex *node);
 void	lex_add_last(t_lex *head, t_lex *new);
 t_lex	*new_lex_node(void);
 int		execute_external_command(char **args);
-void 	expander(t_general *general);
+void	expander(t_general *general);
 
 #endif

@@ -1,10 +1,11 @@
 appunti:
 implementare cd (+10 anni di Tradimento) (quasi 20 anni di MR. SIMPATIA)
-echo, da attivare e da mettere
 msgERROR pe quanto riguarda unset
 exit f. status
 controllare pipe status
-
+aggiornare old pwd e pwd in export;
+fuzione per freeare tutto;
+sistemare cd 
 
 ........                                                                                                                                                           .....................................
 .........                                                                                                                                                        ..  ...................................
