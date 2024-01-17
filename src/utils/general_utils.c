@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:33:01 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/15 16:42:51 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/17 17:30:53 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	print_matrix(char **matrix)
 
 int	dumb_builtin_check(char *command)
 {
-	int i;
+	int	i;
 
 	i = ft_strlen(command);
 	if (ft_strncmp(command, "echo", i) == 0 && i == 4)
@@ -164,14 +164,33 @@ static size_t	ft_counter(const char *s, char c)
 	return (count);
 }
 
-char	**maxxisplit(char const *s, char c)
+int	handle_token(const char **s, char c, char ***matrix, size_t *i)
+{
+	size_t	j;
+
+	j = 0;
+
+	while (**s && **s != c && ++j)
+	{
+		if (**s == 34 || **s == 39)
+		{
+			j += quotes((char *)*s, 0);
+			*s += quotes((char *)*s, 0);
+		}
+		++(*s);
+	}
+	(*matrix)[(*i)++] = ft_substr(*s - j, 0, j);
+	return (j);
+}
+
+char **maxxisplit(char const *s, char c)
 {
 	char	**matrix;
 	size_t	i;
-	size_t	j;
 
 	if (!s)
 		return (NULL);
+
 	i = 0;
 	matrix = malloc(sizeof(char *) * (ft_counter(s, c) + 1));
 	if (!matrix)
@@ -180,17 +199,7 @@ char	**maxxisplit(char const *s, char c)
 	{
 		if (*s != c)
 		{
-			j = 0;
-			while (*s && *s != c && ++j)
-			{
-				if(*s == 34 || *s == 39)
-					{
-						j += quotes((char *)s, 0);
-						s += quotes((char *)s, 0);
-					}
-				++s;
-			}
-			matrix[i++] = ft_substr(s - j, 0, j);
+			handle_token(&s, c, &matrix, &i);
 		}
 		else
 			++s;
