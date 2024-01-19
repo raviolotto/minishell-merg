@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcardina <jcardina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 16:17:29 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/18 18:36:59 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/19 10:27:42 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ int	main(int ac, char **av, char **envp)
 	while (1)
 	{
 		g_last_exit_status = 0;
-		general.args = readline("kitty shell>");
+		printf(YELLOW);
+		general.args = readline("kitty shell> " RESET);
 		if (general.args == NULL)
 			exit(1);
 		//ricordati di freeeeeare
@@ -71,7 +72,7 @@ int	main(int ac, char **av, char **envp)
 		//		printf("\n");
 		//		tmp = tmp->next;
 		//	}
-			print_matrix(general.lexer->command2);
+		//	print_matrix(general.lexer->command2);
 	//gestionene $
 			expander(&general);
 			//print_matrix(general.lexer->command2);
