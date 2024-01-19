@@ -6,7 +6,7 @@
 /*   By: jcardina <jcardina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:54:29 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/19 13:34:38 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/01/19 14:29:22 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,43 @@ char	*ft_str_dollar_cpy(char *src)
 	dest[a] = '\0';
 	return (dest);
 }
+/*
+appunti expander status
+
+funzione che controlla il $?
+comando scsd$?        output  = scsd0
+comando $?            "       = 0
+comando ciao$?ciao    "       = ciao0ciao
+
+il return deve essere 0 se la funzione non ha espanso il punto interrogativo
+altrimenti 1 se lo espande
+in dollar é gia storato la parte prima del punto interrogativo, il problema sarebbe il terzo esempio
+*/
 
 int	expander_status(char **line, char *dollar)
 {
 	int	i;
 	char	*euro;
+	char	*tmp;
+	char	*tmp2;
+	char	*tmp3;
+
 	i = -1;
 	while(line[0][++i] != '\0')
 	{
 		euro = strchr(*line, '$');
-		if(euro && (euro + 1 == '?'))
+		if(euro && (*(euro + 1) == '?'))
 		{
-			
+			tmp = ft_itoa(g_last_exit_status);
+			tmp2 = euro + 2;
+			if (dollar)
+				tmp3 = ft_strjoin(dollar, tmp);
+			else
+				tmp3 = tmp;
+			tmp3 = ft_strjoin(tmp3, tmp2);
+			free(*line);
+			*line = tmp3;
+			return (1);
 		}
 	}
 	return(0);
@@ -111,11 +136,12 @@ void	node_expander(char **command2, t_general *general)
 			}
 			j++;
 		}
-		if(expander_status == 1)
+		if(expander_status(&command2[i], dollar) == 0)
 			ft_expander_case(&command2[i], flag, general, dollar);
 	}
 	free(dollar);
 }
+//modificare per far funzionare $PWD$PWD
 
 void	expander(t_general *general)
 {
