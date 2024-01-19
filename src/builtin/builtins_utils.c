@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:15:36 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/18 18:38:23 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/19 18:30:53 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,23 +66,36 @@ int	ft_nb_quotes(char *str, char c)
 	return (ret);
 }
 
-int	ft_rm_quotes(char *str, int s_quote, int d_quotes, int idx_double)
+int	ft_rm_quotes(char *str, int s_quote, int d_quotes, int idx_double, t_general	*general, int index)
 {
 	int	idx_single;
+	 
 
 	idx_single = ft_idx_quotes(str, '\'');
 	if (s_quote > 0 && d_quotes == 0)
+	{
 		ft_supp_rm(str, '\'');
+		general->flag_quotes[index] = 1;	
+	}
 	else if (d_quotes > 0 && s_quote == 0)
+	{
 		ft_supp_rm(str, '\"');
+		general->flag_quotes[index] = 2; //scrivere caso con split es: "$PWD $PWD"
+	}
 	else if (idx_double > idx_single)
+	{
 		ft_supp_rm(str, '\'');
+		general->flag_quotes[index] = 1;
+	}
 	else if (idx_single > idx_double)
+	{
 		ft_supp_rm(str, '\"');
+		general->flag_quotes[index] = 3; //scrivere caso per flag = 3
+	}
 	return (1);
 }
 
-int	ft_cd_with_quotes(char *str)
+int	ft_cd_with_quotes(char *str, t_general *general, int index)
 {
 	int	s_quote;
 	int	d_quotes;
@@ -94,6 +107,6 @@ int	ft_cd_with_quotes(char *str)
 	all_quotes = s_quote + d_quotes;
 	idx_double = ft_idx_quotes(str, '\"');
 	if (all_quotes > 0)
-		ft_rm_quotes(str, s_quote, d_quotes, idx_double);
+		ft_rm_quotes(str, s_quote, d_quotes, idx_double, general, index);
 	return (1);
 }

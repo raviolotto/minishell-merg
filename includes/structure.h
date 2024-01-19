@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:16:18 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/12 17:14:51 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/19 18:19:38 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_general
 	char			**enexp;
 	char			**path;
 	struct s_lex	*lexer;
+	int				flag_quotes[1000];
 }	t_general;
 
 #endif

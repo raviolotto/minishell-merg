@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:54:29 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/19 14:29:22 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/01/19 19:32:37 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	expander_status(char **line, char *dollar)
 	while(line[0][++i] != '\0')
 	{
 		euro = strchr(*line, '$');
-		if(euro && (*(euro + 1) == '?'))
+		if(euro && (*(euro + 1) == '?')) //exit status $?
 		{
 			tmp = ft_itoa(g_last_exit_status);
 			tmp2 = euro + 2;
@@ -79,23 +79,64 @@ void	ft_expander_case2(char **line, t_general *general, char *dollar)
 	int		index;
 
 	euro = ft_strchr(*line, '$');
-		index = my_setenv(euro + 1, NULL, &general->envp2);
-		if (index >= 0)
-		{
-			free (*line);
-			*line = ft_strjoin(dollar, ft_strdup(ft_strchr(general->envp2[index], '=') + 1));
-			return ;
-		}
-			free(*line);
-			*line = ft_strjoin(dollar, "");
+	index = my_setenv(euro + 1, NULL, &general->envp2);
+	if (index >= 0)
+	{
+		free (*line);
+		*line = ft_strjoin(dollar, ft_strdup(ft_strchr(general->envp2[index], '=') + 1));
+		return ;
+	}
+	free(*line);
+	*line = ft_strjoin(dollar, "");
 }
 
-void	ft_expander_case(char **line, int flag, t_general *general, char *dollar)
+void caso2(int index,char **line, t_general *general, int i, char **mtx) {
+	
+		// if (my_setenv(&mtx[i][0], NULL, &general->envp2) >= 0)
+		
+		// index = my_setenv(&line[0][1], NULL, &general->envp2);
+		// if (index >= 0)
+		// {
+		// 	free(*line);
+		// 	*line = ft_strdup(ft_strchr(general->envp2[index], '=') + 1);
+		// 	return ;
+		// }
+		// free(*line);
+		// *line = ft_strdup("");
+		// return;
+
+		index = my_setenv(&mtx[i][0], NULL, &general->envp2);
+		if (index >= 0)
+		{
+			free(*line);
+			*mtx = ft_strdup(ft_strchr(general->envp2[index], '=') + 1);
+			return ;
+		}
+		free(*line);
+		*line = ft_strdup("");
+		return ;
+}
+
+void	ft_expander_case(char **line, int flag, t_general *general, char *dollar, int i) //expander per tutto tranne che per il ?
 {
 	int		index;
 
-	if (line[0][0] == '$')
+	//printf("line: %s, quotes?= %i\n", line[0], general->flag_quotes[i]);
+	char **mtx;
+		mtx = ft_split(line[0], '$');
+		print_matrix(mtx);
+	if (general->flag_quotes[i] == 1)
+		return ;
+	
+	else if (line[0][0] == '$' && general->flag_quotes[i] == 2)
 	{
+		//check dollari
+		caso2(index,line, general,i, mtx);
+		return ;
+	}
+	else if (line[0][0] == '$')
+	{
+		
 		index = my_setenv(&line[0][1], NULL, &general->envp2);
 		if (index >= 0)
 		{
@@ -107,9 +148,10 @@ void	ft_expander_case(char **line, int flag, t_general *general, char *dollar)
 		*line = ft_strdup("");
 		return ;
 	}
-	else if (flag == 1)
+	else if (flag == 1) //caso in cui il $ non é all inizio
 	{
 		ft_expander_case2(line, general, dollar);
+
 	}
 }
 
@@ -128,16 +170,16 @@ void	node_expander(char **command2, t_general *general)
 		j = 0;
 		while (command2[i][j] != '\0')
 		{
-			idx = ft_idx_quotes(command2[i], '$');
-			if (ft_strchr(command2[i], '$') && idx != 0)
+			idx = ft_idx_quotes(command2[i], '$'); //caso in cui il $ non é all ínizio
+			if (ft_strchr(command2[i], '$') && idx != 0)  
 			{
 				dollar = ft_str_dollar_cpy(command2[i]);
 				flag = 1;
 			}
 			j++;
 		}
-		if(expander_status(&command2[i], dollar) == 0)
-			ft_expander_case(&command2[i], flag, general, dollar);
+		if(expander_status(&command2[i], dollar) == 0) //se non becca il $? allora...
+			ft_expander_case(&command2[i], flag, general, dollar, i);
 	}
 	free(dollar);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:45:46 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/19 10:48:06 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/01/19 18:07:43 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	build_matrix(char *str, t_lex *node, t_general *general)
 	while (i < matrixlen(node->command2))
 	{
 		handle_quotes(node->command2[i]);
-		ft_cd_with_quotes(node->command2[i]);
+		ft_cd_with_quotes(node->command2[i], general, i);
 		i++;
 	}
 	node->builtin = dumb_builtin_check(node->command2[0]);
