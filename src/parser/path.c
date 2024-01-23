@@ -6,7 +6,7 @@
 /*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:45:46 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/23 15:48:00 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/01/23 15:55:38 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	*pathfinder(char *command, char **path)
 	return (result);
 }
 
-int build_matrix(char *str, t_lex *node, t_general *general)
+int	build_matrix(char *str, t_lex *node, t_general *general)
 {
 	char	*tmp;
 	int		i;
@@ -95,31 +95,8 @@ int build_matrix(char *str, t_lex *node, t_general *general)
 		i++;
 	}
 	node->builtin = dumb_builtin_check(node->command2[0]);
-
-	while (node->command2[i] != NULL)
-	{
-		// Handle quotes for each word (token) in the command
-		char *quoted_word = handle_quotes(node->command2[i]);
-		if (quoted_word == NULL)
-		{
-			// Error handling: free allocated memory and return
-			int j = 0;
-			while (node->command2[j] != NULL)
-				free(node->command2[j++]);
-			free(node->command2);
-			return 1;
-		}
-
-		// Replace the original word with the quoted version
-		free(node->command2[i]);
-		node->command2[i] = quoted_word;
-
-		i++;
-	}
-
 	if (node->builtin != 0)
 		return (0);
-
 	tmp = pathfinder(node->command2[0], general->path);
 	if (tmp != NULL)
 	{

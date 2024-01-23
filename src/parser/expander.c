@@ -3,46 +3,86 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:54:29 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/19 14:29:22 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/01/23 15:57:55 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/mini_shell.h"
 
-char	*ft_str_dollar_cpy(char *src)
-{
-	int		a;
-	char	*dest;
-
-	dest = malloc(sizeof (char *) * ft_strlen(src) + 1);
-	if (!dest)
-		return (NULL);
-	a = 0;
-	while (src[a])
-	{
-		if (src[a] == '$')
-			return (dest);
-		dest[a] = src[a];
-		a++;
-	}
-	dest[a] = '\0';
-	return (dest);
+int confronta_sottostringhe(const char* str, const char* sub, size_t len) {
+    size_t i = 0;
+    while (i < len) {
+        if (str[i] != sub[i]) {
+            return 0; 
+        }
+        i++;
+    }
+    return 1;  
 }
-/*
-appunti expander status
 
-funzione che controlla il $?
-comando scsd$?        output  = scsd0
-comando $?            "       = 0
-comando ciao$?ciao    "       = ciao0ciao
+char *find_substring_position(const char* str, const char* sub) {
+    size_t len = ft_strlen(sub);
+    while (*str != '\0') {
+        if (confronta_sottostringhe(str, sub, len)) {
+            return (char*)str;
+        }
+        str++;
+    }
+    return NULL;
+}
 
-il return deve essere 0 se la funzione non ha espanso il punto interrogativo
-altrimenti 1 se lo espande
-in dollar é gia storato la parte prima del punto interrogativo, il problema sarebbe il terzo esempio
-*/
+char *find_sostituzione(char *comando, t_general *general) {
+    int index = my_setenv(comando + 1, NULL, &general->envp2);
+    if (index >= 0) {
+        char *sostituzione = ft_strchr(general->envp2[index], '=') + 1;
+        return sostituzione;
+    } else {
+        return "";
+    }
+}
+
+char *sostituisci_comando_dollaro(char *input, t_general *general) {
+    char *posizione = input;
+
+    // Trova la posizione del primo comando
+    while ((posizione = find_substring_position(posizione, "$")) != NULL) {
+        char *fine_comando = posizione + ft_strlen("$");
+
+        // Trova la fine del comando
+        while (*fine_comando != ' ' && *fine_comando != '\0' && *fine_comando != '"' && *fine_comando != '$') {
+            fine_comando++;
+        }
+        // Calcola la lunghezza del comando
+        int lunghezza_comando = fine_comando - posizione;
+        char *comando = ft_substr(posizione, 0, lunghezza_comando);
+        char *sostituzione = find_sostituzione(comando, general);
+
+        char *parte_prima = ft_substr(input, 0, posizione - input);
+        char *parte_dopo = ft_substr(fine_comando, 0, strlen(fine_comando));
+
+        char *updated_input = ft_strjoin(parte_prima, sostituzione);
+        updated_input = ft_strjoin(updated_input, parte_dopo);
+
+        free(input);
+        free(parte_prima);
+        free(parte_dopo);
+        free(comando);
+
+        return sostituisci_comando_dollaro(updated_input, general);
+    }
+    return input;
+}
+
+void	ft_expander_case(char **line, int flag, t_general *general, char *dollar)
+{
+	char *finale = sostituisci_comando_dollaro(*line, general);
+	//printf("finale! %s\n", finale);
+	*line = finale;
+	//free(finale);
+}
 
 int	expander_status(char **line, char *dollar)
 {
@@ -73,45 +113,26 @@ int	expander_status(char **line, char *dollar)
 	return(0);
 }
 
-void	ft_expander_case2(char **line, t_general *general, char *dollar)
+char	*ft_str_dollar_cpy(char *src)
 {
-	char	*euro;
-	int		index;
+	int		a;
+	char	*dest;
 
-	euro = ft_strchr(*line, '$');
-		index = my_setenv(euro + 1, NULL, &general->envp2);
-		if (index >= 0)
-		{
-			free (*line);
-			*line = ft_strjoin(dollar, ft_strdup(ft_strchr(general->envp2[index], '=') + 1));
-			return ;
-		}
-			free(*line);
-			*line = ft_strjoin(dollar, "");
+	dest = malloc(sizeof (char *) * ft_strlen(src) + 1);
+	if (!dest)
+		return (NULL);
+	a = 0;
+	while (src[a])
+	{
+		if (src[a] == '$')
+			return (dest);
+		dest[a] = src[a];
+		a++;
+	}
+	dest[a] = '\0';
+	return (dest);
 }
 
-void	ft_expander_case(char **line, int flag, t_general *general, char *dollar)
-{
-	int		index;
-
-	if (line[0][0] == '$')
-	{
-		index = my_setenv(&line[0][1], NULL, &general->envp2);
-		if (index >= 0)
-		{
-			free(*line);
-			*line = ft_strdup(ft_strchr(general->envp2[index], '=') + 1);
-			return ;
-		}
-		free(*line);
-		*line = ft_strdup("");
-		return ;
-	}
-	else if (flag == 1)
-	{
-		ft_expander_case2(line, general, dollar);
-	}
-}
 
 void	node_expander(char **command2, t_general *general)
 {
@@ -139,9 +160,8 @@ void	node_expander(char **command2, t_general *general)
 		if(expander_status(&command2[i], dollar) == 0)
 			ft_expander_case(&command2[i], flag, general, dollar);
 	}
-	free(dollar);
+	//free(dollar);
 }
-//modificare per far funzionare $PWD$PWD
 
 void	expander(t_general *general)
 {
@@ -154,66 +174,3 @@ void	expander(t_general *general)
 		tmp = tmp->next;
 	}
 }
-// void	expander(t_general *general)
-// {
-// 	t_lex	*tmp;
-// 	int		i;
-// 	int		index;
-// 	int		j;
-// 	int		flag = 0;
-// 	int		idx = 0;
-// 	char	*dollar;
-// 	char	*euro;
-
-// 	tmp = general->lexer;
-// 	while (tmp)
-// 	{
-// 		i = 0;
-// 		while (tmp->command2[i])
-// 		{
-// 			j = 0;
-// 			while (tmp->command2[i][j] != '\0')
-// 			{
-// 				idx = ft_idx_quotes(tmp->command2[i], '$');
-// 				if (ft_strchr(tmp->command2[i], '$' ) && idx != 0)
-// 				{
-// 					dollar = ft_str_dollar_cpy(tmp->command2[i]);
-// 					flag = 1;
-// 				}
-// 				j++;
-// 			}
-// 			if (tmp->command2[i][0] == '$')
-// 			{
-// 				index = my_setenv(&tmp->command2[i][1], NULL, &general->envp2);
-// 				if (index >= 0)
-// 				{
-// 					free(tmp->command2[i]);
-// 					tmp->command2[i] = ft_strdup(ft_strchr(general->envp2[index], '=') + 1);
-// 				}
-// 				else if (index == -1)
-// 				{
-// 					free(tmp->command2[i]);
-// 					tmp->command2[i] = ft_strdup("");
-// 				}
-// 			}
-// 			else if (flag == 1)
-// 			{
-// 				euro = ft_strchr(tmp->command2[i], '$');
-// 				index = my_setenv(euro + 1, NULL, &general->envp2);
-// 				if (index >= 0)
-// 				{
-// 					free(tmp->command2[i]);
-// 					tmp->command2[i] = ft_strjoin(dollar,  ft_strdup(ft_strchr(general->envp2[index], '=') + 1));
-// 				}
-// 				else if (index == -1)
-// 				{
-// 					free(tmp->command2[i]);
-// 					tmp->command2[i] = ft_strjoin(dollar, "");
-// 					free(dollar);
-// 				}
-// 			}
-// 			i++;
-// 		}
-// 		tmp = tmp->next;
-// 	}
-// }
