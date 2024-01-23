@@ -6,7 +6,7 @@
 /*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:33:01 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/17 17:30:53 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/01/23 15:46:24 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ void	print_export(char **matrix)
 	return ;
 }
 //questa funzione deve essere nello stesso file di minisplit
+
 static size_t	ft_counter(const char *s, char c)
 {
 	size_t	count;

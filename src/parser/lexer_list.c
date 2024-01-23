@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcardina <jcardina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 11:44:18 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/12 13:20:13 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/17 19:06:04 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	quotes(char *str, int j)
 	{
 		j2++;
 		while (str[j + j2] != 34 && str[j + j2] != '\0')
-			j2++;
+			++j2;
 		return (j2);
 	}
 	else if (str[j] == 39)

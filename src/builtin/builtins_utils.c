@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:15:36 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/15 17:34:10 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/18 18:38:23 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	ft_nb_quotes(char *str, char c)
 	int	i;
 	int	ret;
 
-	i = 0;
+	i = 0; //provare con i=1	
 	ret = 0;
 	if (str == 0)
 		return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_shell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcardina <jcardina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:31:51 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/12 17:13:50 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/17 15:30:56 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <readline/readline.h>
 # include <errno.h>
 # include <string.h>
+# include <sys/wait.h>
+# include <limits.h>  // For PATH_MAX
 # include "../lib/libft/libft.h"
 # include "../lib/ft_printf/ft_printf.h"
 # include "structure.h"
@@ -28,9 +30,8 @@
 # include "utils.h"
 # include "builtin.h"
 # include "executor.h"
-# include "global.h"
-# include <sys/wait.h>
-# include <limits.h>  // For PATH_MAX
+
+extern int	g_last_exit_status;
 
 #endif
 

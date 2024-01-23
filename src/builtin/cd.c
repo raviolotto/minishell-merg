@@ -6,7 +6,7 @@
 /*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:16:09 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/16 16:21:16 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/01/23 15:46:47 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ void	handle_cd(t_general *general, t_lex *node)
 
 	if (getcwd(current_directory, PATH_MAX) == NULL)
 		return ;
-	if (matrixlen(node->command2) > 2)
-	{
-		printf("kitty shell: cd: too many arguments\n");
-		return ;
-	}
-	if (ft_cd_with_quotes(node->command2[1]) == 0)
-	{
-		printf("kitty shell:%s:No such file or directory\n", node->command2[1]);
-		return ;
-	}
+	// if (matrixlen(node->command2) > 2)
+	// {
+	// 	printf("kitty shell: cd: too many arguments\n");
+	// 	return ;
+	// }
+	// if (ft_cd_with_quotes(node->command2[1]) == 0)
+	// {
+	// 	printf("kitty shell:%s:No such file or directory\n", node->command2[1]);
+	// 	return ;
+	// }
 	old_directory = current_directory;
 	if (!node->command2[1])
 	{

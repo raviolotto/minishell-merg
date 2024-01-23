@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 17:42:05 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/14 18:08:25 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/17 19:43:04 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ft_new_pwd(t_general *general)
 	ft_printf("\nNEW_PWD=%s\n", current_directory);
 	new_directory = ft_strjoin("=", current_directory);
 	my_setenv("PWD", new_directory, &(general->envp2));
+	my_setenv("PWD", new_directory, &(general->enexp));
 }
 
 void	ft_old_pwd(t_general *general, char *old_dir)
@@ -30,6 +31,7 @@ void	ft_old_pwd(t_general *general, char *old_dir)
 
 	old_directory = ft_strjoin("=", old_dir);
 	my_setenv("OLDPWD", old_directory, &(general->envp2));
+	my_setenv("OLDPWD", old_directory, &(general->enexp));
 	ft_printf("\nOLD_PWD = %s\n", old_directory);
 }
 
@@ -66,13 +68,11 @@ int	ft_change_dir(char *new_dir, char **cmd2, t_general *general, char *old_dir)
 	{
 		if (chdir(new_dir) != 0)
 		{
-			printf("something went wrong, impossible to change directory\n");
 			printf("kitty shell: cd: %s: %s\n", cmd2[1], strerror(errno));
 			return (0);
 		}
 		else
 		{
-			printf("successfull change directory\n");
 			ft_old_pwd(general, old_dir);
 			ft_new_pwd(general);
 			return (1);

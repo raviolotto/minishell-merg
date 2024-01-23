@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_myexport.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcardina <jcardina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:51:44 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/14 18:11:17 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/17 16:11:35 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,6 @@ int	is_accepted_variable(char *var)
 		return (0);
 	return (1);
 }
-
-// void	print_export(char **matrix)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	if (matrix == NULL)
-// 		return;
-// 	while(matrix[i] != NULL)
-// 	{
-// 		printf("declare -x %s\n", matrix[i]);
-// 		i++;
-// 	}
-// 	return;
-// }
 
 int	uguallen(char *str)
 {
@@ -63,6 +48,15 @@ int	my_setcontrol(char *environ, char *name, char *value)
 	return (-1);
 }
 
+void	env_append(char **env_var, char ***environ, char *value, int index)
+{
+	if (ft_strchr((*environ)[index], '=') == NULL)
+		*env_var = ft_strjoin((*environ)[index], &value[1]);
+	else
+		*env_var = ft_strjoin((*environ)[index], &value[2]);
+	return ;
+}
+
 int	my_setenv(char *name, char *value, char ***environ)
 {
 	char	*env_var;
@@ -75,16 +69,11 @@ int	my_setenv(char *name, char *value, char ***environ)
 		if (my_setcontrol((*environ)[index], name, value) == 0)
 		{
 			if (value[0] == '+')
-			{
-				if (ft_strchr((*environ)[index], '=') == NULL)
-					env_var = ft_strjoin((*environ)[index], &value[1]);
-				else
-					env_var = ft_strjoin((*environ)[index], &value[2]);
-			}
+				env_append(&env_var, environ, value, index);
 			else
 				env_var = ft_strjoin(name, value);
 			free((*environ)[index]);
-			(*environ)[index] = env_var; // Aggiorna il valore della variabile
+			(*environ)[index] = env_var;
 			return (0);
 		}
 		if (my_setcontrol((*environ)[index], name, value) == 1)

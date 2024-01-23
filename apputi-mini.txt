@@ -1,10 +1,9 @@
 appunti:
-implementare cd (+10 anni di Tradimento) (quasi 20 anni di MR. SIMPATIA)
-echo, da attivare e da mettere
+messaggi di errore fatti da scrivere bene
 msgERROR pe quanto riguarda unset
 exit f. status
 controllare pipe status
-
+fuzione per freeare tutto;
 
 ........                                                                                                                                                           .....................................
 .........                                                                                                                                                        ..  ...................................

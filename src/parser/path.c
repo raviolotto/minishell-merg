@@ -6,77 +6,42 @@
 /*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:45:46 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/16 20:31:16 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/01/23 15:48:00 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/mini_shell.h"
 
-char *handle_quotes(char *word)
+void	handle_quotes(char *word)
 {
-	size_t	len;
-	int		num_quotes;
+	int	i;
 
-	len = ft_strlen(word);
-	num_quotes = 0;
-
-	// Check if the argument is enclosed in single or double quotes
-	if (len >= 2 &&
-		((word[0] == '\'' && word[len - 1] == '\'') || (word[0] == '\"' && word[len - 1] == '\"')))
+	i = 0;
+	while (word[i] != '\0')
 	{
-		// Check for matching quotes at the beginning and end
-		if (word[0] != word[len - 1])
+		if (word[i] == '\'')
 		{
-			printf("Error: Unterminated quotes within the word '%s'.\n", word);
-			// Handle the error as needed
-			return ft_strdup(""); // Return an empty string to indicate an error
+			if ((ft_nb_quotes(word + i, '\'') % 2) == 0)
+			{
+				printf("errore 1");
+				g_last_exit_status = 1;
+				return ;
+			}
+			return ;
 		}
-
-		// Remove the quotes and return the substring
-		return ft_substr(word, 1, len - 2);
+		else if (word[i] == '\"')
+		{
+			if ((ft_nb_quotes(word + i, '\"') % 2) == 0)
+			{
+				printf("errore 2");
+				g_last_exit_status = 1;
+				return ;
+			}
+			return ;
+		}
+		i++;
 	}
-
-	// Check for unterminated single quotes at the beginning
-	if (word[0] == '\'' && word[len - 1] != '\'')
-	{
-		printf("Error: Unterminated single quote within the word '%s'.\n", word);
-		// Handle the error as needed
-		return ft_strdup(""); // Return an empty string to indicate an error
-	}
-
-	// Check for unterminated double quotes at the beginning
-	if (word[0] == '\"' && word[len - 1] != '\"')
-	{
-		printf("Error: Unterminated double quote within the word '%s'.\n", word);
-		// Handle the error as needed
-		return ft_strdup(""); // Return an empty string to indicate an error
-	}
-
-	// Check for quotes at the end without matching at the beginning
-	if ((word[0] != '\'' && word[0] != '\"') && (word[len - 1] == '\'' || word[len - 1] == '\"'))
-	{
-		printf("Error: Unmatched quotes at the end within the word '%s'.\n", word);
-		// Handle the error as needed
-		return ft_strdup(""); // Return an empty string to indicate an error
-	}
-
-	// Count the number of quotes within the word
-	for (size_t i = 0; i < len; i++)
-	{
-		if (word[i] == '\'' || word[i] == '\"')
-			num_quotes++;
-	}
-
-	// Check if the total number of quotes is even
-	if (num_quotes % 2 != 0)
-	{
-		printf("Error: Unmatched quotes within the word '%s'.\n", word);
-		// Handle the error as needed
-		return ft_strdup(""); // Return an empty string to indicate an error
-	}
-
-	// If no quotes are found, return the word
-	return ft_strdup(word);
+	return ;
 }
 
 char	*pathfinder(char *command, char **path)
@@ -84,20 +49,20 @@ char	*pathfinder(char *command, char **path)
 	char	*result;
 	int		i;
 	char	*fullpath;
-	char	*temp_path;
+	char	*temppath;
 
 	i = 0;
 	result = NULL;
 	while (path[i])
 	{
-		temp_path = ft_strjoin(path[i], "/");
-		if (!temp_path)
+		temppath = ft_strjoin(path[i], "/");
+		if (!temppath)
 		{
 			perror("Errore nell'allocazione di memoria");
 			exit(EXIT_FAILURE);
 		}
-		fullpath = ft_strjoin(temp_path, command);
-		free(temp_path);
+		fullpath = ft_strjoin(temppath, command);
+		free(temppath);
 		if (!fullpath)
 		{
 			perror("Errore nell'allocazione di memoria");
@@ -112,18 +77,23 @@ char	*pathfinder(char *command, char **path)
 		i++;
 	}
 	if (result == NULL)
-		printf("Il comando '%s' non è stato trovato nei percorsi specificati.\n", command); // da scrivere in inglese
-	// std 1.ERROR, 2. input ed 3. output? le precedenti task sonon gia´ state eseguite?
+		printf("Il comando '%s' non è stato trovato\n", command);
 	return (result);
 }
 
 int build_matrix(char *str, t_lex *node, t_general *general)
 {
-	char *tmp;
-	int i;
-	i = 0;
+	char	*tmp;
+	int		i;
 
-	node->command2 = maxxisplit(str, ' ');
+	i = 0;
+	node->command2 = maxxisplit (str, ' ');
+	while (i < matrixlen(node->command2))
+	{
+		handle_quotes(node->command2[i]);
+		ft_cd_with_quotes(node->command2[i]);
+		i++;
+	}
 	node->builtin = dumb_builtin_check(node->command2[0]);
 
 	while (node->command2[i] != NULL)

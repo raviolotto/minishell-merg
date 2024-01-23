@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:58:58 by amema             #+#    #+#             */
-/*   Updated: 2024/01/15 17:01:38 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/17 19:44:55 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	handle_echo(t_general *general, t_lex *node)
 	int		no_newline;
 	int		i;
 	int		num_args;
-	char	*tmp;
 
 	no_newline = 0;
 	i = 1;
@@ -30,27 +29,48 @@ void	handle_echo(t_general *general, t_lex *node)
 	}
 	while (i < num_args)
 	{
-		//if(ft_strncmp(node->command2[i], "-n", 2) == 0)
-		//	i++;
-		//tmp = ft_strtrim(node->command2[i], "\"");
-		//if(tmp)
-		if (ft_cd_with_quotes(node->command2[i]) == 0)
-		{
-			ft_printf("--------%s\n", node->command2[i]);
-			printf("errors\n");
-			return ;
-		}
+		// ft_cd_with_quotes(node->command2[i]);
 		if (node->command2[i])
 			ft_printf("%s", node->command2[i]);
 		if (i < num_args -1)
 			ft_printf(" ");
 		i++;
-		//free(tmp);
 	}
 	if (!no_newline)
 		ft_printf("\n");
 }
+// funzionante
+// void	handle_echo(t_general *general, t_lex *node)
+// {
+// 	int		no_newline;
+// 	int		i;
+// 	int		num_args;
 
+// 	no_newline = 0;
+// 	i = 1;
+// 	num_args = matrixlen(node->command2);
+// 	while (node->command2[i] != NULL && num_args > 1
+// 		&& ft_strncmp(node->command2[i], "-n", 2) == 0)
+// 	{
+// 		no_newline = 1;
+// 		i++;
+// 	}
+// 	while (i < num_args)
+// 	{
+// 		if (ft_cd_with_quotes(node->command2[i]) == 0)
+// 		{
+// 			printf("errors\n");
+// 			return ;
+// 		}
+// 		if (node->command2[i])
+// 			ft_printf("%s", node->command2[i]);
+// 		if (i < num_args -1)
+// 			ft_printf(" ");
+// 		i++;
+// 	}
+// 	if (!no_newline)
+// 		ft_printf("\n");
+// }
 // void	handle_echo(char **args, int arg_nb, t_shell *shell)
 // {
 // 	int		output_redirect_index = -1;

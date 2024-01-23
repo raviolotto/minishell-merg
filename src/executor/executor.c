@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:49:11 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/14 17:54:24 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:46:49 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	builtinmanager(t_lex *node, t_general *general)
 		handle_unset(general, node);
 	if (node->builtin == 6)
 		handle_env(general);
-	//if (node->builtin == 7)
-	//handle_exit
+	if (node->builtin == 7)
+		handle_exit(node->command2);
 }
 
 void	executor(t_general *general)
