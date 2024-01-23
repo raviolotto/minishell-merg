@@ -6,7 +6,7 @@
 /*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:54:29 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/23 16:21:59 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/01/23 17:18:53 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ char *find_sostituzione(char *comando, t_general *general) {
 
 char *sostituisci_comando_dollaro(char *input, t_general *general) {
     char *posizione = input;
+	char *sostituzione;
 
     // Trova la posizione del primo comando
     while ((posizione = find_substring_position(posizione, "$")) != NULL) {
@@ -58,7 +59,12 @@ char *sostituisci_comando_dollaro(char *input, t_general *general) {
         // Calcola la lunghezza del comando
         int lunghezza_comando = fine_comando - posizione;
         char *comando = ft_substr(posizione, 0, lunghezza_comando);
-        char *sostituzione = find_sostituzione(comando, general);
+		printf("comando! %s\n", comando);
+		
+		if (strncmp(comando, "$?", 2) == 0)
+			sostituzione = ft_itoa(g_last_exit_status);
+        else 
+			sostituzione = find_sostituzione(comando, general);
 
         char *parte_prima = ft_substr(input, 0, posizione - input);
         char *parte_dopo = ft_substr(fine_comando, 0, strlen(fine_comando));
@@ -84,34 +90,35 @@ void	ft_expander_case(char **line, int flag, t_general *general, char *dollar)
 	//free(finale);
 }
 
-int	expander_status(char **line, char *dollar)
-{
-	int	i;
-	char	*euro;
-	char	*tmp;
-	char	*tmp2;
-	char	*tmp3;
+// int	expander_status(char **line, char *dollar)
+// {
+// 	int	i;
+// 	char	*euro;
+// 	char	*tmp;
+// 	char	*tmp2;
+// 	char	*tmp3;
 
-	i = -1;
-	while(line[0][++i] != '\0')
-	{
-		euro = strchr(*line, '$');
-		if(euro && (*(euro + 1) == '?'))
-		{
-			tmp = ft_itoa(g_last_exit_status);
-			tmp2 = euro + 2;
-			if (dollar)
-				tmp3 = ft_strjoin(dollar, tmp);
-			else
-				tmp3 = tmp;
-			tmp3 = ft_strjoin(tmp3, tmp2);
-			free(*line);
-			*line = tmp3;
-			return (1);
-		}
-	}
-	return(0);
-}
+// 	i = -1;
+// 	while(line[0][++i] != '\0')
+// 	{
+// 		euro = strchr(*line, '$');
+// 		if(euro && (*(euro + 1) == '?'))
+// 		{
+// 			tmp = ft_itoa(g_last_exit_status);
+// 			tmp2 = euro + 2;
+// 			ft_printf("%s\n", dollar);
+// 			if (dollar)
+// 				tmp3 = ft_strjoin(dollar, tmp);
+// 			else
+// 				tmp3 = tmp;
+// 			tmp3 = ft_strjoin(tmp3, tmp2);
+// 			free(*line);
+// 			*line = tmp3;
+// 			return (1);
+// 		}
+// 	}
+// 	return(0);
+// }
 
 char	*ft_str_dollar_cpy(char *src)
 {
@@ -157,7 +164,7 @@ void	node_expander(char **command2, t_general *general)
 			}
 			j++;
 		}
-		if(expander_status(&command2[i], dollar) == 0)
+		//if(expander_status(&command2[i], dollar) == 0)
 			ft_expander_case(&command2[i], flag, general, dollar);
 	}
 	//free(dollar);
