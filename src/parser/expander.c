@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:54:29 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/23 17:18:53 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/01/23 19:00:57 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char *sostituisci_comando_dollaro(char *input, t_general *general) {
         char *fine_comando = posizione + ft_strlen("$");
 
         // Trova la fine del comando
-        while (*fine_comando != ' ' && *fine_comando != '\0' && *fine_comando != '"' && *fine_comando != '$' && *fine_comando != '\'') {
+        while (*fine_comando != ' ' && *fine_comando != '\0' && *fine_comando != '\"' && *fine_comando != '$' && *fine_comando != '\'') {
             fine_comando++;
         }
         // Calcola la lunghezza del comando
@@ -90,36 +90,6 @@ void	ft_expander_case(char **line, int flag, t_general *general, char *dollar)
 	//free(finale);
 }
 
-// int	expander_status(char **line, char *dollar)
-// {
-// 	int	i;
-// 	char	*euro;
-// 	char	*tmp;
-// 	char	*tmp2;
-// 	char	*tmp3;
-
-// 	i = -1;
-// 	while(line[0][++i] != '\0')
-// 	{
-// 		euro = strchr(*line, '$');
-// 		if(euro && (*(euro + 1) == '?'))
-// 		{
-// 			tmp = ft_itoa(g_last_exit_status);
-// 			tmp2 = euro + 2;
-// 			ft_printf("%s\n", dollar);
-// 			if (dollar)
-// 				tmp3 = ft_strjoin(dollar, tmp);
-// 			else
-// 				tmp3 = tmp;
-// 			tmp3 = ft_strjoin(tmp3, tmp2);
-// 			free(*line);
-// 			*line = tmp3;
-// 			return (1);
-// 		}
-// 	}
-// 	return(0);
-// }
-
 char	*ft_str_dollar_cpy(char *src)
 {
 	int		a;
@@ -153,19 +123,23 @@ void	node_expander(char **command2, t_general *general)
 	flag = 0;
 	while(command2[++i])
 	{
-		j = 0;
-		while (command2[i][j] != '\0')
+		//printf("%i\n", general->flag_quotes[i]);
+		if (general->flag_quotes[i] != 1)
 		{
-			idx = ft_idx_quotes(command2[i], '$');
-			if (ft_strchr(command2[i], '$') && idx != 0)
+			j = 0;
+			while (command2[i][j] != '\0')
 			{
-				dollar = ft_str_dollar_cpy(command2[i]);
-				flag = 1;
+				idx = ft_idx_quotes(command2[i], '$');
+				if (ft_strchr(command2[i], '$') && idx != 0)
+				{
+					dollar = ft_str_dollar_cpy(command2[i]);
+					flag = 1;
+				}
+				j++;
 			}
-			j++;
-		}
 		//if(expander_status(&command2[i], dollar) == 0)
 			ft_expander_case(&command2[i], flag, general, dollar);
+		}
 	}
 	//free(dollar);
 }
