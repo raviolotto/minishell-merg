@@ -6,7 +6,7 @@
 /*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:54:29 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/23 15:57:55 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:21:59 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char *sostituisci_comando_dollaro(char *input, t_general *general) {
         char *fine_comando = posizione + ft_strlen("$");
 
         // Trova la fine del comando
-        while (*fine_comando != ' ' && *fine_comando != '\0' && *fine_comando != '"' && *fine_comando != '$') {
+        while (*fine_comando != ' ' && *fine_comando != '\0' && *fine_comando != '"' && *fine_comando != '$' && *fine_comando != '\'') {
             fine_comando++;
         }
         // Calcola la lunghezza del comando
