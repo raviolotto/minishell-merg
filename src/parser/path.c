@@ -3,22 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amema <amema@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:45:46 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/16 20:13:27 by lmorelli         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   path.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 16:45:46 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/16 19:51:19 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/18 19:28:00 by amema            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +15,7 @@
 char *handle_quotes(char *word)
 {
     size_t len;
-	
+
 	len = ft_strlen(word);
 
     // Check if the argument is enclosed in single or double quotes
@@ -111,13 +99,13 @@ int build_matrix(char *str, t_lex *node, t_general *general)
     char *tmp;
 	int i;
 	i = 0;
-	
+
     node->command2 = maxxisplit(str, ' ');
     node->builtin = dumb_builtin_check(node->command2[0]);
     if (node->builtin != 0)
         return (0);
 
-    
+
     while (node->command2[i] != NULL)
     {
         // Handle quotes for each word (token) in the command

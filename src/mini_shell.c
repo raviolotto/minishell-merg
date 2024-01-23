@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   mini_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amema <amema@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 16:17:29 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/16 19:08:21 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/23 18:02:01 by amema            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/mini_shell.h"
 
 int g_last_exit_status;
+
 
 static int	is_whitespace_input(const char *str)
 {
@@ -27,6 +28,9 @@ static int	is_whitespace_input(const char *str)
 
 void	init(t_general *general, char **envp)
 {
+	size_t size = sizeof(general->lexer);
+	printf("Size of lexer: %zu bytes\n", size);
+
 	general->lexer = NULL;
 	general->envp2 = matrix_dup(envp);
 	general->enexp = matrix_dup(general->envp2);
@@ -39,6 +43,7 @@ int	main(int ac, char **av, char **envp)
 {
 	t_general	general;
 	t_lex		*tmp;
+
 
 	if (ac != 1)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amema <amema@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:44:08 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/12 14:29:38 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:06:06 by amema            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define UTILS_H
 
 void	free_matrix(char **matrix);
+void	afalcons(t_lex *node);
+void	free_lex(t_lex *head);
+void	free_general(t_general *general);
 void	print_export(char **matrix);
 void	print_matrix(char **matrix);
 int		dumb_builtin_check(char *command);
