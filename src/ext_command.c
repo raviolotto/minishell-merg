@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 13:07:51 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/14 18:05:57 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:34:38 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,27 @@ int	execute_external_command(char **args)
 	if (access(res, X_OK) == 0)
 	{
 		pid = fork();
-		if (pid == 0)
-		{
-			if (execve(res, args, NULL) == -1)
-				perror("execve error");
-		}
-		else if (pid < 0)
+		if (pid < 0)
 			perror("fork error");
+		else if (pid == 0)
+		{//execve va chiamato nel child altrimenti il parent verrebbe sostituito e non riuscirebbe ad aspettare che il child termini
+			printf("\nFIGLIO\n");//se aggiungessi qualcos altro dopo questa riga tipo un printf non stamperebbe nulla perché execve rimpiazza tutto ció che sta nel child
+			execve(res, args, NULL);
+			
+		}
 		else
-		{
-			while (!WIFEXITED(status) && !WIFSIGNALED(status))
-				waitpid(pid, &status, 0);
+		{printf("\nPADRE\n");
+			wait(&status);
+			if (WIFEXITED(status))
+			{
+				g_last_exit_status = WEXITSTATUS(status);
+				if (g_last_exit_status == 0)
+					printf("\nsuccess = %d\n", g_last_exit_status);
+				else
+					printf("\nfailure = %d\n", g_last_exit_status);
+}
+			// while (!WIFEXITED(status) && !WIFSIGNALED(status))
+			// 	waitpid(pid, &status, 0);
 		}
 		free(res);
 		return (1);

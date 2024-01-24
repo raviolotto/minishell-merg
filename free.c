@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/18 19:33:03 by amema             #+#    #+#             */
-/*   Updated: 2024/01/24 17:57:36 by frdal-sa         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/01/24 19:12:03 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../includes/mini_shell.h"
 
@@ -76,3 +77,4 @@ void	free_general(t_general *general)
 	free(general->flag_quotes);
 }
 
+void	free_n_exit(t_general)

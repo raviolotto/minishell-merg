@@ -5,6 +5,8 @@ exit f. status
 controllare pipe status
 fuzione per freeare tutto;
 provare echo $?#?$?
+provare echo $?+$?
+
 
 solo $? va in seg fault
 

@@ -6,7 +6,7 @@
 /*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 12:43:41 by amema             #+#    #+#             */
-/*   Updated: 2024/01/24 17:59:16 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/01/24 19:12:34 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,21 @@ void	exit_utils(char **args, int exit_n, int len_args)
 		else
 		{
 			//arg_error("exit\n", NULL, NULL);
-			ft_putstr_fd("exit\nkittisinkula: exit:troppi argomenti\n", 2);
+			ft_putstr_fd("exit\nminishell: exit: too many arguments\n", 2);
 			g_last_exit_status = 1; // variabile externa global
-			exit(g_last_exit_status);
+			// exit(g_last_exit_status);
 		}
 	}
 	else
 	{
 		arg_error("exit\nminishell: exit: ",
-			args[0], ": numeric argument required\n");
+			args[1], ": numeric argument required\n");
 		g_last_exit_status = 2;
 		exit(g_last_exit_status);
 
 	}
 }
+
 void	handle_exit(char **args)
 {
 	int	len_args;
@@ -75,7 +76,7 @@ void	handle_exit(char **args)
 	if (args)
 		while (args[len_args])
 			len_args++;
-	if (len_args == 0)
+	if (len_args == 1)
 	{
 		printf("exit\n");
 		exit(g_last_exit_status);
