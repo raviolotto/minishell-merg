@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 16:17:29 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/23 18:44:58 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/24 17:58:45 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static int	is_whitespace_input(const char *str)
 
 void	init(t_general *general, char **envp)
 {
+	g_last_exit_status = 0;
 	general->lexer = NULL;
 	general->envp2 = matrix_dup(envp);
 	general->enexp = matrix_dup(general->envp2);
@@ -49,7 +50,6 @@ int	main(int ac, char **av, char **envp)
 	init(&general, envp);
 	while (1)
 	{
-		g_last_exit_status = 0;
 		printf(YELLOW);
 		general.args = readline("kitty shell> " RESET);
 		if (general.args == NULL)

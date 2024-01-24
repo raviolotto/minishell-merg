@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:15:36 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/23 19:03:52 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/23 20:03:57 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ int	ft_rm_quotes(char *str, int s_quote, int d_quotes, int idx_double, t_general
 {
 	int	idx_single;
 	 
-
 	idx_single = ft_idx_quotes(str, '\'');
 	if (s_quote > 0 && d_quotes == 0)
 	{

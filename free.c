@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amema <amema@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 19:33:03 by amema             #+#    #+#             */
-/*   Updated: 2024/01/23 18:39:48 by amema            ###   ########.fr       */
+/*   Updated: 2024/01/24 16:39:21 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ void free_general(t_general *general)
 	free_matrix(&(general->enexp));
 	free_matrix(&(general->path));
 	free_lex(general->lexer); //linkd list of t_lex IN t_general
-	free(general flag_quotes);
+	free(general->flag_quotes);
 
 }
 
+void	free_n_exit(t_general)
