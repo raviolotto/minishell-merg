@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:15:36 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/23 19:03:52 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/24 17:58:43 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ int	ft_nb_quotes(char *str, char c)
 	int	i;
 	int	ret;
 
-	i = 0; //provare con i=1	
+	//provare con i=1	
+	i = 0;
 	ret = 0;
 	if (str == 0)
 		return (0);
@@ -103,7 +104,6 @@ int	ft_nb_quotes(char *str, char c)
 int	ft_rm_quotes(char *str, int s_quote, int d_quotes, int idx_double, t_general *general, int index)
 {
 	int	idx_single;
-	 
 
 	idx_single = ft_idx_quotes(str, '\'');
 	if (s_quote > 0 && d_quotes == 0)
@@ -114,7 +114,8 @@ int	ft_rm_quotes(char *str, int s_quote, int d_quotes, int idx_double, t_general
 	else if (d_quotes > 0 && s_quote == 0)
 	{
 		ft_supp_rm(str, '\"');
-		general->flag_quotes[index] = 0; //scrivere caso con split es: "$PWD $PWD"
+		//scrivere caso con split es: "$PWD $PWD"
+		general->flag_quotes[index] = 0; 
 	}
 	else if (idx_double > idx_single)
 	{

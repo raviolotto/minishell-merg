@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amema <amema@student.42.fr>                +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 19:33:03 by amema             #+#    #+#             */
-/*   Updated: 2024/01/23 18:39:48 by amema            ###   ########.fr       */
+/*   Updated: 2024/01/24 17:57:36 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	free_matrix(char **matrix)
 	}
 	free (matrix);
 }
+
 void	afalcons(t_lex *node)
 {
 	if (node->next)
@@ -32,7 +33,6 @@ void	afalcons(t_lex *node)
 	free(node->command);
 	free(node);
 }
-
 
 // void	free_matrix1(char **matrix)
 // {
@@ -54,23 +54,25 @@ void	afalcons(t_lex *node)
 // 	free(matrix);
 // }
 
-void free_lex(t_lex *node)
+void	free_lex(t_lex *node)
 {
 	if (node == NULL)
-		return;
-	free_matrix(&(node->command2)); // +altra roba che devo freeare(?) ---->decidere se freeare con questo oppure afalcons
+		return ;
+	// +altra roba che devo freeare(?) ---->decidere se freeare con questo oppure afalcons
+	free_matrix(&(node->command2));
 	free_lex(node->next);
-	free_matrix(&(node->command)); // +altra roba che devo freeare(?)
+	// +altra roba che devo freeare(?)
+	free_matrix(&(node->command)); 
 	free(node);
 }
 
-void free_general(t_general *general)
+void	free_general(t_general *general)
 {
 	free_matrix(&(general->envp2));
 	free_matrix(&(general->enexp));
 	free_matrix(&(general->path));
-	free_lex(general->lexer); //linkd list of t_lex IN t_general
-	free(general flag_quotes);
-
+	//linkd list of t_lex IN t_general
+	free_lex(general->lexer);
+	free(general->flag_quotes);
 }
 

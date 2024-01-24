@@ -6,7 +6,7 @@
 /*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 12:43:41 by amema             #+#    #+#             */
-/*   Updated: 2024/01/24 15:43:34 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/01/24 17:59:16 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ void	exit_utils(char **args, int exit_n, int len_args)
 }
 void	handle_exit(char **args)
 {
-
-
 	int	len_args;
 	int	exit_n;
 
