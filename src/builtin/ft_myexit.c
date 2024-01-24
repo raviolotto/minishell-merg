@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_myexit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 12:43:41 by amema             #+#    #+#             */
-/*   Updated: 2024/01/16 19:34:31 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/24 15:43:34 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/mini_shell.h"
+
+void	arg_error(char *first, char *var, char *secondigliano)
+{
+	ft_putstr_fd(first, 2);
+	ft_putstr_fd(var, 2);
+	ft_putstr_fd(secondigliano, 2);
+}
 
 int	only_n_in_str(char *str)
 {
@@ -32,43 +39,48 @@ void	exit_utils(char **args, int exit_n, int len_args)
 	{
 		if (len_args == 2)
 		{
-			exit_n = ft_atoi(args[1]);
-			exit_n = exit_n % 256;
+			exit_n = (ft_atoi(args[1]) % 256);
+			// exit_n = exit_n % 256;
 			if (exit_n < 0)
 				exit_n = exit_n + 256;
-			ft_printf("exit\n");
+			// arg_error("exit\n", NULL, NULL);
 			// funzione per free-are exit
-
+			printf("exit\n");
+			exit(exit_n);
 		}
 		else
 		{
-			ft_putstr_fd ("exit\nminishell: exit: too many arguments\n", 2); //2 = stderror
+			//arg_error("exit\n", NULL, NULL);
+			ft_putstr_fd("exit\nkittisinkula: exit:troppi argomenti\n", 2);
 			g_last_exit_status = 1; // variabile externa global
+			exit(g_last_exit_status);
 		}
 	}
 	else
 	{
-		ft_putstr_fd ("kitty shell : exit: %s: numeric argument required\n", 2);
-		exit(130);		
+		arg_error("exit\nminishell: exit: ",
+			args[0], ": numeric argument required\n");
+		g_last_exit_status = 2;
+		exit(g_last_exit_status);
+
 	}
 }
 void	handle_exit(char **args)
 {
+
+
+	int	len_args;
 	int	exit_n;
 
+	len_args = 1;
 	exit_n = 0;
-	// if (args)
-	// {
-	// 	while(args[i])
-	// 		i++;
-	// }
-	// if (i == 0)
-	if(!args[1])
+	if (args)
+		while (args[len_args])
+			len_args++;
+	if (len_args == 0)
 	{
-		ft_printf("exit\n");
-		//free di tuttoooooooooo 
+		printf("exit\n");
 		exit(g_last_exit_status);
-		// free exit
 	}
 	else
 		exit_utils(args, exit_n, matrixlen(args));
