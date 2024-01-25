@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 16:17:29 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/24 17:58:45 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/25 18:01:37 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	init(t_general *general, char **envp)
 	general->path = ft_split(getenv("PATH"), ':');
 	printf(PINK"\n%s\n", INTRO);
 	printf("\n%s\n"RESET, HELLO2);
-	//general->flag_quotes = calloc(sizeof(int), 1000);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -55,7 +54,6 @@ int	main(int ac, char **av, char **envp)
 		if (general.args == NULL)
 			exit(1);
 		//ricordati di freeeeeare
-		//printf("%p\n", general.args);
 		if (general.args && *general.args)
 			add_history(general.args);
 		if (!is_whitespace_input(general.args))

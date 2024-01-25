@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:58:58 by amema             #+#    #+#             */
-/*   Updated: 2024/01/17 19:44:55 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/25 18:14:14 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	handle_echo(t_general *general, t_lex *node)
 	}
 	while (i < num_args)
 	{
-		// ft_cd_with_quotes(node->command2[i]);
 		if (node->command2[i])
 			ft_printf("%s", node->command2[i]);
 		if (i < num_args -1)

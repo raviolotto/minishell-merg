@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:45:46 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/23 18:22:07 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/25 18:06:43 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char	*pathfinder(char *command, char **path)
 		if (access(fullpath, F_OK | X_OK) == 0)
 		{
 			result = fullpath;
-			break;
+			break ;
 		}
 		free(fullpath);
 		i++;

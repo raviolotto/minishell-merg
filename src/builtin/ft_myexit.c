@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_myexit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 12:43:41 by amema             #+#    #+#             */
-/*   Updated: 2024/01/24 19:12:34 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/01/25 18:15:12 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	only_n_in_str(char *str)
 
 void	exit_utils(char **args, int exit_n, int len_args)
 {
-	if(only_n_in_str(args[1]))
+	if (only_n_in_str(args[1]))
 	{
 		if (len_args == 2)
 		{
@@ -62,7 +62,6 @@ void	exit_utils(char **args, int exit_n, int len_args)
 			args[1], ": numeric argument required\n");
 		g_last_exit_status = 2;
 		exit(g_last_exit_status);
-
 	}
 }
 

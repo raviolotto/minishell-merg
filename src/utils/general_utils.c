@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:33:01 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/23 15:46:24 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/01/25 18:10:10 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,6 @@ int	handle_token(const char **s, char c, char ***matrix, size_t *i)
 	size_t	j;
 
 	j = 0;
-
 	while (**s && **s != c && ++j)
 	{
 		if (**s == 34 || **s == 39)
@@ -184,14 +183,13 @@ int	handle_token(const char **s, char c, char ***matrix, size_t *i)
 	return (j);
 }
 
-char **maxxisplit(char const *s, char c)
+char	**maxxisplit(char const *s, char c)
 {
 	char	**matrix;
 	size_t	i;
 
 	if (!s)
 		return (NULL);
-
 	i = 0;
 	matrix = malloc(sizeof(char *) * (ft_counter(s, c) + 1));
 	if (!matrix)
