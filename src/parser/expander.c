@@ -6,7 +6,7 @@
 /*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:54:29 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/25 17:39:20 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/01/25 17:43:42 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,28 +164,12 @@ char	*ft_str_dollar_cpy(char *src)
 void	node_expander(char **command2, t_general *general)
 {
 	int		i;
-	int		j;
-	int		idx;
-	int		flag;
-	char	*dollar;
 
 	i = -1;
-	flag = 0;
 	while (command2[++i])
 	{
 		if (general->flag_quotes[i] != 1)
 		{
-			j = 0;
-			while (command2[i][j] != '\0')
-			{
-				idx = ft_idx_quotes(command2[i], '$');
-				if (ft_strchr(command2[i], '$') && idx != 0)
-				{
-					dollar = ft_str_dollar_cpy(command2[i]);
-					flag = 1;
-				}
-				j++;
-			}
 			ft_expander_case(&command2[i], general);
 		}
 	}
