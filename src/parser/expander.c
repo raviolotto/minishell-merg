@@ -6,7 +6,7 @@
 /*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:54:29 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/24 19:04:55 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/01/25 17:39:20 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,47 @@ char	*find_sostituzione(char *comando, t_general *general)
 	}
 }
 
+char	*calcolate_parte_prima(char *input, char *posizione)
+{
+	char	*parte_prima;
+	int		lunghezza_parte_prima;
+
+	lunghezza_parte_prima = posizione - input;
+	parte_prima = ft_substr(input, 0, lunghezza_parte_prima);
+	return (parte_prima);
+}
+
+char	*calcolate_parte_dopo(char *fine_comando)
+{
+	char	*parte_dopo;
+	int		lunghezza_parte_dopo;
+
+	lunghezza_parte_dopo = strlen(fine_comando);
+	parte_dopo = ft_substr(fine_comando, 0, lunghezza_parte_dopo);
+	return (parte_dopo);
+}
+
+char	*find_fine_comando(char *posizione)
+{
+	char	*fine_comando;
+
+	fine_comando = posizione + ft_strlen("$");
+	while (*fine_comando != ' ' && *fine_comando != '\0' 
+		&& *fine_comando != '\"' && *fine_comando != '$'
+		&& *fine_comando != '\'')
+	{
+		fine_comando++;
+	}
+	return (fine_comando);
+}
+
+
+//da controllare le allocazioni di memoria vegono liberate
 char	*sostituisci_comando_dollaro(char *input, t_general *general)
 {
 	char	*posizione;
 	char	*fine_comando;
-	int		lunghezza_comando;
 	char	*comando;
-	char	*parte_prima;
-	char	*parte_dopo;
 	char	*updated_input;
 
 	posizione = input;
@@ -86,25 +119,13 @@ char	*sostituisci_comando_dollaro(char *input, t_general *general)
 		posizione = find_substring_position(posizione, "$");
 		if (posizione == NULL)
 			break ;
-
-		fine_comando = posizione + ft_strlen("$");
-
-		while (*fine_comando != ' ' && *fine_comando != '\0' 
-			&& *fine_comando != '\"' && *fine_comando != '$'
-			&& *fine_comando != '\'')
-		{
-			fine_comando++;
-		}
-		lunghezza_comando = fine_comando - posizione;
-		comando = ft_substr(posizione, 0, lunghezza_comando);
-		parte_prima = ft_substr(input, 0, posizione - input);
-		parte_dopo = ft_substr(fine_comando, 0, strlen(fine_comando));
+		fine_comando = find_fine_comando(posizione);
+		comando = ft_substr(posizione, 0, fine_comando - posizione);
 		updated_input = 
-			ft_strjoin(parte_prima, find_sostituzione(comando, general));
-		updated_input = ft_strjoin(updated_input, parte_dopo);
-		free(input);
-		free(parte_prima);
-		free(parte_dopo);
+			ft_strjoin(calcolate_parte_prima(input, posizione),
+				find_sostituzione(comando, general));
+		updated_input = ft_strjoin(updated_input, 
+				calcolate_parte_dopo(fine_comando));
 		free(comando);
 		return (sostituisci_comando_dollaro(updated_input, general));
 	}
