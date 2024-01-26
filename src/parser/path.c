@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:45:46 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/25 18:06:43 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:11:42 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,26 @@ void	handle_quotes(char *word)
 {
 	int	i;
 
-	i = 0;
-	while (word[i] != '\0')
+	i = -1;
+	while (word[++i] != '\0')
 	{
 		if (word[i] == '\'')
 		{
 			if ((ft_nb_quotes(word + i, '\'') % 2) == 0)
 			{
-				printf("errore 1");
+				printf("wela zio non hai chiuso le '\n");
 				g_last_exit_status = 1;
-				return ;
 			}
-			return ;
 		}
 		else if (word[i] == '\"')
 		{
 			if ((ft_nb_quotes(word + i, '\"') % 2) == 0)
 			{
-				printf("errore 2");
 				g_last_exit_status = 1;
-				return ;
+				printf("wela zio non hai chiuso le '\n");
 			}
 			return ;
 		}
-		i++;
 	}
 	return ;
 }

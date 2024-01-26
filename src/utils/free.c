@@ -1,14 +1,14 @@
-/* ************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amema <amema@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/25 15:13:22 by amema             #+#    #+#             */
-/*   Updated: 2024/01/26 14:21:32 by amema            ###   ########.fr       */
+/*   Created: 2024/01/26 17:01:40 by jcardina          #+#    #+#             */
+/*   Updated: 2024/01/26 17:03:58 by jcardina         ###   ########.fr       */
 /*                                                                            */
-/* ************************** */
+/* ************************************************************************** */
 
 #include "../../includes/mini_shell.h"
 
@@ -36,13 +36,10 @@ void	afalcons(t_lex *node)
 
 void	free_lex(t_lex *node)
 {
-
 	if (node == NULL)
 		return ;
-	// +altra roba che devo freeare(?) ---->decidere se freeare con questo oppure afalcons
 	if (node->next)
 		free_lex(node->next);
-	// +altra roba che devo freeare(?)
 	free_matrix(node->command2);
 	free(node->command);
 	free(node);
@@ -59,11 +56,10 @@ void	free_general(t_general *general)
 
 void	free_and_exit(int exit_n, t_general *general)
 {
-	//int str;
 	if (general != NULL)
 	{
-		free_general(general); //free_di_Tutto
+		free_general(general);
 		free_lex(general->lexer);
 	}
-	 exit(exit_n);
+	exit(exit_n);
 }

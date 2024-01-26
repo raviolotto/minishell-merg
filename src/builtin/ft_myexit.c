@@ -6,7 +6,7 @@
 /*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 15:17:38 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/26 16:16:44 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:01:05 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,36 +56,20 @@ int	only_n_in_str(char *str)
 
 void	exit_utils(char **args, int exit_n, int len_args, t_general *general)
 {
-	//if(only_n_in_str(args[1]))
-	//{
-		if (len_args == 2)
-		{
-			exit_n = (ft_atoi(args[1]) % 256);
-			// exit_n = exit_n % 256;
-			if (exit_n < 0)
-				exit_n = exit_n + 256;
-			// arg_error("exit\n", NULL, NULL);
-			// funzione per free-are exit
-			printf("exit\n");
-			free_and_exit(exit_n, general);
-		}
-		else
-		{
-			//arg_error("exit\n", NULL, NULL);
-			ft_putstr_fd("exit\nminishell: exit: too many arguments\n", 2);
-			g_last_exit_status = 1; // variabile externa global
-			return ;
-			//free_and_exit(g_last_exit_status, general);
-		}
-	//}
-	// else
-	// {
-	// 	arg_error("exit\nminishell: exit: ",
-	// 		args[1], ": numeric argument required\n");
-	// 	g_last_exit_status = 2;
-	// 	exit(g_last_exit_status);
-
-	// }
+	if (len_args == 2)
+	{
+		exit_n = (ft_atoi(args[1]) % 256);
+		if (exit_n < 0)
+			exit_n = exit_n + 256;
+		printf("exit\n");
+		free_and_exit(exit_n, general);
+	}
+	else
+	{
+		ft_putstr_fd("exit\nminishell: exit: too many arguments\n", 2);
+		g_last_exit_status = 1;
+		return ;
+	}
 }
 
 void	handle_exit(char **args, t_general *general)
@@ -108,7 +92,7 @@ void	handle_exit(char **args, t_general *general)
 		if (checkmytoy(args[1]) == 1)
 		{
 			arg_error("exit\nminishell: exit: ",
-			args[1], ": numeric argument required\n");
+				args[1], ": numeric argument required\n");
 			g_last_exit_status = 2;
 			exit(g_last_exit_status);
 		}
