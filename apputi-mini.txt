@@ -1,14 +1,27 @@
 appunti:
-messaggi di errore fatti da scrivere bene
-msgERROR pe quanto riguarda unset
-exit f. status
+
+FRA
+norminette 4 variabili
+messaggi errore builin && parser
+exit status builin
+norminette
+
+
+JACOPO
 controllare pipe status
-fuzione per freeare tutto;
+fare l´unset di PATH
+
+ANI
+segnali
+controllare corretion sheet
+
+iniziare executor;
+
 provare echo $?#?$?
 provare echo $?+$?
 
+calloc free opzionale
 
-solo $? va in seg fault
 
 ........                                                                                                                                                           .....................................
 .........                                                                                                                                                        ..  ...................................
