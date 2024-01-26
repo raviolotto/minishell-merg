@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_list_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 12:12:07 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/16 13:12:28 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:31:56 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,4 @@ void	lex_add_last(t_lex *head, t_lex *new)
 	tmp = lex_last(head);
 	tmp->next = new;
 	return ;
-}
-
-void	afalcons(t_lex *node)
-{
-	if (node->next)
-		afalcons(node->next);
-	free_matrix(node->command2);
-	free(node->command);
-	free(node);
 }

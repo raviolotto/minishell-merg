@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 13:18:23 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/23 18:24:39 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:27:34 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTIN_H
 # define BUILTIN_H
 
-void	handle_exit(char **args);
+void	handle_exit(char **args, t_general *general);
 void	handle_cd(t_general *general, t_lex *node);
 void	handle_pwd(void);
 void	handle_export(t_general *general, t_lex *node);

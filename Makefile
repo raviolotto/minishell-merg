@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+         #
+#    By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 18:22:29 by jcardina          #+#    #+#              #
-#    Updated: 2024/01/16 18:44:49 by lmorelli         ###   ########.fr        #
+#    Updated: 2024/01/26 15:23:57 by jcardina         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ src = \
 		src/mini_shell.c\
 		src/ext_command.c\
 		src/utils/general_utils.c\
+		src/utils/free.c\
 		src/parser/parser.c\
 		src/parser/lexer_list.c\
 		src/parser/lexer_list_utils.c\

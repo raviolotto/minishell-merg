@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   general_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:33:01 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/25 18:10:10 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:29:43 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/mini_shell.h"
-
-void	free_matrix(char **matrix)
-{
-	size_t	i;
-
-	i = 0;
-	while (matrix[i] != NULL)
-	{
-		free (matrix[i]);
-		i++;
-	}
-	free (matrix);
-}
 
 char	**matrix_dup(char **matrix)
 {
