@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structure.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:16:18 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/23 18:46:07 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/27 15:27:42 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ typedef struct s_lex
 	char			*command;
 	char			**command2;
 	int				token;
-	//1 = |, 2 = >, 3 = <, 4 = >>, 5 = <<, 0 = é un comando
 	int				pipe_status;
-	//0 = prima pipe, 1 pipe in mezzo, 2 pipe finale
 	int				builtin;
 	struct s_lex	*next;
 }	t_lex;

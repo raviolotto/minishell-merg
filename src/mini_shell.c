@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 16:17:29 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/25 18:01:37 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/27 15:37:11 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,23 @@ void	init(t_general *general, char **envp)
 	printf("\n%s\n"RESET, HELLO2);
 }
 
-int	main(int ac, char **av, char **envp)
+int	check_input_number(int ac)
 {
-	t_general	general;
-	t_lex		*tmp;
-
 	if (ac != 1)
 	{
 		printf(RED "error dumb input\n" RESET);
 		return (0);
 	}
+	return (1);
+}
+
+int	main(int ac, char **av, char **envp)
+{
+	t_general	general;
+	t_lex		*tmp;
+
+	if (!check_input_number(ac))
+		return (0);
 	init(&general, envp);
 	while (1)
 	{
@@ -53,30 +60,14 @@ int	main(int ac, char **av, char **envp)
 		general.args = readline("kitty shell> " RESET);
 		if (general.args == NULL)
 			exit(1);
-		//ricordati di freeeeeare
 		if (general.args && *general.args)
 			add_history(general.args);
 		if (!is_whitespace_input(general.args))
 		{
 			parser(&general);
 			tmp = general.lexer;
-			//debug info
-		//	while (tmp != NULL)
-		//	{
-		//		printf("token %i\n", tmp->token);
-		//		printf("pipe steatus %i\n", tmp->pipe_status);
-		//		printf("command %s\n", tmp->command);
-		//		printf("builtin == %i\n", tmp->builtin);
-		//		print_matrix(tmp->command2);
-		//		printf("\n");
-		//		tmp = tmp->next;
-		//	}
-		//	print_matrix(general.lexer->command2);
-	//gestionene $
 			expander(&general);
-			//print_matrix(general.lexer->command2);
 			executor(&general);
-			//free memory
 			afalcons(general.lexer);
 			general.lexer = NULL;
 		}

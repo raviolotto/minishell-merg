@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:45:46 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/26 17:37:29 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/01/27 15:38:38 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	build_matrix(char *str, t_lex *node, t_general *general)
 	node->builtin = dumb_builtin_check(node->command2[0]);
 	if (node->builtin != 0)
 		return (0);
-	tmp = pathfinder(node->command2[0],general->path); //ft_split(&general->envp2[my_setenv("$PATH", NULL, &general->envp2)][5], ':')
+	tmp = pathfinder(node->command2[0],general->path);
 	if (tmp != NULL)
 	{
 		free(node->command2[0]);
