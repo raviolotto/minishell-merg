@@ -1,5 +1,7 @@
 appunti:
 
+togliere le stampe dal comando cd;
+
 FRA
 norminette 4 variabili
 messaggi errore builin && parser
@@ -9,7 +11,7 @@ norminette
 
 JACOPO
 controllare pipe status
-fare l´unset di PATH
+FATTO -------fare l´unset di PATH
 
 ANI
 segnali

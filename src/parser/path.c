@@ -49,6 +49,11 @@ char	*pathfinder(char *command, char **path)
 
 	i = 0;
 	result = NULL;
+	if(path == NULL)
+	{
+		printf("Il comando '%s' non è stato trovato\n", command);
+		return (result);
+	}
 	while (path[i])
 	{
 		temppath = ft_strjoin(path[i], "/");
@@ -77,12 +82,28 @@ char	*pathfinder(char *command, char **path)
 	return (result);
 }
 
+void	pathpiker(t_general *general)
+{
+	int index;
+
+	index = my_setenv("PATH", NULL, &general->envp2);
+	if (index == -1)
+	{
+		free_matrix(general->path);
+		general->path = NULL;
+		return ;
+	}
+	general->path = ft_split((general->envp2[index] + 5), ':');
+}
+
 int	build_matrix(char *str, t_lex *node, t_general *general)
 {
 	char	*tmp;
 	int		i;
 
 	i = 0;
+
+	pathpiker(general);
 	node->command2 = maxxisplit (str, ' ');
 	while (i < matrixlen(node->command2))
 	{
@@ -93,7 +114,7 @@ int	build_matrix(char *str, t_lex *node, t_general *general)
 	node->builtin = dumb_builtin_check(node->command2[0]);
 	if (node->builtin != 0)
 		return (0);
-	tmp = pathfinder(node->command2[0],general->path); //ft_split(&general->envp2[my_setenv("$PATH", NULL, &general->envp2)][5], ':')
+	tmp = pathfinder(node->command2[0],general->path);
 	if (tmp != NULL)
 	{
 		free(node->command2[0]);
