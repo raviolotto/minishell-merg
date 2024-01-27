@@ -89,7 +89,8 @@ void	pathpiker(t_general *general)
 	index = my_setenv("PATH", NULL, &general->envp2);
 	if (index == -1)
 	{
-		free_matrix(general->path);
+		if(general->path != NULL)
+			free_matrix(general->path);
 		general->path = NULL;
 		return ;
 	}

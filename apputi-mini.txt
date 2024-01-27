@@ -12,6 +12,7 @@ norminette
 JACOPO
 FATTO -------controllare pipe status
 FATTO -------fare l´unset di PATH
+			da controllare meglio;
 
 ANI
 segnali
