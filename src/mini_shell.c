@@ -59,18 +59,18 @@ int	main(int ac, char **av, char **envp)
 		if (!is_whitespace_input(general.args))
 		{
 			parser(&general);
-			tmp = general.lexer;
-			//debug info
-			while (tmp != NULL)
-			{
-				printf("token %i\n", tmp->token);
-				printf("pipe steatus %i\n", tmp->pipe_status);
-				printf("command %s\n", tmp->command);
-				printf("builtin == %i\n", tmp->builtin);
-				print_matrix(tmp->command2);
-				printf("\n");
-				tmp = tmp->next;
-			}
+			// tmp = general.lexer;
+			// //debug info
+			// while (tmp != NULL)
+			// {
+			// 	printf("token %i\n", tmp->token);
+			// 	printf("pipe steatus %i\n", tmp->pipe_status);
+			// 	printf("command %s\n", tmp->command);
+			// 	printf("builtin == %i\n", tmp->builtin);
+			// 	print_matrix(tmp->command2);
+			// 	printf("\n");
+			// 	tmp = tmp->next;
+			// }
 		//	print_matrix(general.lexer->command2);
 	//gestionene $
 			expander(&general);
