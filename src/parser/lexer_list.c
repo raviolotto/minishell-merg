@@ -47,6 +47,8 @@ int	pipe_status(t_general *general)
 			i++;
 		tmp = tmp->next;
 	}
+	if (i == 1)
+		return (0);
 	tmp = general->lexer;
 	while (tmp)
 	{

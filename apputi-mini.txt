@@ -10,7 +10,7 @@ norminette
 
 
 JACOPO
-controllare pipe status
+FATTO -------controllare pipe status
 FATTO -------fare l´unset di PATH
 
 ANI
