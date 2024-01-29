@@ -26,6 +26,21 @@ provare echo $?+$?
 calloc free opzionale
 
 
+int	execute_external_command(t_lex *node)
+{
+	pid_t	pid;
+	char	**token;
+
+	token = node->command2;
+	int pid1 = fork();
+	if (pid1 < 0)
+		return (2);
+	if (pid1 == 0)
+		execve(token[0], token, NULL);
+	waitpid(pid1, NULL, 0);
+	return (0);
+}
+
 ........                                                                                                                                                           .....................................
 .........                                                                                                                                                        ..  ...................................
 .............                                                                                                                                                        .. . ..............................
