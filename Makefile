@@ -6,7 +6,7 @@
 #    By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 18:22:29 by jcardina          #+#    #+#              #
-#    Updated: 2024/01/26 15:23:57 by jcardina         ###   ########.fr        #
+#    Updated: 2024/01/29 16:16:54 by jcardina         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,6 @@ PRINTF = lib/ft_printf/libftprintf.a
 
 src = \
 		src/mini_shell.c\
-		src/ext_command.c\
 		src/utils/general_utils.c\
 		src/utils/free.c\
 		src/parser/parser.c\
@@ -36,6 +35,7 @@ src = \
 		src/builtin/ft_myecho.c\
 		src/builtin/ft_myexit.c\
 		src/executor/executor.c\
+#		src/executo/ext_command.c\
 
 OBJ = $(src:%.c=%.o)
 

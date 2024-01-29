@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 12:09:14 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/16 16:23:07 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/29 18:42:12 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	i = 0;
-	matrix = malloc(sizeof(char *) * (ft_counter(s, c) + 1));
+	matrix = ft_calloc(sizeof(char *), (ft_counter(s, c) + 1));
 	if (!matrix)
 		return (NULL);
 	while (*s)

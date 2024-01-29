@@ -6,7 +6,7 @@
 /*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:35:26 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/26 15:24:54 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/01/29 16:11:45 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int		menage_token(char *str, int i, t_general *general, int *p);
 int		quotes(char *str, int j);
 void	lex_add_last(t_lex *head, t_lex *new);
 t_lex	*new_lex_node(void);
-int		execute_external_command(char **args);
 void	expander(t_general *general);
 
 #endif

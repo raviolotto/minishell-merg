@@ -6,7 +6,7 @@
 /*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:01:40 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/26 17:03:58 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/01/29 18:36:56 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void	free_general(t_general *general)
 {
 	free_matrix(general->envp2);
 	free_matrix(general->enexp);
-	free_matrix(general->path);
+	if(general->path != NULL)
+		free_matrix(general->path);
 	//da vedere quando si fará il calloc di array di int
 	//free(general->flag_quotes);
 }

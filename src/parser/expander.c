@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:54:29 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/25 18:05:19 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:47:33 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,8 @@ void	expander(t_general *general)
 	tmp = general->lexer;
 	while (tmp)
 	{
-		node_expander(tmp->command2, general);
+		if(tmp->token == 0)
+			node_expander(tmp->command2, general);
 		tmp = tmp->next;
 	}
 }

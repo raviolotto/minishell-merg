@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 17:42:05 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/17 19:43:04 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/29 16:20:36 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	ft_new_pwd(t_general *general)
 
 	if (getcwd(current_directory, PATH_MAX) == NULL)
 		return ;
-	ft_printf("\nNEW_PWD=%s\n", current_directory);
 	new_directory = ft_strjoin("=", current_directory);
 	my_setenv("PWD", new_directory, &(general->envp2));
 	my_setenv("PWD", new_directory, &(general->enexp));
@@ -32,7 +31,6 @@ void	ft_old_pwd(t_general *general, char *old_dir)
 	old_directory = ft_strjoin("=", old_dir);
 	my_setenv("OLDPWD", old_directory, &(general->envp2));
 	my_setenv("OLDPWD", old_directory, &(general->enexp));
-	ft_printf("\nOLD_PWD = %s\n", old_directory);
 }
 
 char	*ft_home_env(char **env)
