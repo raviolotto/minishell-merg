@@ -5,11 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/30 19:44:45 by frdal-sa         ###   ########.fr       */
+/*   Created: 2024/01/30 19:50:35 by frdal-sa          #+#    #+#             */
+/*   Updated: 2024/01/30 19:50:35 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../includes/mini_shell.h"
 
@@ -33,7 +32,6 @@ void	init(t_general *general, char **envp)
 	general->envp2 = matrix_dup(envp);
 	general->enexp = matrix_dup(general->envp2);
 	general->path = NULL;
-	//general->path = ft_split(getenv("PATH"), ':');
 	printf(PINK"\n%s\n", INTRO);
 	printf("\n%s\n"RESET, HELLO2);
 }
@@ -48,10 +46,21 @@ int	check_input_number(int ac)
 	return (1);
 }
 
+void	start_the_work(t_general general)
+{
+	t_lex		*tmp;
+
+	parser(&general);
+	tmp = general.lexer;
+	expander(&general);
+	executor(&general);
+	free_lex(general.lexer);
+	general.lexer = NULL;
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	t_general	general;
-	t_lex		*tmp;
 
 	if (!check_input_number(ac))
 		return (0);
@@ -68,13 +77,6 @@ int	main(int ac, char **av, char **envp)
 		if (general.args && *general.args)
 			add_history(general.args);
 		if (!is_whitespace_input(general.args))
-		{
-			parser(&general);
-			tmp = general.lexer;
-			expander(&general);
-			executor(&general);
-			free_lex(general.lexer);
-			general.lexer = NULL;
-		}
+			start_the_work(general);
 	}
 }
