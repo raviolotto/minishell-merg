@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/07 16:17:29 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/30 16:29:10 by frdal-sa         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/01/30 16:32:32 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../includes/mini_shell.h"
 
@@ -36,16 +37,23 @@ void	init(t_general *general, char **envp)
 	printf("\n%s\n"RESET, HELLO2);
 }
 
-int	main(int ac, char **av, char **envp)
+int	check_input_number(int ac)
 {
-	t_general	general;
-	t_lex		*tmp;
-
 	if (ac != 1)
 	{
 		printf(RED "error dumb input\n" RESET);
 		return (0);
 	}
+	return (1);
+}
+
+int	main(int ac, char **av, char **envp)
+{
+	t_general	general;
+	t_lex		*tmp;
+
+	if (!check_input_number(ac))
+		return (0);
 	init(&general, envp);
 	while (1)
 	{
@@ -58,6 +66,7 @@ int	main(int ac, char **av, char **envp)
 		if (!is_whitespace_input(general.args))
 		{
 			parser(&general);
+			tmp = general.lexer;
 			expander(&general);
 			executor(&general);
 			afalcons(general.lexer);
