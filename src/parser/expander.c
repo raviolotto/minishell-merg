@@ -6,7 +6,7 @@
 /*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:54:29 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/29 17:47:33 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/01/30 17:08:30 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ char	*find_fine_comando(char *posizione)
 	fine_comando = posizione + ft_strlen("$");
 	while (*fine_comando != ' ' && *fine_comando != '\0'
 		&& *fine_comando != '\"' && *fine_comando != '$'
-		&& *fine_comando != '\'')
+		&& *fine_comando != '\'' && *fine_comando == '?')
 	{
 		fine_comando++;
 	}

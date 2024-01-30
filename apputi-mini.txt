@@ -9,11 +9,6 @@ exit status builin
 norminette
 
 
-JACOPO
-FATTO -------controllare pipe status
-FATTO -------fare l´unset di PATH
-			da controllare meglio;
-
 ANI
 segnali
 controllare corretion sheet
@@ -31,7 +26,7 @@ int main(int ac, char **av)
 	if (pid == -1)
 		return 1;
 	if (pid == 0)
-	{       
+	{
 		int file = open("prova.txt", O_WRONLY | O_CREAT, 0777);
 		if (file == -1)
 			return (2);

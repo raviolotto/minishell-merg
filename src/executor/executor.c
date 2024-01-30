@@ -6,7 +6,7 @@
 /*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:49:11 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/30 14:15:08 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/01/30 16:50:23 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,37 @@ void	builtinmanager(t_lex *node, t_general *general)
 		handle_exit(node->command2, general);
 }
 
-int	execute_external_command(t_lex *node, t_general *general, int *save_fd)
+
+void	piping(int *fd, int *save_fd, t_lex *node, t_general *general)
+{
+	if(node->next && node->next->token == 1)
+	{
+	dup2(fd[1], STDOUT_FILENO);
+	close(fd[1]);
+	close(fd[0]);
+	}
+	else if (node->next == NULL)
+	dup2(save_fd[1], STDOUT_FILENO);
+	if (node->builtin > 0)
+	{
+	builtinmanager(node, general);
+	exit(0); //potrebbe essere utile returnare exit status?
+	}
+	execve(node->command2[0], node->command2, NULL);
+	perror("il comando esterno non é stato eseguito\n");
+}
+void	re_out(t_lex *node, t_general *general)
+{
+	int	file;
+
+	if(node->next->token == 2)
+		file = open(node->next->command + 1, O_WRONLY | O_CREAT, 0777);
+	if(node->next->token == 4)
+		file = open(node->next->command + 2, O_WRONLY | O_CREAT, 0777);
+
+}
+
+int	execute_command(t_lex *node, t_general *general, int *save_fd)
 {
 	int	pid;
 	int	fd[2];
@@ -44,21 +74,25 @@ int	execute_external_command(t_lex *node, t_general *general, int *save_fd)
 	pid = fork();
 	if (pid == 0)
 	{
-		if(node->next && node->next->token == 1)
-		{
-			dup2(fd[1], STDOUT_FILENO);
-			close(fd[1]);
-			close(fd[0]);
-		}
-		else if (node->next == NULL)
-			dup2(save_fd[1], STDOUT_FILENO);
-		if (node->builtin > 0)
-		{
-			builtinmanager(node, general);
-			exit(0); //potrebbe essere utile returnare exit status?
-		}
-		execve(node->command2[0], node->command2, NULL);
-			perror("il comando esterno non é stato eseguito\n");
+		if(node->next == NULL || node->next->token == 1)
+			piping(fd, save_fd, node, general);
+		else if(node->next->token == 2 || node->next->token == 4)
+			re_out(node, general);
+		// if(node->next && node->next->token == 1)
+		// {
+		// 	dup2(fd[1], STDOUT_FILENO);
+		// 	close(fd[1]);
+		// 	close(fd[0]);
+		// }
+		// else if (node->next == NULL)
+		// 	dup2(save_fd[1], STDOUT_FILENO);
+		// if (node->builtin > 0)
+		// {
+		// 	builtinmanager(node, general);
+		// 	exit(0); //potrebbe essere utile returnare exit status?
+		// }
+		// execve(node->command2[0], node->command2, NULL);
+		// 	perror("il comando esterno non é stato eseguito\n");
 	}
 	waitpid(pid, &status, 0);
 	if (node->next && node->next->token == 1)
@@ -79,8 +113,8 @@ void	executor(t_general *general)
 	tmp = general->lexer;
 	while (tmp)
 	{
-		if(tmp->token != 1)
-			g_last_exit_status = execute_external_command(tmp, general, save_fd);
+		if(tmp->token == 0)
+			g_last_exit_status = execute_command(tmp, general, save_fd);
 		tmp = tmp->next;
 	}
 	dup2(save_fd[0], STDIN_FILENO);
