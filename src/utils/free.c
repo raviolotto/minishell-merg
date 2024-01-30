@@ -6,7 +6,7 @@
 /*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:01:40 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/29 18:36:56 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/01/30 12:11:03 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	free_lex(t_lex *node)
 		return ;
 	if (node->next)
 		free_lex(node->next);
-	free_matrix(node->command2);
+	if (node->command2 != NULL)
+		free_matrix(node->command2);
 	free(node->command);
 	free(node);
 }

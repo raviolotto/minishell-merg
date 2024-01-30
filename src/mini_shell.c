@@ -6,7 +6,7 @@
 /*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 16:17:29 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/29 18:35:31 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:02:44 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ int	main(int ac, char **av, char **envp)
 		printf(YELLOW);
 		general.args = readline("kitty shell> " RESET);
 		if (general.args == NULL)
+		{
+			ft_printf("sono uscito nel controllo general.args == NULL\n");
 			free_and_exit(1, &general);
+		}
 		//ricordati di freeeeeare
 		if (general.args && *general.args)
 			add_history(general.args);
@@ -62,24 +65,26 @@ int	main(int ac, char **av, char **envp)
 			parser(&general);
 			tmp = general.lexer;
 			//debug info
-			while (tmp != NULL)
-			{
-				printf("token %i\n", tmp->token);
-				printf("pipe steatus %i\n", tmp->pipe_status);
-				printf("command %s\n", tmp->command);
-				printf("builtin == %i\n", tmp->builtin);
-				print_matrix(tmp->command2);
-				printf("\n");
-				tmp = tmp->next;
-			}
+			// printf(RED);
+			// while (tmp != NULL)
+			// {
+			// 	printf("token %i\n", tmp->token);
+			// 	printf("pipe steatus %i\n", tmp->pipe_status);
+			// 	printf("command %s\n", tmp->command);
+			// 	printf("builtin == %i\n", tmp->builtin);
+			// 	print_matrix(tmp->command2);
+			// 	printf("\n");
+			// 	tmp = tmp->next;
+			// }
+			// printf(RESET);
+
 		//	print_matrix(general.lexer->command2);
 	//gestionene $
 			expander(&general);
 			//print_matrix(general.lexer->command2);
-			//executor(&general);
+			executor(&general);
 			//free memory
 			free_lex(general.lexer);
-			write(1, "a\n", 2);
 			general.lexer = NULL;
 		}
 	}

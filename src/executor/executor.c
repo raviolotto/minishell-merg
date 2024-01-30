@@ -6,7 +6,7 @@
 /*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:49:11 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/29 18:26:34 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:15:08 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,42 +30,44 @@ void	builtinmanager(t_lex *node, t_general *general)
 		handle_exit(node->command2, general);
 }
 
-int	execute_external_command(t_lex *node, t_general *general)
+int	execute_external_command(t_lex *node, t_general *general, int *save_fd)
 {
 	int	pid;
 	int	fd[2];
+	int	status;
 
-	int pid1 = fork();
-	if (pid1 < 0)
-		return (2);
 	if(node->next && node->next->token == 1)
 	{
 		if (pipe(fd) == -1)
 			perror("non é stato possibile creare la pipe");
 	}
-	if (pid1 == 0)
+	pid = fork();
+	if (pid == 0)
 	{
-		if (node->builtin > 0)
-		{
-			builtinmanager(node, general);
-			return (0); //potrebbe essere utile returnare exit status?
-		}
 		if(node->next && node->next->token == 1)
 		{
-			dup2(fd[1], 1);
+			dup2(fd[1], STDOUT_FILENO);
 			close(fd[1]);
 			close(fd[0]);
 		}
+		else if (node->next == NULL)
+			dup2(save_fd[1], STDOUT_FILENO);
+		if (node->builtin > 0)
+		{
+			builtinmanager(node, general);
+			exit(0); //potrebbe essere utile returnare exit status?
+		}
 		execve(node->command2[0], node->command2, NULL);
+			perror("il comando esterno non é stato eseguito\n");
 	}
-	waitpid(pid1, NULL, 0);
-	if(node->next && node->next->token == 1)
+	waitpid(pid, &status, 0);
+	if (node->next && node->next->token == 1)
 	{
-		dup2(fd[0], 0);
+		dup2(fd[0], STDIN_FILENO);
 		close(fd[0]);
 		close(fd[1]);
 	}
-	return (0);
+	return WIFEXITED(status) && WEXITSTATUS(status);
 }
 void	executor(t_general *general)
 {
@@ -78,12 +80,10 @@ void	executor(t_general *general)
 	while (tmp)
 	{
 		if(tmp->token != 1)
-			execute_external_command(tmp, general);
-		wait(NULL);
+			g_last_exit_status = execute_external_command(tmp, general, save_fd);
 		tmp = tmp->next;
 	}
 	dup2(save_fd[0], STDIN_FILENO);
-	dup2(save_fd[1], STDOUT_FILENO);
 	close(save_fd[0]);
 	close(save_fd[1]);
 }
