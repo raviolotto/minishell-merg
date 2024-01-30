@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/15 18:54:29 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/30 17:08:30 by jcardina         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/01/30 19:43:54 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../includes/mini_shell.h"
 
@@ -167,7 +168,6 @@ void	node_expander(char **command2, t_general *general)
 			ft_expander_case(&command2[i], general);
 		}
 	}
-	//free(dollar);
 }
 
 void	expander(t_general *general)

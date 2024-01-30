@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:33:01 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/26 15:29:43 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:55:30 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,10 @@ char	**matrix_newline(char **matrix, char *str)
 	len = matrixlen(matrix);
 	newmatrix = malloc((len + 2) * sizeof(char *));
 	if (!newmatrix)
-		perror("errore allocazione di memoria");
+	{
+		g_last_exit_status = 1;
+		ft_putstr_fd("kitty shell: error while allocating memory\n", 2);
+	}
 	len = 0;
 	while (matrix[len] != NULL)
 	{

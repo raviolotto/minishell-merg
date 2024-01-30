@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   mini_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/07 16:17:29 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/30 16:27:35 by jcardina         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/01/30 19:44:45 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../includes/mini_shell.h"
 
@@ -37,16 +38,23 @@ void	init(t_general *general, char **envp)
 	printf("\n%s\n"RESET, HELLO2);
 }
 
-int	main(int ac, char **av, char **envp)
+int	check_input_number(int ac)
 {
-	t_general	general;
-	t_lex		*tmp;
-
 	if (ac != 1)
 	{
 		printf(RED "error dumb input\n" RESET);
 		return (0);
 	}
+	return (1);
+}
+
+int	main(int ac, char **av, char **envp)
+{
+	t_general	general;
+	t_lex		*tmp;
+
+	if (!check_input_number(ac))
+		return (0);
 	init(&general, envp);
 	while (1)
 	{
@@ -63,22 +71,6 @@ int	main(int ac, char **av, char **envp)
 		{
 			parser(&general);
 			tmp = general.lexer;
-
-			//                       debug info
-			// printf(RED);
-			// while (tmp != NULL)
-			// {
-			// 	printf("token %i\n", tmp->token);
-			// 	printf("pipe steatus %i\n", tmp->pipe_status);
-			// 	printf("command %s\n", tmp->command);
-			// 	printf("builtin == %i\n", tmp->builtin);
-			// 	print_matrix(tmp->command2);
-			// 	printf("\n");
-			// 	tmp = tmp->next;
-			// }
-			// printf(RESET);
-			//                       end debug info;
-
 			expander(&general);
 			executor(&general);
 			free_lex(general.lexer);

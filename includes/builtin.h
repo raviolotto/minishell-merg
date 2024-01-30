@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 13:18:23 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/26 15:27:34 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/01/30 16:43:57 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		my_setenv(char *name, char *value, char ***environ);
 void	ft_supp_rm(char *str, char c);
 int		ft_idx_quotes(char *str, char c);
 int		ft_nb_quotes(char *str, char c);
-int		ft_rm_quotes(char *str, int s_quote, int d_quotes, int idx_double, t_general *general, int index);
+int		ft_rm_quotes(char *str, int idx_double, t_general *general, int index);
 int		ft_cd_with_quotes(char *str, t_general *general, int i);
 int		ft_cd_only(char **env, char **command2,
 			t_general *general, char *old_dir);
