@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ext_command.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 13:07:51 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/25 18:09:06 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/30 16:28:15 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,17 @@ int	execute_external_command(char **args)
 	if (access(res, X_OK) == 0)
 	{
 		pid = fork();
-		if (pid < 0)
-			perror("fork error");
+		if (pid < 0) 
+		{
+			g_last_exit_status = 1;
+			ft_putstr_fd("kitty shell: error while forking\n", 2);
+		}
 		else if (pid == 0)
 		{
-			printf("\nFIGLIO\n");
 			execve(res, args, NULL);
 		}
 		else
 		{
-			printf("\nPADRE\n");
 			wait(&status);
 			if (WIFEXITED(status))
 			{
@@ -49,7 +50,11 @@ int	execute_external_command(char **args)
 				if (g_last_exit_status == 0)
 					printf("\nsuccess = %d\n", g_last_exit_status);
 				else
-					printf("\nfailure = %d\n", g_last_exit_status);
+				{
+					ft_putstr_fd("kitty shell: failure = ", 2);
+					ft_putnbr_fd(g_last_exit_status, 2);
+					ft_putstr_fd("\n", 2);
+				}
 			}
 		}
 		free(res);

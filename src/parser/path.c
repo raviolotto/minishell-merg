@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:45:46 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/26 17:37:29 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/01/29 18:42:57 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	handle_quotes(char *word)
 		{
 			if ((ft_nb_quotes(word + i, '\'') % 2) == 0)
 			{
-				printf("wela zio non hai chiuso le '\n");
 				g_last_exit_status = 1;
+				ft_putstr_fd("kitty shell: you didn't close the \'\n", 2);
 			}
 		}
 		else if (word[i] == '\"')
@@ -32,7 +32,7 @@ void	handle_quotes(char *word)
 			if ((ft_nb_quotes(word + i, '\"') % 2) == 0)
 			{
 				g_last_exit_status = 1;
-				printf("wela zio non hai chiuso le '\n");
+				ft_putstr_fd("kitty shell: you didn't close the \"\n", 2);
 			}
 			return ;
 		}
@@ -49,9 +49,14 @@ char	*pathfinder(char *command, char **path)
 
 	i = 0;
 	result = NULL;
-	if(path == NULL)
+
+	if (path == NULL)
 	{
-		printf("Il comando '%s' non è stato trovato\n", command);
+		g_last_exit_status = 127;
+		ft_putstr_fd("kitty shell: ", 2);
+		ft_putstr_fd(command, 2);
+		ft_putstr_fd(": ", 2);
+		ft_putstr_fd("command not found \n", 2);
 		return (result);
 	}
 	while (path[i])
@@ -59,14 +64,16 @@ char	*pathfinder(char *command, char **path)
 		temppath = ft_strjoin(path[i], "/");
 		if (!temppath)
 		{
-			perror("Errore nell'allocazione di memoria");
+			g_last_exit_status = 1;
+			ft_putstr_fd("Error in memory allocation /n", 2);
 			exit(EXIT_FAILURE);
 		}
 		fullpath = ft_strjoin(temppath, command);
 		free(temppath);
 		if (!fullpath)
 		{
-			perror("Errore nell'allocazione di memoria");
+			g_last_exit_status = 1;
+			ft_putstr_fd("Error in memory allocation /n", 2);
 			exit(EXIT_FAILURE);
 		}
 		if (access(fullpath, F_OK | X_OK) == 0)
@@ -77,8 +84,15 @@ char	*pathfinder(char *command, char **path)
 		free(fullpath);
 		i++;
 	}
-	if (result == NULL)
-		printf("Il comando '%s' non è stato trovato\n", command);
+	if (result == NULL) 
+	{
+		g_last_exit_status = 127;
+		ft_putstr_fd("kitty shell: ", 2);
+		ft_putstr_fd(command, 2);
+		ft_putstr_fd(": ", 2);
+		ft_putstr_fd("command not found \n", 2);
+	}
+
 	return (result);
 }
 

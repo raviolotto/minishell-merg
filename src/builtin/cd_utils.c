@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 17:42:05 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/17 19:43:04 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/01/30 16:18:51 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ int	ft_change_dir(char *new_dir, char **cmd2, t_general *general, char *old_dir)
 	{
 		if (chdir(new_dir) != 0)
 		{
-			printf("kitty shell: cd: %s\n", strerror(errno));
+			g_last_exit_status = 1;
+			ft_putstr_fd("kitty shell: cd: ", 2);
+			ft_putstr_fd(strerror(errno), 2);
+			ft_putstr_fd("\n", 2);
 			return (0);
 		}
 	}
@@ -68,7 +71,12 @@ int	ft_change_dir(char *new_dir, char **cmd2, t_general *general, char *old_dir)
 	{
 		if (chdir(new_dir) != 0)
 		{
-			printf("kitty shell: cd: %s: %s\n", cmd2[1], strerror(errno));
+			g_last_exit_status = 1;
+			ft_putstr_fd("kitty shell: cd: ", 2);
+			ft_putstr_fd(cmd2[1], 2);
+			ft_putstr_fd(": ", 2);
+			ft_putstr_fd(strerror(errno), 2);
+			ft_putstr_fd("\n", 2);
 			return (0);
 		}
 		else
