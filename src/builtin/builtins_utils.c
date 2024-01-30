@@ -6,7 +6,7 @@
 /*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:15:36 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/27 15:38:03 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/01/30 16:48:03 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,17 +66,17 @@ int	ft_nb_quotes(char *str, char c)
 	return (ret);
 }
 
-int	ft_rm_quotes(char *str, int s_quote, int d_quotes, int idx_double, t_general *general, int index)
+int	ft_rm_quotes(char *str, int idx_double, t_general *general, int index)
 {
 	int	idx_single;
 
 	idx_single = ft_idx_quotes(str, '\'');
-	if (s_quote > 0 && d_quotes == 0)
+	if (ft_nb_quotes(str, '\'') > 0 && ft_nb_quotes(str, '\"') == 0)
 	{
 		ft_supp_rm(str, '\'');
 		general->flag_quotes[index] = 1;
 	}
-	else if (d_quotes > 0 && s_quote == 0)
+	else if (ft_nb_quotes(str, '\"') > 0 && ft_nb_quotes(str, '\'') == 0)
 	{
 		ft_supp_rm(str, '\"');
 		general->flag_quotes[index] = 0;
@@ -91,7 +91,6 @@ int	ft_rm_quotes(char *str, int s_quote, int d_quotes, int idx_double, t_general
 		ft_supp_rm(str, '\"');
 		general->flag_quotes[index] = 0;
 	}
-	printf("%i\n", general->flag_quotes[index]);
 	return (1);
 }
 
@@ -107,7 +106,7 @@ int	ft_cd_with_quotes(char *str, t_general *general, int index)
 	all_quotes = s_quote + d_quotes;
 	idx_double = ft_idx_quotes(str, '\"');
 	if (all_quotes > 0)
-		ft_rm_quotes(str, s_quote, d_quotes, idx_double, general, index);
+		ft_rm_quotes(str, idx_double, general, index);
 	else
 		general->flag_quotes[index] = 0;
 	return (1);

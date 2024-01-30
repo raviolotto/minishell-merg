@@ -5,11 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/30 16:32:32 by frdal-sa         ###   ########.fr       */
+/*   Created: 2024/01/30 16:58:31 by frdal-sa          #+#    #+#             */
+/*   Updated: 2024/01/30 16:58:43 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../includes/mini_shell.h"
 
@@ -32,7 +31,6 @@ void	init(t_general *general, char **envp)
 	general->lexer = NULL;
 	general->envp2 = matrix_dup(envp);
 	general->enexp = matrix_dup(general->envp2);
-	//general->path = ft_split(getenv("PATH"), ':');
 	printf(PINK"\n%s\n", INTRO);
 	printf("\n%s\n"RESET, HELLO2);
 }

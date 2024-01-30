@@ -6,7 +6,7 @@
 /*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:51:44 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/30 16:05:53 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/01/30 19:04:56 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,15 @@ int	my_setenv(char *name, char *value, char ***environ)
 	return (0);
 }
 
+void	show_export_error(char *arg)
+{
+	g_last_exit_status = 1;
+	ft_putstr_fd("kitty shell:", 2);
+	ft_putstr_fd(" export: '", 2);
+	ft_putstr_fd(arg, 2);
+	ft_putstr_fd("': not a valid identifier\n", 2);
+}
+
 void	my_export(char *arg, char ***env, char ***enexp)
 {
 	char	*name;
@@ -108,13 +117,7 @@ void	my_export(char *arg, char ***env, char ***enexp)
 		my_setenv(name, value, enexp);
 	}
 	else
-	{
-		g_last_exit_status = 1;
-		ft_putstr_fd("kitty shell:", 2);
-		ft_putstr_fd(" export: '", 2);
-		ft_putstr_fd(arg, 2);
-		ft_putstr_fd("': not a valid identifier\n", 2);
-	}
+		show_export_error(arg);
 	free(name);
 	free(value);
 }

@@ -6,7 +6,7 @@
 /*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 17:42:05 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/30 16:18:51 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/01/30 19:04:40 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,23 @@ char	*ft_home_env(char **env)
 	return (home_dir);
 }
 
+void	show_cd_error(char *cmd2, char *error)
+{
+	g_last_exit_status = 1;
+	ft_putstr_fd("kitty shell: cd: ", 2);
+	ft_putstr_fd(cmd2, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(error, 2);
+	ft_putstr_fd("\n", 2);
+}
+
 int	ft_change_dir(char *new_dir, char **cmd2, t_general *general, char *old_dir)
 {
 	if (!cmd2[1])
 	{
 		if (chdir(new_dir) != 0)
 		{
-			g_last_exit_status = 1;
-			ft_putstr_fd("kitty shell: cd: ", 2);
-			ft_putstr_fd(strerror(errno), 2);
-			ft_putstr_fd("\n", 2);
+			show_cd_error(cmd2[1], strerror(errno));
 			return (0);
 		}
 	}
@@ -71,12 +78,7 @@ int	ft_change_dir(char *new_dir, char **cmd2, t_general *general, char *old_dir)
 	{
 		if (chdir(new_dir) != 0)
 		{
-			g_last_exit_status = 1;
-			ft_putstr_fd("kitty shell: cd: ", 2);
-			ft_putstr_fd(cmd2[1], 2);
-			ft_putstr_fd(": ", 2);
-			ft_putstr_fd(strerror(errno), 2);
-			ft_putstr_fd("\n", 2);
+			show_cd_error(cmd2[1], strerror(errno));
 			return (0);
 		}
 		else
