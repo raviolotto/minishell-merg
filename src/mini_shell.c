@@ -6,7 +6,7 @@
 /*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 16:17:29 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/31 13:54:41 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/01/31 18:39:00 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,10 @@ int	main(int ac, char **av, char **envp)
 		if (!is_whitespace_input(general.args))
 		{
 			parser(&general);
+			expander(&general);
 
 			//                       debug info
-			tmp = general.lexer;
+			// tmp = general.lexer;
 			// printf(RED);
 			// while (tmp != NULL)
 			// {
@@ -77,9 +78,8 @@ int	main(int ac, char **av, char **envp)
 			// 	tmp = tmp->next;
 			// }
 			// printf(RESET);
-			//                       end debug info;
+			//                      end debug info;
 
-			expander(&general);
 			executor(&general);
 			free_lex(general.lexer);
 			general.lexer = NULL;
