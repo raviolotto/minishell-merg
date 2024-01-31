@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: amema <amema@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 16:17:29 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/31 18:39:00 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/01/31 19:48:10 by amema            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,15 @@ void	init(t_general *general, char **envp)
 	printf(PINK"\n%s\n", INTRO);
 	printf("\n%s\n"RESET, HELLO2);
 }
+void handle_sigint(int sig)
+{
+	ft_printf(YELLOW"\nkitty shell>" RESET);
+	g_last_exit_status = 130;
+}
+void handle_sigquit(int sig)
+{
+	g_last_exit_status = 0;
+}
 
 int	main(int ac, char **av, char **envp)
 {
@@ -47,6 +56,9 @@ int	main(int ac, char **av, char **envp)
 		printf(RED "error dumb input\n" RESET);
 		return (0);
 	}
+
+	signal(SIGINT, handle_sigint);
+	signal(SIGQUIT, handle_sigquit);
 	init(&general, envp);
 	while (1)
 	{
