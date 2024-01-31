@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:33:01 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/30 15:55:30 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/01/31 19:28:50 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	print_matrix(char **matrix)
 		return ;
 	while (matrix[i])
 	{
-		printf("%s\n", matrix[i]);
+		ft_printf("%s\n", matrix[i]);
 		i++;
 	}
 	return ;
