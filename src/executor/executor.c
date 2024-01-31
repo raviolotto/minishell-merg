@@ -6,7 +6,7 @@
 /*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:49:11 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/31 19:37:51 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/01/31 20:10:22 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,9 @@ int	piping(int *fd, int *save_fd, t_lex *node, t_general *general)
 	}
 	else if (node->next == NULL)
 		dup2(save_fd[1], STDOUT_FILENO);
-	if (node->builtin > 0)
+	if (node->builtin == 1 || node->builtin == 3 || node->builtin == 6)
 	{
+		write(2, "cu\n", 3);
 		ft_printf("é una builtin\n");
 		builtinmanager(node, general);
 		exit (0); //potrebbe essere utile returnare exit status?
@@ -78,6 +79,12 @@ int	execute_command(t_lex *node, t_general *general, int *save_fd)
 	int	fd[2];
 	int	status;
 
+
+	if(node->builtin != 1 && node->builtin != 3 && node->builtin != 6 && node->builtin != 0)
+	{
+		builtinmanager(node, general);
+		return(g_last_exit_status);
+	}
 	if(node->next && node->next->token == 1)
 	{
 		if (pipe(fd) == -1)
