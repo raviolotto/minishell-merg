@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/30 19:43:54 by frdal-sa         ###   ########.fr       */
+/*   Created: 2024/01/31 14:11:22 by jcardina          #+#    #+#             */
+/*   Updated: 2024/01/31 14:11:41 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../includes/mini_shell.h"
 
@@ -177,7 +176,7 @@ void	expander(t_general *general)
 	tmp = general->lexer;
 	while (tmp)
 	{
-		if(tmp->token == 0)
+		if (tmp->token == 0)
 			node_expander(tmp->command2, general);
 		tmp = tmp->next;
 	}

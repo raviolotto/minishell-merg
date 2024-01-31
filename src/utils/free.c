@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:01:40 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/30 19:43:23 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/01/31 14:13:09 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,8 @@ void	free_general(t_general *general)
 {
 	free_matrix(general->envp2);
 	free_matrix(general->enexp);
-	if(general->path != NULL)
+	if (general->path != NULL)
 		free_matrix(general->path);
-	//da vedere quando si fará il calloc di array di int
-	//free(general->flag_quotes);
 }
 
 void	free_and_exit(int exit_n, t_general *general)

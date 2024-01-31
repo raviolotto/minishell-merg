@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:25:59 by frdal-sa          #+#    #+#             */
-/*   Updated: 2024/01/30 19:39:27 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/01/31 14:10:09 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ char	*pathfinder(char *command, char **path)
 		return (result);
 	}
 	result = find_executable_path(command, path, result);
-	if (result == NULL) 
+	if (result == NULL)
 	{
 		show_pathfinder_error(command);
 		return (result);

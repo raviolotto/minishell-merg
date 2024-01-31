@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/30 19:44:03 by frdal-sa         ###   ########.fr       */
+/*   Created: 2024/01/31 14:13:40 by jcardina          #+#    #+#             */
+/*   Updated: 2024/01/31 14:13:44 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../includes/mini_shell.h"
 
