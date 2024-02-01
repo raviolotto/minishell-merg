@@ -6,7 +6,7 @@
 /*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:49:11 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/02/01 18:13:21 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/02/01 18:16:40 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	re_out(t_lex *node, t_general *general, int *save_fd)
 
 int	piping(int *fd, int *save_fd, t_lex *node, t_general *general)
 {
-	if(node->next && node->next->token == 1)
+	if (node->next && node->next->token == 1)
 	{
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[1]);
@@ -62,15 +62,9 @@ int	pid_manager(int *fd, int *save_fd, t_lex *node, t_general *general)
 	if (pid == 0)
 	{
 		if (node->next == NULL || node->next->token == 1)
-		{
-			write(1, "v\n", 2);
 			piping(fd, save_fd, node, general);
-		}
-		else if (node->next->token == 2 || node->next->token == 3)
-		{
-			write(1, "b\n", 2);
-			re_out(node, general);
-		}
+		else if(node->next->token == 2 || node->next->token == 3)
+			re_out(node, general, save_fd);
 		else
 			write(1, "p\n", 2);
 	}
@@ -95,17 +89,7 @@ int	execute_command(t_lex *node, t_general *general, int *save_fd)
 		if (pipe(fd) == -1)
 			perror("non é stato possibile creare la pipe");
 	}
-	pid = fork();
-	if (pid == 0)
-	{
-			if(node->next == NULL || node->next->token == 1)
-				piping(fd, save_fd, node, general);
-			else if(node->next->token == 2 || node->next->token == 3)
-				re_out(node, general, save_fd);
-			else
-				write(1, "p\n", 2);
-	}
-	//waitpid(pid, &status, 0);
+	pid = pid_manager(fd, save_fd, node, general);
 	wait(NULL);
 	if (node->next && node->next->token == 1)
 	{
