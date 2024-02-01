@@ -6,7 +6,7 @@
 /*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:25:59 by frdal-sa          #+#    #+#             */
-/*   Updated: 2024/01/31 14:10:09 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/02/01 16:01:16 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,8 @@ int	list_commander(t_general *general)
 	{
 		if (tmp->token == 0)
 			build_matrix(tmp->command, tmp, general);
+		else if(tmp->token != 0 && tmp->token != 1)
+			file_name_handler(tmp);
 		tmp = tmp->next;
 	}
 	return (0);

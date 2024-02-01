@@ -6,11 +6,45 @@
 /*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:33:01 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/31 19:28:50 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/02/01 16:03:13 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/mini_shell.h"
+
+char *cleaner(char *str)
+{
+	char *new;
+	if(str[0] == '\'')
+		new = ft_strtrim(str, "\'");
+	else
+		new = ft_strtrim(str, "\"");
+}
+
+void	file_name_handler(t_lex *node)
+{
+	char	*str;
+	char	*tmp;
+
+	if(node->token == 3 || node->token == 5)
+	{
+		str = node->command + 2;
+		str = ft_strtrim(str, " ");
+		tmp = cleaner(str);
+		free(str);
+		free(node->command);
+		node->command = tmp;
+	}
+	else
+	{
+		str = node->command + 1;
+		str = ft_strtrim(str, " ");
+		tmp = cleaner(str);
+		free(str);
+		free(node->command);
+		node->command = tmp;
+	}
+}
 
 char	**matrix_dup(char **matrix)
 {

@@ -6,11 +6,45 @@
 /*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:49:11 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/31 20:10:22 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/02/01 16:01:09 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/mini_shell.h"
+
+// char *cleaner(char *str)
+// {
+// 	char *new;
+// 	if(str[0] == '\'')
+// 		new = ft_strtrim(str, "\'");
+// 	else
+// 		new = ft_strtrim(str, "\"");
+// }
+
+// void	file_name_handler(t_lex *node)
+// {
+// 	char	*str;
+// 	char	*tmp;
+
+// 	if(node->builtin == 3 || node->builtin == 5)
+// 	{
+// 		str = node->command + 2;
+// 		str = ft_strtrim(str, " ");
+// 		tmp = cleaner(str);
+// 		free(str);
+// 		free(node->command);
+// 		node->command = tmp;
+// 	}
+// 	else
+// 	{
+// 		str = node->command + 1;
+// 		str = ft_strtrim(str, " ");
+// 		tmp = cleaner(str);
+// 		free(str);
+// 		free(node->command);
+// 		node->command = tmp;
+// 	}
+// }
 
 void	builtinmanager(t_lex *node, t_general *general)
 {
@@ -35,9 +69,9 @@ int	re_out(t_lex *node, t_general *general)
 
 	write (1, "a\n", 2);
 	if(node->next->token == 2)
-		file = open(node->next->command + 1, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+		file = open(node->next->command, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if(node->next->token == 3)
-		file = open(node->next->command + 2, O_WRONLY | O_CREAT | O_APPEND, 0777);
+		file = open(node->next->command, O_WRONLY | O_CREAT | O_APPEND, 0777);
 	if (file == -1)
 		return (1);
 	dup2(file, STDOUT_FILENO);
