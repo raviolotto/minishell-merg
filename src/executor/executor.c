@@ -6,64 +6,13 @@
 /*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:49:11 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/02/01 16:01:09 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:28:11 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/mini_shell.h"
 
-// char *cleaner(char *str)
-// {
-// 	char *new;
-// 	if(str[0] == '\'')
-// 		new = ft_strtrim(str, "\'");
-// 	else
-// 		new = ft_strtrim(str, "\"");
-// }
-
-// void	file_name_handler(t_lex *node)
-// {
-// 	char	*str;
-// 	char	*tmp;
-
-// 	if(node->builtin == 3 || node->builtin == 5)
-// 	{
-// 		str = node->command + 2;
-// 		str = ft_strtrim(str, " ");
-// 		tmp = cleaner(str);
-// 		free(str);
-// 		free(node->command);
-// 		node->command = tmp;
-// 	}
-// 	else
-// 	{
-// 		str = node->command + 1;
-// 		str = ft_strtrim(str, " ");
-// 		tmp = cleaner(str);
-// 		free(str);
-// 		free(node->command);
-// 		node->command = tmp;
-// 	}
-// }
-
-void	builtinmanager(t_lex *node, t_general *general)
-{
-	if (node->builtin == 1)
-		handle_echo(general, node);
-	if (node->builtin == 2)
-		handle_cd(general, node);
-	if (node->builtin == 3)
-		handle_pwd();
-	if (node->builtin == 4)
-		handle_export(general, node);
-	if (node->builtin == 5)
-		handle_unset(general, node);
-	if (node->builtin == 6)
-		handle_env(general);
-	if (node->builtin == 7)
-		handle_exit(node->command2, general);
-}
-int	re_out(t_lex *node, t_general *general)
+int	re_out(t_lex *node, t_general *general, int *save_fd)
 {
 	int	file;
 
@@ -78,16 +27,15 @@ int	re_out(t_lex *node, t_general *general)
 	close(file);
 	if (node->builtin > 0)
 	{
-		ft_printf("é una buil in");
 		builtinmanager(node, general);
-		return (g_last_exit_status); //potrebbe essere utile returnare exit status?
+		dup2(save_fd[1], STDOUT_FILENO);
+		exit (g_last_exit_status); //potrebbe essere utile returnare exit status?
 	}
 	execve(node->command2[0], node->command2, NULL);
 }
 
 int	piping(int *fd, int *save_fd, t_lex *node, t_general *general)
 {
-	write(2, "a\n", 2);
 	if(node->next && node->next->token == 1)
 	{
 		dup2(fd[1], STDOUT_FILENO);
@@ -98,10 +46,8 @@ int	piping(int *fd, int *save_fd, t_lex *node, t_general *general)
 		dup2(save_fd[1], STDOUT_FILENO);
 	if (node->builtin == 1 || node->builtin == 3 || node->builtin == 6)
 	{
-		write(2, "cu\n", 3);
-		ft_printf("é una builtin\n");
 		builtinmanager(node, general);
-		exit (0); //potrebbe essere utile returnare exit status?
+		exit (g_last_exit_status); //potrebbe essere utile returnare exit status?
 	}
 	execve(node->command2[0], node->command2, NULL);
 	perror("il comando esterno non é stato eseguito\n");
@@ -111,7 +57,7 @@ int	execute_command(t_lex *node, t_general *general, int *save_fd)
 {
 	int	pid;
 	int	fd[2];
-	int	status;
+	//int	status;
 
 
 	if(node->builtin != 1 && node->builtin != 3 && node->builtin != 6 && node->builtin != 0)
@@ -128,26 +74,22 @@ int	execute_command(t_lex *node, t_general *general, int *save_fd)
 	if (pid == 0)
 	{
 			if(node->next == NULL || node->next->token == 1)
-			{
-				write(1, "v\n", 2);
 				piping(fd, save_fd, node, general);
-			}
 			else if(node->next->token == 2 || node->next->token == 3)
-			{
-				write(1, "b\n", 2);
-				re_out(node, general);
-			}
+				re_out(node, general, save_fd);
 			else
 				write(1, "p\n", 2);
 	}
-	waitpid(pid, &status, 0);
+	//waitpid(pid, &status, 0);
+	wait(NULL);
 	if (node->next && node->next->token == 1)
 	{
 		dup2(fd[0], STDIN_FILENO);
 		close(fd[0]);
 		close(fd[1]);
 	}
-	return WIFEXITED(status) && WEXITSTATUS(status);
+	//return WIFEXITED(status) && WEXITSTATUS(status);
+	return(0);
 }
 void	executor(t_general *general)
 {

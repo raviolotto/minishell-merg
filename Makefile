@@ -6,7 +6,7 @@
 #    By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 18:22:29 by jcardina          #+#    #+#              #
-#    Updated: 2024/01/31 19:49:17 by jcardina         ###   ########.fr        #
+#    Updated: 2024/02/01 17:03:37 by jcardina         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ src = \
 		src/builtin/ft_myecho.c\
 		src/builtin/ft_myexit.c\
 		src/executor/executor.c\
-#		src/executo/ext_command.c\
+		src/executor/executor_utils.c\
 
 OBJ = $(src:%.c=%.o)
 
