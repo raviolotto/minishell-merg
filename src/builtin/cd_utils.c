@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 14:13:40 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/31 14:13:44 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/02/01 15:39:18 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,6 @@ char	*ft_home_env(char **env)
 		i++;
 	}
 	return (home_dir);
-}
-
-void	show_cd_error(char *cmd2, char *error)
-{
-	g_last_exit_status = 1;
-	ft_putstr_fd("kitty shell: cd: ", 2);
-	ft_putstr_fd(cmd2, 2);
-	ft_putstr_fd(": ", 2);
-	ft_putstr_fd(error, 2);
-	ft_putstr_fd("\n", 2);
 }
 
 int	ft_change_dir(char *new_dir, char **cmd2, t_general *general, char *old_dir)
