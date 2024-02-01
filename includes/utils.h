@@ -6,7 +6,7 @@
 /*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:44:08 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/01 17:08:05 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:39:24 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,8 @@ void	print_matrix(char **matrix);
 int		dumb_builtin_check(char *command);
 char	*cleaner(char *str);
 void	file_name_handler(t_lex *node);
+char	*cleaner(char *str);
+void	file_name_handler(t_lex *node);
+char	**matrix_dup(char **matrix);
 
 #endif

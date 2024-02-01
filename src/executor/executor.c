@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:49:11 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/02/01 16:01:09 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:55:03 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,31 +46,14 @@
 // 	}
 // }
 
-void	builtinmanager(t_lex *node, t_general *general)
-{
-	if (node->builtin == 1)
-		handle_echo(general, node);
-	if (node->builtin == 2)
-		handle_cd(general, node);
-	if (node->builtin == 3)
-		handle_pwd();
-	if (node->builtin == 4)
-		handle_export(general, node);
-	if (node->builtin == 5)
-		handle_unset(general, node);
-	if (node->builtin == 6)
-		handle_env(general);
-	if (node->builtin == 7)
-		handle_exit(node->command2, general);
-}
 int	re_out(t_lex *node, t_general *general)
 {
 	int	file;
 
-	write (1, "a\n", 2);
-	if(node->next->token == 2)
+	write(1, "a\n", 2);
+	if (node->next->token == 2)
 		file = open(node->next->command, O_WRONLY | O_CREAT | O_TRUNC, 0777);
-	if(node->next->token == 3)
+	if (node->next->token == 3)
 		file = open(node->next->command, O_WRONLY | O_CREAT | O_APPEND, 0777);
 	if (file == -1)
 		return (1);
@@ -80,7 +63,7 @@ int	re_out(t_lex *node, t_general *general)
 	{
 		ft_printf("é una buil in");
 		builtinmanager(node, general);
-		return (g_last_exit_status); //potrebbe essere utile returnare exit status?
+		return (g_last_exit_status); // potrebbe essere utile returnare exit status?
 	}
 	execve(node->command2[0], node->command2, NULL);
 }
@@ -88,7 +71,7 @@ int	re_out(t_lex *node, t_general *general)
 int	piping(int *fd, int *save_fd, t_lex *node, t_general *general)
 {
 	write(2, "a\n", 2);
-	if(node->next && node->next->token == 1)
+	if (node->next && node->next->token == 1)
 	{
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[1]);
@@ -101,11 +84,36 @@ int	piping(int *fd, int *save_fd, t_lex *node, t_general *general)
 		write(2, "cu\n", 3);
 		ft_printf("é una builtin\n");
 		builtinmanager(node, general);
-		exit (0); //potrebbe essere utile returnare exit status?
+		exit(0); // potrebbe essere utile returnare exit status?
 	}
 	execve(node->command2[0], node->command2, NULL);
 	perror("il comando esterno non é stato eseguito\n");
 }
+
+int	pid_manager(int *fd, int *save_fd, t_lex *node, t_general *general)
+{
+	int	pid;
+
+	pid = fork();
+
+	if (pid == 0)
+	{
+		if (node->next == NULL || node->next->token == 1)
+		{
+			write(1, "v\n", 2);
+			piping(fd, save_fd, node, general);
+		}
+		else if (node->next->token == 2 || node->next->token == 3)
+		{
+			write(1, "b\n", 2);
+			re_out(node, general);
+		}
+		else
+			write(1, "p\n", 2);
+	}
+	return (pid);
+}
+
 
 int	execute_command(t_lex *node, t_general *general, int *save_fd)
 {
@@ -113,33 +121,18 @@ int	execute_command(t_lex *node, t_general *general, int *save_fd)
 	int	fd[2];
 	int	status;
 
-
-	if(node->builtin != 1 && node->builtin != 3 && node->builtin != 6 && node->builtin != 0)
+	if (node->builtin != 1 && node->builtin != 3 
+		&& node->builtin != 6 && node->builtin != 0)
 	{
 		builtinmanager(node, general);
-		return(g_last_exit_status);
+		return (g_last_exit_status);
 	}
-	if(node->next && node->next->token == 1)
+	if (node->next && node->next->token == 1)
 	{
 		if (pipe(fd) == -1)
 			perror("non é stato possibile creare la pipe");
 	}
-	pid = fork();
-	if (pid == 0)
-	{
-			if(node->next == NULL || node->next->token == 1)
-			{
-				write(1, "v\n", 2);
-				piping(fd, save_fd, node, general);
-			}
-			else if(node->next->token == 2 || node->next->token == 3)
-			{
-				write(1, "b\n", 2);
-				re_out(node, general);
-			}
-			else
-				write(1, "p\n", 2);
-	}
+	pid = pid_manager(fd, save_fd, node, general);
 	waitpid(pid, &status, 0);
 	if (node->next && node->next->token == 1)
 	{
@@ -149,6 +142,7 @@ int	execute_command(t_lex *node, t_general *general, int *save_fd)
 	}
 	return WIFEXITED(status) && WEXITSTATUS(status);
 }
+
 void	executor(t_general *general)
 {
 	t_lex	*tmp;
@@ -159,7 +153,7 @@ void	executor(t_general *general)
 	tmp = general->lexer;
 	while (tmp)
 	{
-		if(tmp->token == 0)
+		if (tmp->token == 0)
 			g_last_exit_status = execute_command(tmp, general, save_fd);
 		tmp = tmp->next;
 	}

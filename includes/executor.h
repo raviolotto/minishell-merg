@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:50:44 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/12 17:11:54 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:56:01 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 # define EXECUTOR_H
 
 void	executor(t_general *general);
+void	builtinmanager(t_lex *node, t_general *general);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:35:26 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/01 16:11:11 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:37:49 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,11 @@ void	show_quotes_error(char *word);
 int		handle_quotes(char *word);
 void	show_pathfinder_error(char *command);
 void	manage_memory_error(void);
+int		confronta_sottostringhe(const char *str, const char *sub, size_t len);
+char	*find_substring_position(const char *str, const char *sub);
+char	*find_sostituzione(char *comando, t_general *general);
+char	*calcolate_parte_prima(char *input, char *posizione);
+char	*calcolate_parte_dopo(char *fine_comando);
+char	*find_fine_comando(char *posizione);
 
 #endif
