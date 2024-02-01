@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+         #
+#    By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 18:22:29 by jcardina          #+#    #+#              #
-#    Updated: 2024/02/01 17:03:37 by jcardina         ###   ########.fr        #
+#    Updated: 2024/02/01 18:10:16 by frdal-sa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,18 +19,25 @@ PRINTF = lib/ft_printf/libftprintf.a
 src = \
 		src/mini_shell.c\
 		src/utils/general_utils.c\
+		src/utils/general_utils2.c\
+		src/utils/general_utils3.c\
 		src/utils/free.c\
 		src/parser/parser.c\
 		src/parser/lexer_list.c\
 		src/parser/lexer_list_utils.c\
 		src/parser/path.c\
+		src/parser/path_utils.c\
 		src/parser/expander.c\
+		src/parser/expander_utils.c\
+		src/parser/expander_utils2.c\
 		src/builtin/pwd.c\
 		src/builtin/env.c\
 		src/builtin/ft_myexport.c\
+		src/builtin/ft_myexport_utils.c\
 		src/builtin/ft_myunset.c\
 		src/builtin/cd.c\
 		src/builtin/cd_utils.c\
+		src/builtin/cd_utils2.c\
 		src/builtin/builtins_utils.c\
 		src/builtin/ft_myecho.c\
 		src/builtin/ft_myexit.c\

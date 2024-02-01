@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/12 14:50:44 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/02/01 17:00:08 by jcardina         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/02/01 18:10:42 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef EXECUTOR_H
 # define EXECUTOR_H
 
 void	executor(t_general *general);
+void	builtinmanager(t_lex *node, t_general *general);
 void	builtinmanager(t_lex *node, t_general *general);
 
 #endif

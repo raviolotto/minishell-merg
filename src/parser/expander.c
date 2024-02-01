@@ -3,108 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 14:11:22 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/31 18:51:27 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:35:26 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/mini_shell.h"
-
-int	confronta_sottostringhe(const char *str, const char *sub, size_t len)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < len)
-	{
-		if (str[i] != sub[i])
-		{
-			return (0);
-		}
-		i++;
-	}
-	return (1);
-}
-
-char	*find_substring_position(const char *str, const char *sub)
-{
-	size_t	len;
-
-	len = ft_strlen(sub);
-	while (*str != '\0')
-	{
-		if (confronta_sottostringhe(str, sub, len))
-			return ((char *)str);
-		str++;
-	}
-	return (NULL);
-}
-
-char	*find_sostituzione(char *comando, t_general *general)
-{
-	int		index;
-	char	*sostituzione;
-
-	if (strncmp(comando, "$?", 2) == 0)
-	{
-		sostituzione = ft_itoa(g_last_exit_status);
-		return (sostituzione);
-	}
-	else
-	{
-		index = my_setenv(comando + 1, NULL, &general->envp2);
-		if (index >= 0)
-		{
-			sostituzione = ft_strchr(general->envp2[index], '=') + 1;
-			return (sostituzione);
-		}
-		else
-		{
-			return ("");
-		}
-	}
-}
-
-char	*calcolate_parte_prima(char *input, char *posizione)
-{
-	char	*parte_prima;
-	int		lunghezza_parte_prima;
-
-	lunghezza_parte_prima = posizione - input;
-	parte_prima = ft_substr(input, 0, lunghezza_parte_prima);
-	return (parte_prima);
-}
-
-char	*calcolate_parte_dopo(char *fine_comando)
-{
-	char	*parte_dopo;
-	int		lunghezza_parte_dopo;
-
-	lunghezza_parte_dopo = strlen(fine_comando);
-	parte_dopo = ft_substr(fine_comando, 0, lunghezza_parte_dopo);
-	return (parte_dopo);
-}
-
-char	*find_fine_comando(char *posizione)
-{
-	char	*fine_comando;
-
-	fine_comando = posizione + ft_strlen("$");
-	while (*fine_comando != ' ' && *fine_comando != '\0'
-		&& *fine_comando != '\"' && *fine_comando != '$'
-		&& *fine_comando != '\'')
-	{
-		if (*fine_comando == '?')
-			if (*fine_comando + 1 == '\0')
-				return (fine_comando + 2);
-		else
-			return (fine_comando + 1);
-		fine_comando++;
-	}
-	return (fine_comando);
-}
 
 //da controllare le allocazioni di memoria vegono liberate
 char	*sostituisci_comando_dollaro(char *input, t_general *general)

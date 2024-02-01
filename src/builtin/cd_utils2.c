@@ -1,37 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structure.h                                        :+:      :+:    :+:   */
+/*   cd_utils2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 13:16:18 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/01 18:10:48 by frdal-sa         ###   ########.fr       */
+/*   Created: 2024/01/31 14:13:40 by jcardina          #+#    #+#             */
+/*   Updated: 2024/02/01 15:38:48 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTURE_H
-# define STRUCTURE_H
+#include "../../includes/mini_shell.h"
 
-typedef struct s_lex
+void	show_cd_error(char *cmd2, char *error)
 {
-	char			*command;
-	char			**command2;
-	int				token;
-	int				pipe_status;
-	int				builtin;
-	int				i;
-	struct s_lex	*next;
-}	t_lex;
-
-typedef struct s_general
-{
-	char			*args;
-	char			**envp2;
-	char			**enexp;
-	char			**path;
-	struct s_lex	*lexer;
-	int				flag_quotes[1000];
-}	t_general;
-
-#endif
+	g_last_exit_status = 1;
+	ft_putstr_fd("kitty shell: cd: ", 2);
+	ft_putstr_fd(cmd2, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(error, 2);
+	ft_putstr_fd("\n", 2);
+}
