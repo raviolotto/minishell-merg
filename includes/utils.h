@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:44:08 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/01 15:57:55 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:08:05 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ int		matrixlen(char **matrix);
 char	**matrix_dup(char **matrix);
 char	**matrix_newline(char **matrix, char *str);
 char	**maxxisplit(char const *s, char c);
+int		matrixlen(char **matrix);
+char	**matrix_dup(char **matrix);
+void	print_matrix(char **matrix);
+int		dumb_builtin_check(char *command);
 char	*cleaner(char *str);
 void	file_name_handler(t_lex *node);
 
