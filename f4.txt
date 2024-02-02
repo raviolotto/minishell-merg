@@ -1,0 +1,11 @@
+Makefile
+README.md
+apputi-mini.txt
+f2.txt
+f3.txt
+f4.txt
+folio.txt
+includes
+lib
+minishell
+src

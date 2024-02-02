@@ -6,7 +6,7 @@
 /*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:49:11 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/02/02 17:55:17 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/02/02 18:16:18 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@
 
 int	re_out(t_lex *node, t_general *general, int *save_fd)
 {
-	dup2(file, STDOUT_FILENO);
-	close(file);
+	dup2(general->file_fd, STDOUT_FILENO);
+	close(general->file_fd);
 	if (node->builtin > 0)
 	{
 		builtinmanager(node, general);
@@ -106,9 +106,12 @@ void	executor(t_general *general)
 {
 	t_lex	*tmp;
 	int		save_fd[2];
+	int		i;
 
 	save_fd[0] = dup(STDIN_FILENO);
 	save_fd[1] = dup(STDOUT_FILENO);
+	i = find_correct_redir(general);
+	open_fd(general, i);
 	tmp = general->lexer;
 	while (tmp)
 	{
