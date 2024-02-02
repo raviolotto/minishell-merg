@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general_utils3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:25:03 by frdal-sa          #+#    #+#             */
-/*   Updated: 2024/02/01 17:40:32 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/02/01 19:26:56 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,18 @@ char	**matrix_dup(char **matrix)
 		i++;
 	}
 	return (ret);
+}
+
+void	index_list(t_general *general)
+{
+	t_lex	*tmp;
+	int		i;
+
+	tmp = general->lexer;
+	i = 0;
+	while (tmp != NULL)
+	{
+		tmp->i = i++;
+		tmp = tmp->next;
+	}
 }

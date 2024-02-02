@@ -6,7 +6,7 @@
 /*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 16:17:29 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/01 17:01:15 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/02/02 17:10:43 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	main(int ac, char **av, char **envp)
 		general.args = readline("kitty shell> " RESET);
 		if (general.args == NULL)
 		{
-			ft_printf("sono uscito nel controllo general.args == NULL\n");
+			ft_printf("exit");
 			free_and_exit(0, &general);
 		}
 		if (general.args && *general.args)
@@ -76,19 +76,22 @@ int	main(int ac, char **av, char **envp)
 			expander(&general);
 
 			//                       debug info
-			tmp = general.lexer;
-			printf(RED);
-			while (tmp != NULL)
-			{
-				printf("token %i\n", tmp->token);
-				printf("pipe steatus %i\n", tmp->pipe_status);
-				printf("command %s\n", tmp->command);
-				printf("builtin == %i\n", tmp->builtin);
-				print_matrix(tmp->command2);
-				printf("\n");
-				tmp = tmp->next;
-			}
-			printf(RESET);
+			// tmp = general.lexer;
+			// ft_printf(RED);
+			// while (tmp != NULL)
+			// {
+			// 	printf("token %i\n", tmp->token);
+			// 	printf("pipe steatus %i\n", tmp->pipe_status);
+			// 	printf("command %s\n", tmp->command);
+			// 	printf("builtin == %i\n", tmp->builtin);
+			// 	print_matrix(tmp->command2);
+			// 	printf("questo é index == %d\n", tmp->i);
+			// 	printf("\n");
+			// 	tmp = tmp->next;
+			// }
+			// ft_printf("fine scroll\n");
+			// ft_printf("giusta redir == %d\n", find_correct_redir(&general));
+			// ft_printf(RESET);
 			//                      end debug info;
 
 			executor(&general);

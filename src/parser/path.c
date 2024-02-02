@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:25:59 by frdal-sa          #+#    #+#             */
-/*   Updated: 2024/02/01 17:08:17 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/02/01 19:22:43 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	list_commander(t_general *general)
 	{
 		if (tmp->token == 0)
 			build_matrix(tmp->command, tmp, general);
-		else if(tmp->token != 0 && tmp->token != 1)
+		else if (tmp->token != 0 && tmp->token != 1)
 			file_name_handler(tmp);
 		tmp = tmp->next;
 	}

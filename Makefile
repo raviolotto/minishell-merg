@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+         #
+#    By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 18:22:29 by jcardina          #+#    #+#              #
-#    Updated: 2024/02/01 18:10:16 by frdal-sa         ###   ########.fr        #
+#    Updated: 2024/02/02 15:07:04 by jcardina         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ src = \
 		src/builtin/ft_myexit.c\
 		src/executor/executor.c\
 		src/executor/executor_utils.c\
+		src/executor/redir_out.c\
 
 OBJ = $(src:%.c=%.o)
 

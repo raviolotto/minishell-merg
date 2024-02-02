@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:14:37 by frdal-sa          #+#    #+#             */
-/*   Updated: 2024/02/01 17:40:51 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/02/01 19:21:47 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,6 @@ int	matrixlen(char **matrix)
 	while (matrix[i] != NULL)
 		i++;
 	return (i);
-}
-
-char	**matrix_dup(char **matrix)
-{
-	char	**ret;
-	size_t	i;
-
-	i = 0;
-	while (matrix[i] != NULL)
-		i++;
-	ret = ft_calloc(sizeof(char *), i + 1);
-	if (!ret)
-		return (NULL);
-	i = 0;
-	while (matrix[i] != NULL)
-	{
-		ret[i] = ft_strdup(matrix[i]);
-		i++;
-	}
-	return (ret);
 }
 
 void	print_matrix(char **matrix)

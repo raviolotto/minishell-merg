@@ -6,7 +6,7 @@
 /*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:23:21 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/01 16:01:36 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/02/01 19:29:24 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ int	parser(t_general *general)
 	lexer(general);
 	if (list_commander(general) == 1)
 		return (1);
+	index_list(general);
 	return (0);
 }

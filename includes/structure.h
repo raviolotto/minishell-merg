@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structure.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:16:18 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/01 18:10:48 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/02/02 17:12:26 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ typedef struct s_lex
 {
 	char			*command;
 	char			**command2;
-	int				token;
+	int				token; // 0= comando, 1 = |, 2 = >, 3 = >>, 4 = <, 5 = << COMMENTO DA NON ELIMINARE
 	int				pipe_status;
 	int				builtin;
 	int				i;
@@ -31,6 +31,7 @@ typedef struct s_general
 	char			**enexp;
 	char			**path;
 	struct s_lex	*lexer;
+	int				file_fd;
 	int				flag_quotes[1000];
 }	t_general;
 
