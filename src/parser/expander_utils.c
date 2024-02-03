@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:32:40 by frdal-sa          #+#    #+#             */
-/*   Updated: 2024/02/01 17:39:46 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/02/03 16:52:01 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ char	*find_sostituzione(char *comando, t_general *general)
 
 	if (strncmp(comando, "$?", 2) == 0)
 	{
-		sostituzione = ft_itoa(g_last_exit_status);
+		if(g_last_exit_status == 130 || g_last_exit_status == 0);
+			general->save_exit_status = 130;
+		sostituzione = ft_itoa(general->save_exit_status);
 		return (sostituzione);
 	}
 	else

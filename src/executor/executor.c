@@ -6,7 +6,7 @@
 /*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:49:11 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/02/03 13:48:44 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/02/03 16:57:01 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ void	executor(t_general *general)
 	int		save_fd[2];
 	int		i;
 
+	if(g_last_exit_status != 0 && g_last_exit_status != 130)
+		return ;
 	save_fd[0] = dup(STDIN_FILENO);
 	save_fd[1] = dup(STDOUT_FILENO);
 	i = find_correct_redir(general);
@@ -96,11 +98,15 @@ void	executor(t_general *general)
 	while (tmp)
 	{
 		if(tmp->token == 0)
+		{
 			g_last_exit_status = execute_command(tmp, general, save_fd);
+			ft_printf("g_last %d\n", g_last_exit_status);
+		}
 		tmp = tmp->next;
 	}
 	dup2(save_fd[0], STDIN_FILENO);
 	dup2(save_fd[1], STDOUT_FILENO);
 	close(save_fd[0]);
 	close(save_fd[1]);
+	general->save_exit_status = g_last_exit_status;
 }

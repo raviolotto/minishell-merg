@@ -6,7 +6,7 @@
 /*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:29:54 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/03 14:21:54 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/02/03 15:48:51 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,39 +41,6 @@ int	find_correct_redir(t_general *general)
 	return (redir_pos);
 }
 
-void	open_fd(t_general *general, int i)
-{
-	t_lex	*node;
-	int		file;
-
-	node = general->lexer;
-	while(node != NULL)
-	{
-		if(node->token == 2)
-		{
-			file = open(node->command, O_WRONLY | O_CREAT | O_TRUNC, 0777);
-				if(i == node->i)
-				{
-					general->file_fd = file;
-					return ;
-				}
-			close (file);
-		}
-		else if(node->token == 3)
-		{
-			file = open(node->command, O_WRONLY | O_CREAT | O_APPEND, 0777);
-			if(i == node->i)
-				{
-					general->file_fd = file;
-					return ;
-				}
-			close (file);
-		}
-		node = node->next;
-	}
-}
-
-//NON ELIMINARE
 // void	open_fd(t_general *general, int i)
 // {
 // 	t_lex	*node;
@@ -84,20 +51,53 @@ void	open_fd(t_general *general, int i)
 // 	{
 // 		if(node->token == 2)
 // 		{
-// 			file = open(node->command, O_WRONLY | O_CREAT | O_APPEND, 0777);
-// 			if(i == node->i)
+// 			file = open(node->command, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+// 				if(i == node->i)
+// 				{
 // 					general->file_fd = file;
-// 			else
+// 					return ;
+// 				}
 // 			close (file);
 // 		}
 // 		else if(node->token == 3)
 // 		{
 // 			file = open(node->command, O_WRONLY | O_CREAT | O_APPEND, 0777);
 // 			if(i == node->i)
+// 				{
 // 					general->file_fd = file;
-// 			else
+// 					return ;
+// 				}
 // 			close (file);
 // 		}
 // 		node = node->next;
 // 	}
 // }
+
+//NON ELIMINARE
+void	open_fd(t_general *general, int i)
+{
+	t_lex	*node;
+	int		file;
+
+	node = general->lexer;
+	while(node != NULL)
+	{
+		if(node->token == 2)
+		{
+			file = open(node->command, O_WRONLY | O_CREAT | O_APPEND, 0777);
+			if(i == node->i)
+					general->file_fd = file;
+			else
+			close (file);
+		}
+		else if(node->token == 3)
+		{
+			file = open(node->command, O_WRONLY | O_CREAT | O_APPEND, 0777);
+			if(i == node->i)
+					general->file_fd = file;
+			else
+			close (file);
+		}
+		node = node->next;
+	}
+}
