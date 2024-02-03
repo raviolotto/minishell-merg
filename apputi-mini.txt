@@ -2,7 +2,6 @@ appunti:
 
 FRA
 controllare corretion sheet
-fare file per le funzioni
 
 ANI
 segnali

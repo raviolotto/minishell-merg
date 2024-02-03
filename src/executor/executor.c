@@ -6,35 +6,15 @@
 /*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:49:11 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/02/02 18:16:18 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/02/03 13:48:44 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../includes/mini_shell.h"
 
-// int	re_out(t_lex *node, t_general *general, int *save_fd)
-// {
-// 	int	file;
-
-// 	if(node->next->token == 2)
-// 		file = open(node->next->command, O_WRONLY | O_CREAT | O_TRUNC, 0777);
-// 	if(node->next->token == 3)
-// 		file = open(node->next->command, O_WRONLY | O_CREAT | O_APPEND, 0777);
-// 	if (file == -1)
-// 		return (1);
-// 	dup2(file, STDOUT_FILENO);
-// 	close(file);
-// 	if (node->builtin > 0)
-// 	{
-// 		builtinmanager(node, general);
-// 		dup2(save_fd[1], STDOUT_FILENO);
-// 		exit (g_last_exit_status); //potrebbe essere utile returnare exit status?
-// 	}
-// 	execve(node->command2[0], node->command2, NULL);
-// }
-
 int	re_out(t_lex *node, t_general *general, int *save_fd)
 {
+	ft_printf("sono entrato in re_out\n");
 	dup2(general->file_fd, STDOUT_FILENO);
 	close(general->file_fd);
 	if (node->builtin > 0)

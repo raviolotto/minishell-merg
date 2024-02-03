@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 11:44:18 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/17 19:06:04 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/02/03 13:33:31 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,30 @@ int	menage_token(char *str, int i, t_general *general, int *p)
 	}
 	else if (tmp->token == 3 || tmp->token == 5)
 		j++;
-	while (what_token(str, i + j) == 0 && str[i + j] != '\0')
+	if (tmp->token != 0 && tmp->token != 1)
 	{
+		while(iswhite(str[i + j]) == 0)
+			j++;
+		if(what_token(str, i + j) != 0 || str[i + j] == '\0')
+		{
+			g_last_exit_status = 2;
+			ft_printf("pars error\n");
+		}
+		while (what_token(str, i + j) == 0 && str[i + j] != '\0' && iswhite(str[i + j]) == 1)
+		{
 		if (str[i + j] == 34 || str[i + j] == 39)
 			j += quotes(str, j);
 		j++;
+		}
+	}
+	else
+	{
+		while (what_token(str, i + j) == 0 && str[i + j] != '\0')
+		{
+			if (str[i + j] == 34 || str[i + j] == 39)
+				j += quotes(str, j);
+			j++;
+		}
 	}
 	tmp->command = ft_substr(str, i, j);
 	return (j);

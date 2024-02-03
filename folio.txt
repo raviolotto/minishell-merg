@@ -1,8 +1,1 @@
-Makefile
-README.md
-apputi-mini.txt
-folio.txt
-includes
-lib
-minishell
 src

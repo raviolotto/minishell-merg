@@ -6,7 +6,7 @@
 /*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 12:12:07 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/26 15:31:56 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/02/03 13:34:55 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_lex	*new_lex_node(void)
 		tmp->token = 0;
 		tmp->pipe_status = 0;
 		tmp->command2 = NULL;
+		tmp->builtin = -1;
 		tmp->next = NULL;
 	}
 	return (tmp);
