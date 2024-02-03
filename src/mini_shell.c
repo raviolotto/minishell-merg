@@ -6,7 +6,7 @@
 /*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 16:17:29 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/03 17:02:49 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/02/03 18:51:44 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	init(t_general *general, char **envp)
 	general->envp2 = matrix_dup(envp);
 	general->enexp = matrix_dup(general->envp2);
 	general->path = NULL;
+	general->save_exit_status = 0;
 	printf(PINK"\n%s\n", INTRO);
 	printf("\n%s\n"RESET, HELLO2);
 }
@@ -55,13 +56,13 @@ int	main(int ac, char **av, char **envp)
 		printf(RED "error dumb input\n" RESET);
 		return (0);
 	}
-
+	signal(SIGINT, handle_sigint);
+	signal(SIGTERM, handle_sigquit);
+	signal(SIGQUIT, handle_sigquit);
 	init(&general, envp);
 	while (1)
 	{
 		g_last_exit_status = 0;
-		signal(SIGINT, handle_sigint);
-		signal(SIGQUIT, handle_sigquit);
 		printf(YELLOW);
 		general.args = readline("kitty shell> " RESET);
 		if (general.args == NULL)

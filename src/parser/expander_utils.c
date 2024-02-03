@@ -6,7 +6,7 @@
 /*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:32:40 by frdal-sa          #+#    #+#             */
-/*   Updated: 2024/02/03 16:52:01 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/02/03 18:49:46 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*find_sostituzione(char *comando, t_general *general)
 
 	if (strncmp(comando, "$?", 2) == 0)
 	{
-		if(g_last_exit_status == 130 || g_last_exit_status == 0);
+		if(g_last_exit_status == 130)
 			general->save_exit_status = 130;
 		sostituzione = ft_itoa(general->save_exit_status);
 		return (sostituzione);
