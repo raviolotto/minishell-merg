@@ -6,7 +6,7 @@
 #    By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 18:22:29 by jcardina          #+#    #+#              #
-#    Updated: 2024/02/03 18:53:23 by jcardina         ###   ########.fr        #
+#    Updated: 2024/02/03 18:54:50 by jcardina         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ OBJ = $(src:%.c=%.o)
 
 FLAGS = -Wall -Werror -Wextra -g
 
-CC = clang
+CC = gcc
 
 all: $(NAME)
 
