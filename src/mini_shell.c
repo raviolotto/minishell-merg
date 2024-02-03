@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 16:17:29 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/03 18:51:44 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/02/03 20:57:42 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,15 @@ void	init(t_general *general, char **envp)
 	printf(PINK"\n%s\n", INTRO);
 	printf("\n%s\n"RESET, HELLO2);
 }
-void handle_sigint(int sig)
+
+void	handle_sigint(int sig)
 {
 	//free(general->args);
 	ft_printf(YELLOW"\nkitty shell>" RESET);
 	g_last_exit_status = 130;
 }
-void handle_sigquit(int sig)
+
+void	handle_sigquit(int sig)
 {
 	g_last_exit_status = 0;
 }
@@ -81,7 +83,6 @@ int	main(int ac, char **av, char **envp)
 		// }
 			parser(&general);
 			expander(&general);
-
 			//                       debug info
 			// tmp = general.lexer;
 			// ft_printf(RED);
@@ -100,7 +101,6 @@ int	main(int ac, char **av, char **envp)
 			// ft_printf("giusta redir == %d\n", find_correct_redir(&general));
 			// ft_printf(RESET);
 			//                      end debug info;
-
 			executor(&general);
 			free_lex(general.lexer);
 			general.lexer = NULL;

@@ -1,3 +1,0 @@
-XDG_SESSION_PATH=/org/freedesktop/DisplayManager/Session0
-XDG_SEAT_PATH=/org/freedesktop/DisplayManager/Seat0
-PATH=/nfs/homes/jcardina/bin:/nfs/homes/jcardina/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redir_out.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:29:54 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/03 18:27:08 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/02/03 20:47:30 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../includes/mini_shell.h"
+#include "../../includes/mini_shell.h"
 
 int	find_correct_redir(t_general *general)
 {
@@ -24,17 +24,17 @@ int	find_correct_redir(t_general *general)
 		tmp = tmp->next;
 	pipe_pos = tmp->i;
 	tmp = general->lexer;
-	while(tmp != NULL && tmp->i <= pipe_pos)
+	while (tmp != NULL && tmp->i <= pipe_pos)
 	{
-		if(tmp->token == 3 || tmp->token == 2)
+		if (tmp->token == 3 || tmp->token == 2)
 			redir_pos = tmp->i;
 		tmp = tmp->next;
 	}
-	if(redir_pos > -1)
+	if (redir_pos > -1)
 		return (redir_pos);
-	while(tmp != NULL)
+	while (tmp != NULL)
 	{
-		if(tmp->token == 3 || tmp->token == 2)
+		if (tmp->token == 3 || tmp->token == 2)
 			redir_pos = tmp->i;
 		tmp = tmp->next;
 	}
@@ -47,30 +47,31 @@ int	open_fd(t_general *general, int i)
 	int		file;
 
 	node = general->lexer;
-	while(node != NULL)
+	while (node != NULL)
 	{
-		if(node->token == 2)
+		if (node->token == 2)
 		{
 			file = open(node->command, O_WRONLY | O_CREAT | O_TRUNC, 0777);
-			if(i == node->i)
-					general->file_fd = file;
+			if (i == node->i)
+				general->file_fd = file;
 			else
-			close (file);
+				close(file);
 		}
-		else if(node->token == 3)
+		else if (node->token == 3)
 		{
 			file = open(node->command, O_WRONLY | O_CREAT | O_APPEND, 0777);
-			if(i == node->i)
-					general->file_fd = file;
+			if (i == node->i)
+				general->file_fd = file;
 			else
-			close (file);
+				close(file);
 		}
 		node = node->next;
 	}
 	return (i);
 }
 
-//return 1 se la redirection giusta é prima di una pipe 2 se dopo o non sono presenti pipe
+//return 1 se la redirection giusta é prima di 
+//una pipe 2 se dopo o non sono presenti pipe
 //-1 non ci sono redir
 int	re_dir_status(int index, t_general *general)
 {
