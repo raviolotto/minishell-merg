@@ -6,7 +6,7 @@
 /*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:29:54 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/03 15:48:51 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/02/03 18:27:08 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,54 @@ int	find_correct_redir(t_general *general)
 		tmp = tmp->next;
 	}
 	return (redir_pos);
+}
+
+int	open_fd(t_general *general, int i)
+{
+	t_lex	*node;
+	int		file;
+
+	node = general->lexer;
+	while(node != NULL)
+	{
+		if(node->token == 2)
+		{
+			file = open(node->command, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+			if(i == node->i)
+					general->file_fd = file;
+			else
+			close (file);
+		}
+		else if(node->token == 3)
+		{
+			file = open(node->command, O_WRONLY | O_CREAT | O_APPEND, 0777);
+			if(i == node->i)
+					general->file_fd = file;
+			else
+			close (file);
+		}
+		node = node->next;
+	}
+	return (i);
+}
+
+//return 1 se la redirection giusta é prima di una pipe 2 se dopo o non sono presenti pipe
+//-1 non ci sono redir
+int	re_dir_status(int index, t_general *general)
+{
+	t_lex	*tmp;
+	int		pipe_pos;
+
+	if (index == -1)
+		return (-1);
+	tmp = general->lexer;
+	while (tmp->token != 1 && tmp->next != NULL)
+		tmp = tmp->next;
+	pipe_pos = tmp->i;
+	if (index < pipe_pos)
+		return (1);
+	else
+		return (2);
 }
 
 // void	open_fd(t_general *general, int i)
@@ -74,30 +122,3 @@ int	find_correct_redir(t_general *general)
 // }
 
 //NON ELIMINARE
-void	open_fd(t_general *general, int i)
-{
-	t_lex	*node;
-	int		file;
-
-	node = general->lexer;
-	while(node != NULL)
-	{
-		if(node->token == 2)
-		{
-			file = open(node->command, O_WRONLY | O_CREAT | O_APPEND, 0777);
-			if(i == node->i)
-					general->file_fd = file;
-			else
-			close (file);
-		}
-		else if(node->token == 3)
-		{
-			file = open(node->command, O_WRONLY | O_CREAT | O_APPEND, 0777);
-			if(i == node->i)
-					general->file_fd = file;
-			else
-			close (file);
-		}
-		node = node->next;
-	}
-}

@@ -6,7 +6,7 @@
 /*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:49:11 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/02/03 16:57:01 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/02/03 18:29:07 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 int	re_out(t_lex *node, t_general *general, int *save_fd)
 {
-	ft_printf("sono entrato in re_out\n");
 	dup2(general->file_fd, STDOUT_FILENO);
 	close(general->file_fd);
 	if (node->builtin > 0)
 	{
 		builtinmanager(node, general);
 		dup2(save_fd[1], STDOUT_FILENO);
-		exit (g_last_exit_status); //potrebbe essere utile returnare exit status?
+		exit (g_last_exit_status);
 	}
 	execve(node->command2[0], node->command2, NULL);
 }
@@ -39,7 +38,7 @@ int	piping(int *fd, int *save_fd, t_lex *node, t_general *general)
 	if (node->builtin == 1 || node->builtin == 3 || node->builtin == 6)
 	{
 		builtinmanager(node, general);
-		exit (g_last_exit_status); //potrebbe essere utile returnare exit status?
+		exit (g_last_exit_status);
 	}
 	execve(node->command2[0], node->command2, NULL);
 	perror("il comando esterno non é stato eseguito\n");
@@ -65,7 +64,13 @@ int	execute_command(t_lex *node, t_general *general, int *save_fd)
 	pid = fork();
 	if (pid == 0)
 	{
-			if(node->next == NULL || node->next->token == 1)
+			if(general->o_flag == 1)
+			{
+				re_out(node, general, save_fd);
+				close(fd[0]);
+				close(fd[1]);
+			}
+			else if(node->next == NULL || node->next->token == 1)
 				piping(fd, save_fd, node, general);
 			else if(node->next->token == 2 || node->next->token == 3)
 				re_out(node, general, save_fd);
@@ -86,22 +91,18 @@ void	executor(t_general *general)
 {
 	t_lex	*tmp;
 	int		save_fd[2];
-	int		i;
+	int		flag;
 
 	if(g_last_exit_status != 0 && g_last_exit_status != 130)
 		return ;
 	save_fd[0] = dup(STDIN_FILENO);
 	save_fd[1] = dup(STDOUT_FILENO);
-	i = find_correct_redir(general);
-	open_fd(general, i);
+	general->o_flag = re_dir_status(open_fd(general, find_correct_redir(general)), general);
 	tmp = general->lexer;
 	while (tmp)
 	{
 		if(tmp->token == 0)
-		{
 			g_last_exit_status = execute_command(tmp, general, save_fd);
-			ft_printf("g_last %d\n", g_last_exit_status);
-		}
 		tmp = tmp->next;
 	}
 	dup2(save_fd[0], STDIN_FILENO);
