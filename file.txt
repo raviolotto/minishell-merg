@@ -1,0 +1,8 @@
+Makefile
+README.md
+apputi-mini.txt
+file.txt
+includes
+lib
+minishell
+src

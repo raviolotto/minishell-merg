@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:49:11 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/02/03 20:53:24 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/05 15:52:28 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,34 +25,6 @@ includes
 minishell
 src
 */
-int	re_in(t_lex *node, t_general *general, int *save_fd)
-{
-	int	i;
-
-	i = 0;
-	while (general->args[i] != '<') //questa roba va bene in tutti i casi?
-		i++;
-	i++;
-	while (general->args[i] == ' ')
-		i++;
-	ft_printf("idx = %d\n", i);
-	general->file_fd = open(general->args + i, O_RDONLY);
-	if (general->file_fd == -1)
-	{
-		perror("Errore nell'apertura del file");
-		g_last_exit_status = 1; // 1 va bene?
-		exit(g_last_exit_status);
-	}
-	dup2(general->file_fd, STDIN_FILENO);
-	close(general->file_fd);
-	if (node->builtin > 0)
-	{
-		builtinmanager(node, general);
-		dup2(save_fd[0], STDIN_FILENO);
-		exit(g_last_exit_status);
-	}
-	execve(node->command2[0], node->command2, NULL);
-}
 
 int	re_out(t_lex *node, t_general *general, int *save_fd)
 {
@@ -118,8 +90,6 @@ int	execute_command(t_lex *node, t_general *general, int *save_fd)
 			re_out(node, general, save_fd);
 		else if (node->next->token == 4)
 			re_in(node, general, save_fd);
-		else
-			write(1, "p\n", 2);
 	}
 	waitpid(pid, &status, 0);
 	wait(NULL);

@@ -1,9 +1,6 @@
 appunti:
 
-FRA
-controllare corretion sheet
-
-ANI
+capire se possiamo dichiarare globale sia su main che su .h
 segnali
 controllare corretion sheet
 

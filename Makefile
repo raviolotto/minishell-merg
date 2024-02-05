@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+         #
+#    By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 18:22:29 by jcardina          #+#    #+#              #
-#    Updated: 2024/02/03 18:54:50 by jcardina         ###   ########.fr        #
+#    Updated: 2024/02/05 15:53:19 by lmorelli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ src = \
 		src/executor/executor.c\
 		src/executor/executor_utils.c\
 		src/executor/redir_out.c\
+		src/executor/redir_in.c\
 
 OBJ = $(src:%.c=%.o)
 
