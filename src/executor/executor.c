@@ -6,25 +6,145 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:49:11 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/02/05 15:52:28 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/06 20:52:04 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/mini_shell.h"
 
-/*
-NELLA NOSTRA SHELL :
-kitty shell> cat < file1.txt | grep s
-idx = 6
-Errore nell'apertura del file: No such file or directory
-...e rimane in attesa
+// #define BUFFER_SIZE 1024
 
-IN BASH :
-lmorelli@e4r9p4:~/Desktop/mini_3febbr$ cat < file1.txt | grep s
-includes
-minishell
-src
-*/
+// int re_here_doc(t_lex *node, t_general *general, int *save_fd)
+// {
+//     char *delimiter; // Considera il delimitatore dopo "<<"
+// 	int i;
+
+// 	i = 0;
+// 	while (general->args[i] != '<') //questa roba va bene in tutti i casi?
+// 		i++;
+// 	i += 2;
+// 	while (general->args[i] == ' ')
+// 		i++;
+// 	delimiter = general->args + i;
+//     ft_printf("Delimitatore: %s\n", delimiter);
+
+// 	char buffer[BUFFER_SIZE];
+// 	while (1)
+// 	{
+//     	size_t bytesRead = read(STDIN_FILENO, buffer, sizeof(buffer));
+
+//     	if (bytesRead == -1)
+//     	{
+//         	perror("Errore nella lettura da stdin");
+//         	exit(EXIT_FAILURE);
+//     	}
+//     	else if (bytesRead == 0)
+//         	break;
+//     	char *delimiterPos = strstr(buffer, delimiter);
+//     	if (delimiterPos != NULL)
+//     	{
+// 			if (node->builtin > 0)
+// 			{
+//         		builtinmanager(node, general);
+//         		dup2(save_fd[0], STDIN_FILENO);
+//         		exit(g_last_exit_status);
+//     		}
+// 			write(1, "delimitatore trovato\n", 21);
+//         	break;
+//     	}
+// 	}
+// 	close(STDIN_FILENO);
+
+// 	ft_printf("\nCOMANDO : %s\nMATRICE : ", node->command2[0]);
+// 	print_matrix(node->command2);
+//  	execve(node->command2[0], node->command2, NULL);
+// }
+
+char	*create_new_doc_name(void)
+{
+	char			*doc_name;
+	char			*doc_nb;
+	char			*full_name;
+	int				doc_idx;
+
+	doc_idx = 0;
+	doc_name = "here_docs-";
+	while (1)
+	{
+		doc_nb = ft_itoa(doc_idx);
+		full_name = ft_strjoin(doc_name, doc_nb);
+		if (access(full_name, R_OK | W_OK) != 0)
+		{
+			free(doc_nb);
+			break ;
+		}
+		free(doc_nb);
+		free(full_name);
+		doc_idx++;
+	}
+	return (full_name);
+}
+
+int	re_here_doc(t_lex *node, t_general *general, int *save_fd)
+{
+	char	*delimiter;
+	char	*here_doc;
+	char	*str;
+	int		i;
+	int		pid;
+	int		file;
+
+	i = 0;
+	while (general->args[i] != '<') //questa roba va bene in tutti i casi?
+		i++;
+	i += 2;
+	while (general->args[i] == ' ')
+		i++;
+	delimiter = general->args + i;
+	ft_printf("Delimitatore: %s\n", delimiter);
+	here_doc = create_new_doc_name();
+	printf("doc name: %s \n", here_doc);
+	file = open(here_doc, O_WRONLY | O_TRUNC | O_CREAT, 0644); //generare nome in maniera dinamica
+	pid = fork();
+	if (pid == 0)
+	{
+		while (1)
+		{
+			str = readline("heredoc> ");
+			// if (!str)
+			// {
+			// 	free e exit
+			// }
+			if (ft_strncmp(str, delimiter, ft_strlen(delimiter)) == 0)
+				break ;
+			//caso con expander
+			write(file, str, ft_strlen(str));
+			write(file, &"\n", 1);
+			free(str);
+		}
+		exit(0);
+	}
+	waitpid(pid, NULL, 0);
+	close(file);
+//capire se é possibile richiamarsi la funzione gia
+//esistente senza riscrivere tutto cio che sta qui sotto
+	general->file_fd = open(here_doc, O_RDONLY);
+	if (general->file_fd == -1)
+	{
+		perror("Errore nell'apertura del file");
+		g_last_exit_status = 1; // 1 va bene?
+		exit(g_last_exit_status);
+	}
+	dup2(general->file_fd, STDIN_FILENO);
+	close(general->file_fd);
+	if (node->builtin > 0)
+	{
+		builtinmanager(node, general);
+		dup2(save_fd[0], STDIN_FILENO);
+		exit(g_last_exit_status);
+	}
+	execve(node->command2[0], node->command2, NULL);
+}
 
 int	re_out(t_lex *node, t_general *general, int *save_fd)
 {
@@ -90,6 +210,8 @@ int	execute_command(t_lex *node, t_general *general, int *save_fd)
 			re_out(node, general, save_fd);
 		else if (node->next->token == 4)
 			re_in(node, general, save_fd);
+ 		else if (node->next->token == 5) // 5 corrisponde a "<<"
+			re_here_doc(node, general, save_fd);
 	}
 	waitpid(pid, &status, 0);
 	wait(NULL);

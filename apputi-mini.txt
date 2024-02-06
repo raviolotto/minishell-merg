@@ -1,9 +1,40 @@
 appunti:
 
 capire se possiamo dichiarare globale sia su main che su .h
+
 segnali
+
 controllare corretion sheet
 
+calloc?
+
+REDIRECTION :
+1.
+capire se serve generare piu di un here_doc anche se non facciamo il bonus(&&). Esempio:
+lmorelli@e4r9p3:~/Desktop/mini5febb$ grep sasso << ok1 | grep ciao << ok2
+> sasso
+> ok1
+> ciao
+> ok2
+ciao
+
+2.
+expander in here_doc
+
+3.
+free e exit in here_doc
+
+4.
+quotes in < e <<
+
+5.
+controllare poi che < funzioni bene (non credo)
+
+6.
+cancellare here_doc creati
+
+7.
+< e << all inizio della linea di comando?
 ........                                                                                                                                                           .....................................
 .........                                                                                                                                                        ..  ...................................
 .............                                                                                                                                                        .. . ..............................

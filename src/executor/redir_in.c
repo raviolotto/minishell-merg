@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:52:02 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/02/05 15:54:43 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/06 19:09:12 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	re_in(t_lex *node, t_general *general, int *save_fd)
 	while (general->args[i] == ' ')
 		i++;
 	ft_printf("idx = %d\n", i);
+	ft_printf("args = %c\n", general->args[i + 1]);
 	general->file_fd = open(general->args + i, O_RDONLY);
 	if (general->file_fd == -1)
 	{
