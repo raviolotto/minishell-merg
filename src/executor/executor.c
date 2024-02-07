@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:49:11 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/02/06 20:52:04 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/07 15:22:13 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int	re_here_doc(t_lex *node, t_general *general, int *save_fd)
 	char	*delimiter;
 	char	*here_doc;
 	char	*str;
+	char	*expander_result;
 	int		i;
 	int		pid;
 	int		file;
@@ -111,16 +112,22 @@ int	re_here_doc(t_lex *node, t_general *general, int *save_fd)
 		while (1)
 		{
 			str = readline("heredoc> ");
-			// if (!str)
-			// {
-			// 	free e exit
-			// }
+			if (!str)
+			{
+				free(str);
+				g_last_exit_status = 1; // 1 va bene?
+				exit(g_last_exit_status);
+			}
 			if (ft_strncmp(str, delimiter, ft_strlen(delimiter)) == 0)
 				break ;
 			//caso con expander
-			write(file, str, ft_strlen(str));
+			expander_result = sostituisci_comando_dollaro(str, general);
+			printf("test expander: %s \n", expander_result);
+		
+			write(file, expander_result, ft_strlen(expander_result));
 			write(file, &"\n", 1);
 			free(str);
+			//free di expander result?
 		}
 		exit(0);
 	}

@@ -8,6 +8,8 @@ controllare corretion sheet
 
 calloc?
 
+exit status command not found = 127
+
 REDIRECTION :
 1.
 capire se serve generare piu di un here_doc anche se non facciamo il bonus(&&). Esempio:
@@ -19,10 +21,10 @@ lmorelli@e4r9p3:~/Desktop/mini5febb$ grep sasso << ok1 | grep ciao << ok2
 ciao
 
 2.
-expander in here_doc
+expander in here_doc     OK
 
 3.
-free e exit in here_doc
+free e exit in here_doc    OK
 
 4.
 quotes in < e <<
@@ -35,6 +37,9 @@ cancellare here_doc creati
 
 7.
 < e << all inizio della linea di comando?
+
+8.
+il file gere_doc va nascosto
 ........                                                                                                                                                           .....................................
 .........                                                                                                                                                        ..  ...................................
 .............                                                                                                                                                        .. . ..............................
