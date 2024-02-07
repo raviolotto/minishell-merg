@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 16:17:29 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/06 20:46:04 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/07 18:09:14 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	main(int ac, char **av, char **envp)
 		 	}*/
 			parser(&general);
 			expander(&general);
-/*			                      debug info
+//			                      debug info
 			tmp = general.lexer;
 			ft_printf(RED);
 			while (tmp != NULL)
@@ -101,7 +101,7 @@ int	main(int ac, char **av, char **envp)
 			ft_printf("fine scroll\n");
 			ft_printf("giusta redir == %d\n", find_correct_redir(&general));
 			ft_printf(RESET);
-			                     end debug info;*/
+//			                     end debug info;
 			executor(&general);
 			free_lex(general.lexer);
 			general.lexer = NULL;

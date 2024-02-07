@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:49:11 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/02/07 15:22:13 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/07 17:47:23 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,9 @@ int	re_here_doc(t_lex *node, t_general *general, int *save_fd)
 	i += 2;
 	while (general->args[i] == ' ')
 		i++;
+	if (handle_quotes(general->args + i) == 1)
+		exit(1); //che exit status ha "you didn't close the '""
+	ft_cd_with_quotes(general->args + i, general, i);
 	delimiter = general->args + i;
 	ft_printf("Delimitatore: %s\n", delimiter);
 	here_doc = create_new_doc_name();
@@ -120,10 +123,7 @@ int	re_here_doc(t_lex *node, t_general *general, int *save_fd)
 			}
 			if (ft_strncmp(str, delimiter, ft_strlen(delimiter)) == 0)
 				break ;
-			//caso con expander
 			expander_result = sostituisci_comando_dollaro(str, general);
-			printf("test expander: %s \n", expander_result);
-		
 			write(file, expander_result, ft_strlen(expander_result));
 			write(file, &"\n", 1);
 			free(str);
@@ -217,7 +217,7 @@ int	execute_command(t_lex *node, t_general *general, int *save_fd)
 			re_out(node, general, save_fd);
 		else if (node->next->token == 4)
 			re_in(node, general, save_fd);
- 		else if (node->next->token == 5) // 5 corrisponde a "<<"
+ 		else if (node->next->token == 5)
 			re_here_doc(node, general, save_fd);
 	}
 	waitpid(pid, &status, 0);

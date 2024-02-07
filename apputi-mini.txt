@@ -40,6 +40,9 @@ cancellare here_doc creati
 
 8.
 il file gere_doc va nascosto
+
+9.
+Gestione segnali durante here_doc
 ........                                                                                                                                                           .....................................
 .........                                                                                                                                                        ..  ...................................
 .............                                                                                                                                                        .. . ..............................
