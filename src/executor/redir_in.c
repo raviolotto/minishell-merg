@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:52:02 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/02/07 20:57:26 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/07 21:25:27 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	fd_redirin1(t_general *general)
 	index = find_redir_in(general);
 	file =  0;
 	if (index == -1)
-		return (1); //non esistono redir in;
+		return (-1); //non esistono redir in;
 	while (node != NULL)
 	{
 		if(node->token == 4)
@@ -61,7 +61,7 @@ int	fd_redirin1(t_general *general)
 			{
 				ft_putstr_fd("Errore nell'apertura del file", 2);
 				g_last_exit_status = 1;
-				return (1); //errore
+				return (-1); //errore
 			}
 			if (index == node->i)
 				general->input_fd = file;
@@ -70,7 +70,7 @@ int	fd_redirin1(t_general *general)
 		}
 		node = node->next;
 	}
-	return (0);
+	return (index);
 }
 
 

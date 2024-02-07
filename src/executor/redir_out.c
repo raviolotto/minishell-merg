@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:29:54 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/07 20:39:33 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/07 21:33:17 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,36 +91,15 @@ int	re_dir_status(int index, t_general *general)
 		return (2);
 }
 
-// void	open_fd(t_general *general, int i)
-// {
-// 	t_lex	*node;
-// 	int		file;
-
-// 	node = general->lexer;
-// 	while(node != NULL)
-// 	{
-// 		if(node->token == 2)
-// 		{
-// 			file = open(node->command, O_WRONLY | O_CREAT | O_TRUNC, 0777);
-// 				if(i == node->i)
-// 				{
-// 					general->file_fd = file;
-// 					return ;
-// 				}
-// 			close (file);
-// 		}
-// 		else if(node->token == 3)
-// 		{
-// 			file = open(node->command, O_WRONLY | O_CREAT | O_APPEND, 0777);
-// 			if(i == node->i)
-// 				{
-// 					general->file_fd = file;
-// 					return ;
-// 				}
-// 			close (file);
-// 		}
-// 		node = node->next;
-// 	}
-// }
-
-//NON ELIMINARE
+int	re_out(t_lex *node, t_general *general, int *save_fd)
+{
+	dup2(general->file_fd, STDOUT_FILENO);
+	close(general->file_fd);
+	if (node->builtin > 0)
+	{
+		builtinmanager(node, general);
+		dup2(save_fd[1], STDOUT_FILENO);
+		exit (g_last_exit_status);
+	}
+	execve(node->command2[0], node->command2, NULL);
+}
