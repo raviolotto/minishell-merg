@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:16:18 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/06 20:45:55 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/07 19:35:29 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_general
 	char			**path;
 	struct s_lex	*lexer;
 	int				file_fd;
+	int				input_fd;
 	int				o_flag;
 	int				save_exit_status;
 	int				flag_quotes[1000];

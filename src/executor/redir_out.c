@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:29:54 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/03 20:47:30 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/07 20:39:33 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	open_fd(t_general *general, int i)
 		else if (node->token == 3)
 		{
 			file = open(node->command, O_WRONLY | O_CREAT | O_APPEND, 0777);
+			ft_printf("%d\n", file);
 			if (i == node->i)
 				general->file_fd = file;
 			else

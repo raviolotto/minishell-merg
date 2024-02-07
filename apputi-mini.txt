@@ -12,34 +12,28 @@ exit status command not found = 127
 
 REDIRECTION :
 1.
-capire se serve generare piu di un here_doc anche se non facciamo il bonus(&&). Esempio:
-lmorelli@e4r9p3:~/Desktop/mini5febb$ grep sasso << ok1 | grep ciao << ok2
-> sasso
-> ok1
-> ciao
-> ok2
-ciao
+controllare poi che < funzioni bene (non credo)------->OK
 
 2.
-expander in here_doc     OK
+doppie redirection input 
 
 3.
-free e exit in here_doc    OK
-
-4.
 quotes in < e <<
 
+4.
+expander in here_doc     OK
+
 5.
-controllare poi che < funzioni bene (non credo)
+cancellare here_doc creati
 
 6.
-cancellare here_doc creati
+free e exit in here_doc    OK
 
 7.
 < e << all inizio della linea di comando?
 
 8.
-il file gere_doc va nascosto
+il file here_doc va nascosto
 
 9.
 Gestione segnali durante here_doc

@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:49:11 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/02/07 17:47:23 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/07 21:04:16 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,10 +215,19 @@ int	execute_command(t_lex *node, t_general *general, int *save_fd)
 			piping(fd, save_fd, node, general);
 		else if (node->next->token == 2 || node->next->token == 3)
 			re_out(node, general, save_fd);
-		else if (node->next->token == 4)
-			re_in(node, general, save_fd);
- 		else if (node->next->token == 5)
-			re_here_doc(node, general, save_fd);
+		else
+		{
+			if (node->builtin == 1 || node->builtin == 3 || node->builtin == 6)
+			{
+				builtinmanager(node, general);
+				exit (g_last_exit_status);
+			}
+			execve(node->command2[0], node->command2, NULL);
+		}	
+		// else if (node->next->token == 4)
+		// 	re_in(node, general, save_fd);
+ 		// else if (node->next->token == 5)
+		// 	re_here_doc(node, general, save_fd);
 	}
 	waitpid(pid, &status, 0);
 	wait(NULL);
@@ -244,6 +253,11 @@ void	executor(t_general *general)
 	general->o_flag = re_dir_status(open_fd(general,
 				find_correct_redir(general)), general);
 	tmp = general->lexer;
+	if (fd_redirin1(general) == 0)
+	{
+		dup2(general->input_fd, STDIN_FILENO);
+		close(general->input_fd);
+	}	
 	while (tmp)
 	{
 		if (tmp->token == 0)
