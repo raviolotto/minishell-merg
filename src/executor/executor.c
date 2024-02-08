@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:49:11 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/02/08 23:10:23 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/08 23:22:47 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,23 @@
 
 int	piping(int *fd, int *save_fd, t_lex *node, t_general *general)
 {
-	if (node->next && node->next->token == 1 && )
+	if (node->next && node->next->token == 1 && node->next->pipe_status == 0)
 	{
 		dup2(fd[1], STDOUT_FILENO);
+		close(fd[1]);
+		close(fd[0]);
+	}
+	else if (node->next && node->next->token == 1 && node->next->pipe_status == 1)
+	{
+		dup2(fd[0], STDIN_FILENO);
+		close(fd[1]);
+		close(fd[0]);
+		pipe(fd);
+		dup2(fd[1], STDOUT_FILENO);
+	}
+	else if (node->next && node->next->token == 1 && node->next->pipe_status == 2)
+	{
+		dup2(fd[0], STDIN_FILENO);
 		close(fd[1]);
 		close(fd[0]);
 	}
@@ -71,13 +85,13 @@ int	execute_command(t_lex *node, t_general *general, int *save_fd)
 			execve(node->command2[0], node->command2, NULL);
 		}
 	}
-	waitpid(pid, &status, 0);
-	if (node->next && node->next->token == 1)
-	{
-		dup2(fd[0], STDIN_FILENO);
-		close(fd[0]);
-		close(fd[1]);
-	}
+	// waitpid(pid, &status, 0);
+	// if (node->next && node->next->token == 1)
+	// {
+	// 	dup2(fd[0], STDIN_FILENO);
+	// 	close(fd[0]);
+	// 	close(fd[1]);
+	// }
 	return (WIFEXITED(status) && WEXITSTATUS(status));
 }
 
@@ -120,7 +134,7 @@ void	executor(t_general *general)
 	dup2(save_fd[1], STDOUT_FILENO);
 	close(save_fd[0]);
 	close(save_fd[1]);
-	while(waitpid(-1, NULL, 0))
-	{}
+	// while(waitpid(-1, NULL, 0))
+	waitpid(-1, NULL, 0);
 	general->save_exit_status = g_last_exit_status;
 }
