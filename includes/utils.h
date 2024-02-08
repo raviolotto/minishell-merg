@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:44:08 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/08 15:37:45 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/08 19:32:37 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ char	*cleaner(char *str);
 char	*cleaner(char *str);
 char	**matrix_dup(char **matrix);
 char	*ft_strjoin2(char *s1, char *s2);
+int		is_whitespace_input(const char *str);
 
 #endif

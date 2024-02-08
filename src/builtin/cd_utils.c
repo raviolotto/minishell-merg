@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 14:13:40 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/01 15:39:18 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/02/08 20:58:47 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ft_new_pwd(t_general *general)
 	new_directory = ft_strjoin("=", current_directory);
 	my_setenv("PWD", new_directory, &(general->envp2));
 	my_setenv("PWD", new_directory, &(general->enexp));
+	free(new_directory);
 }
 
 void	ft_old_pwd(t_general *general, char *old_dir)
@@ -31,6 +32,7 @@ void	ft_old_pwd(t_general *general, char *old_dir)
 	old_directory = ft_strjoin("=", old_dir);
 	my_setenv("OLDPWD", old_directory, &(general->envp2));
 	my_setenv("OLDPWD", old_directory, &(general->enexp));
+	free(old_directory);
 }
 
 char	*ft_home_env(char **env)

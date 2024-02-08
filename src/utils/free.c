@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:01:40 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/31 14:13:09 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/02/08 20:46:48 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ void	free_and_exit(int exit_n, t_general *general)
 		free_general(general);
 		free_lex(general->lexer);
 	}
+	clear_history();
 	exit(exit_n);
 }

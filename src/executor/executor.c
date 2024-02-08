@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:49:11 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/02/08 18:27:33 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/08 23:10:23 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	piping(int *fd, int *save_fd, t_lex *node, t_general *general)
 {
-	if (node->next && node->next->token == 1)
+	if (node->next && node->next->token == 1 && )
 	{
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[1]);
@@ -69,10 +69,9 @@ int	execute_command(t_lex *node, t_general *general, int *save_fd)
 				exit (g_last_exit_status);
 			}
 			execve(node->command2[0], node->command2, NULL);
-		}	
+		}
 	}
 	waitpid(pid, &status, 0);
-	wait(NULL);
 	if (node->next && node->next->token == 1)
 	{
 		dup2(fd[0], STDIN_FILENO);
@@ -104,7 +103,7 @@ void	executor(t_general *general)
 		dup2(general->input_fd, STDIN_FILENO);
 		close(general->input_fd);
 	}
-	else if((index_hd > index_in && index_hd > -1))
+	else if ((index_hd > index_in && index_hd > -1))
 	{
 		dup2(general->hd_fd, STDIN_FILENO);
 		close(general->hd_fd);
@@ -115,9 +114,13 @@ void	executor(t_general *general)
 			g_last_exit_status = execute_command(tmp, general, save_fd);
 		tmp = tmp->next;
 	}
+	//mettilo qua
+	//ma in che while
 	dup2(save_fd[0], STDIN_FILENO);
 	dup2(save_fd[1], STDOUT_FILENO);
 	close(save_fd[0]);
 	close(save_fd[1]);
+	while(waitpid(-1, NULL, 0))
+	{}
 	general->save_exit_status = g_last_exit_status;
 }

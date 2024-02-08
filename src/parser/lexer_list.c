@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 11:44:18 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/03 20:55:26 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/08 21:10:29 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ t_lex	*noding(t_general *general)
 	return (tmp);
 }
 
+//void	menage_token2(t_lex *tmp, int *p, )
+
 int	menage_token(char *str, int i, t_general *general, int *p)
 {
 	t_lex	*tmp;
@@ -103,7 +105,7 @@ int	menage_token(char *str, int i, t_general *general, int *p)
 		if (what_token(str, i + j) != 0 || str[i + j] == '\0')
 		{
 			g_last_exit_status = 2;
-			ft_printf("pars error\n");
+			ft_printf("parse error\n");
 		}
 		while (what_token(str, i + j) == 0
 			&& str[i + j] != '\0' && iswhite(str[i + j]) == 1)

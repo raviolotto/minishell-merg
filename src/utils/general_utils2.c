@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   general_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:14:37 by frdal-sa          #+#    #+#             */
-/*   Updated: 2024/02/01 19:21:47 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/02/08 19:32:21 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/mini_shell.h"
+
+int	is_whitespace_input(const char *str)
+{
+	while (*str)
+	{
+		if (iswhite(*str))
+			return (0);
+		str++;
+	}
+	return (1);
+}
 
 int	matrixlen(char **matrix)
 {

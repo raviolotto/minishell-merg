@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:31:51 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/08 16:25:40 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/08 20:49:09 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,3 @@
 extern int	g_last_exit_status;
 
 #endif
-
-//se metto una sola pipe il pipe status é due dovrebbe essere 0

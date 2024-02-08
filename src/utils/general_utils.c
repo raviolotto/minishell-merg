@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:33:01 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/08 18:08:10 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/08 19:32:09 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	print_export(char **matrix)
 	}
 	return ;
 }
-//questa funzione deve essere nello stesso file di minisplit
 
 static size_t	ft_counter(const char *s, char c)
 {
