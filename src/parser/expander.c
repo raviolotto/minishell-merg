@@ -3,36 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 14:11:22 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/01 17:35:26 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/02/08 18:28:42 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/mini_shell.h"
 
-//da controllare le allocazioni di memoria vegono liberate
 char	*sostituisci_comando_dollaro(char *input, t_general *general)
 {
-	char	*posizione;
 	char	*fine_comando;
 	char	*comando;
 	char	*updated_input;
+	char	*parte_prima;
+	char	*second_part;
 
-	posizione = input;
 	while (1)
 	{
-		posizione = find_substring_position(posizione, "$");
-		if (posizione == NULL)
+		if (ft_strchr(input, '$') == NULL)
 			break ;
-		fine_comando = find_fine_comando(posizione);
-		comando = ft_substr(posizione, 0, fine_comando - posizione);
-		updated_input = ft_strjoin(calcolate_parte_prima(input, posizione),
+		fine_comando = find_fine_comando(ft_strchr(input, '$'));
+		comando = ft_substr(ft_strchr(input, '$'), 0,
+				fine_comando - ft_strchr(input, '$'));
+		updated_input = ft_strjoin(calcolate_parte_prima(&parte_prima, input,
+					ft_strchr(input, '$')),
 				find_sostituzione(comando, general));
-		updated_input = ft_strjoin(updated_input,
-				calcolate_parte_dopo(fine_comando));
+		updated_input = ft_strjoin2(updated_input,
+				calcolate_parte_dopo(&second_part, fine_comando));
 		free(comando);
+		free(parte_prima);
+		free(second_part);
+		free(input);
 		return (sostituisci_comando_dollaro(updated_input, general));
 	}
 	return (input);

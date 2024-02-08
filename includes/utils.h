@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:44:08 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/01 19:27:29 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/02/08 15:37:45 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ char	**matrix_dup(char **matrix);
 char	*cleaner(char *str);
 char	*cleaner(char *str);
 char	**matrix_dup(char **matrix);
+char	*ft_strjoin2(char *s1, char *s2);
 
 #endif

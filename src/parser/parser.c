@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:23:21 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/07 18:20:39 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/08 18:13:21 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ int	lexer(t_general *general)
 	{
 		while (iswhite(general->args[i]) == 0)
 			i++;
-		if(general->args[i] == '\0')
-			break;
+		if (general->args[i] == '\0')
+			break ;
 		i += menage_token(general->args, i, general, &p);
 	}
 	pipe_status(general);

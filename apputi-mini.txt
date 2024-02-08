@@ -1,12 +1,16 @@
 appunti:
 
-capire se possiamo dichiarare globale sia su main che su .h
-
 controllare corretion sheet
 
-calloc?
+capire se possiamo dichiarare globale sia su main che su .h
+
+cat|cat|cat|
 
 exit status command not found = 127
+
+leaks
+
+norma
 
 REDIRECTION :
 1.
@@ -116,66 +120,21 @@ Gestione segnali durante here_doc
 ***,,,,*,,,,,,,,,,/@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@/#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&*,
 ***,,,,**,,,,,,,,%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&,,.(#/(/#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-leaks
+//			                      debug info
+			// tmp = general.lexer;
+			// ft_printf(RED);
+			// while (tmp != NULL)
+			// {
+			// 	printf("token %i\n", tmp->token);
+			// 	printf("pipe steatus %i\n", tmp->pipe_status);
+			// 	printf("command %s\n", tmp->command);
+			// 	printf("builtin == %i\n", tmp->builtin);
+			// 	print_matrix(tmp->command2);
+			// 	printf("questo é index == %d\n", tmp->i);
+			// 	printf("\n");
+			// 	tmp = tmp->next;
+			// }
+			// ft_printf("fine scroll\n");
+			// ft_printf("giusta redir == %d\n", find_correct_redir(&general));
+			// ft_printf(RESET);
+//			                     end debug info;

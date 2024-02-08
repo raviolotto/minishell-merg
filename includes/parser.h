@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:35:26 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/07 15:03:02 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/08 18:12:00 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ void	show_pathfinder_error(char *command);
 void	manage_memory_error(void);
 char	*find_substring_position(const char *str, const char *sub);
 char	*find_sostituzione(char *comando, t_general *general);
-char	*calcolate_parte_prima(char *input, char *posizione);
-char	*calcolate_parte_dopo(char *fine_comando);
+char	*calcolate_parte_prima(char **parte_prima,
+			char *input, char *posizione);
+char	*calcolate_parte_dopo(char **second_part, char *fine_comando);
 char	*find_fine_comando(char *posizione);
 t_lex	*new_lex_node(void);
 
 char	*sostituisci_comando_dollaro(char *input, t_general *general);
-
 
 #endif

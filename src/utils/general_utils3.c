@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general_utils3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:25:03 by frdal-sa          #+#    #+#             */
-/*   Updated: 2024/02/01 19:26:56 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/02/08 17:39:30 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,29 @@ void	index_list(t_general *general)
 		tmp->i = i++;
 		tmp = tmp->next;
 	}
+}
+
+char	*ft_strjoin2(char *s1, char *s2)
+{
+	size_t	size;
+	int		i;
+	size_t	j;
+	char	*str;
+
+	if (!s1 || !s2)
+		return (NULL);
+	size = (ft_strlen(s1)) + (ft_strlen(s2)) + 1;
+	str = malloc(sizeof(char) * size);
+	if (!str)
+		return (NULL);
+	i = -1;
+	j = 0;
+	while (s1[++i])
+		str[j++] = s1[i];
+	i = -1;
+	while (s2[++i])
+		str[j++] = s2[i];
+	str[j] = '\0';
+	free(s1);
+	return (str);
 }

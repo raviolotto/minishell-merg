@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:25:59 by frdal-sa          #+#    #+#             */
-/*   Updated: 2024/02/08 14:33:32 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/08 18:26:40 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	pathpiker(t_general *general)
 		return ;
 	}
 	if (general->path != NULL)
-			free_matrix(general->path);
+		free_matrix(general->path);
 	general->path = ft_split((general->envp2[index] + 5), ':');
 }
 

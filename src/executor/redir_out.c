@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:29:54 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/07 21:33:17 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/08 18:09:55 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int	open_fd(t_general *general, int i)
 		else if (node->token == 3)
 		{
 			file = open(node->command, O_WRONLY | O_CREAT | O_APPEND, 0777);
-			ft_printf("%d\n", file);
 			if (i == node->i)
 				general->file_fd = file;
 			else
@@ -71,9 +70,6 @@ int	open_fd(t_general *general, int i)
 	return (i);
 }
 
-//return 1 se la redirection giusta é prima di 
-//una pipe 2 se dopo o non sono presenti pipe
-//-1 non ci sono redir
 int	re_dir_status(int index, t_general *general)
 {
 	t_lex	*tmp;

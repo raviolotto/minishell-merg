@@ -6,16 +6,11 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:49:11 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/02/07 22:24:00 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/08 18:27:33 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/mini_shell.h"
-
-
-
-
-
 
 int	piping(int *fd, int *save_fd, t_lex *node, t_general *general)
 {
@@ -75,10 +70,6 @@ int	execute_command(t_lex *node, t_general *general, int *save_fd)
 			}
 			execve(node->command2[0], node->command2, NULL);
 		}	
-		// else if (node->next->token == 4)
-		// 	re_in(node, general, save_fd);
- 		// else if (node->next->token == 5)
-		// 	re_here_doc(node, general, save_fd);
 	}
 	waitpid(pid, &status, 0);
 	wait(NULL);
@@ -108,7 +99,7 @@ void	executor(t_general *general)
 	tmp = general->lexer;
 	index_hd = hd_manager(general);
 	index_in = fd_redirin1(general);
-	if (index_in > index_hd && index_in > -1) // (index_in > index_hd)
+	if (index_in > index_hd && index_in > -1)
 	{
 		dup2(general->input_fd, STDIN_FILENO);
 		close(general->input_fd);
