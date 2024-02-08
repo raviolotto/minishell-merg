@@ -2,8 +2,6 @@ appunti:
 
 capire se possiamo dichiarare globale sia su main che su .h
 
-segnali
-
 controllare corretion sheet
 
 calloc?
@@ -15,25 +13,25 @@ REDIRECTION :
 controllare poi che < funzioni bene (non credo)------->OK
 
 2.
-doppie redirection input 
+doppie redirection input ------> OK
 
 3.
-quotes in < e <<
+quotes in < e <<    ---------->OK
 
 4.
-expander in here_doc     OK
+expander in here_doc -----> OK
 
 5.
-cancellare here_doc creati
+cancellare here_doc creati ------> OK
 
 6.
-free e exit in here_doc    OK
+free e exit in here_doc -------> OK
 
 7.
-< e << all inizio della linea di comando?
+< e << all inizio della linea di comando? ------> OK
 
 8.
-il file here_doc va nascosto
+il file here_doc va nascosto ---------> OK
 
 9.
 Gestione segnali durante here_doc
