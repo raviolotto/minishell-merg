@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 16:17:29 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/09 16:42:32 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/09 22:29:48 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ void	init(t_general *general, char **envp)
 
 void	handle_sigint(int sig)
 {
-	ft_printf(YELLOW"\nkitty shell>" RESET);
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	ft_printf("\n");
+	rl_redisplay();
 	g_last_exit_status = 130;
 }
 
@@ -40,24 +43,6 @@ void	core(t_general *general)
 {
 	parser(general);
 	expander(general);
-
-	t_lex *tmp = general->lexer;
-	ft_printf(RED);
-	while (tmp != NULL)
-	{
-		printf("token %i\n", tmp->token);
-		printf("pipe steatus %i\n", tmp->pipe_status);
-		printf("command %s\n", tmp->command);
-		printf("builtin == %i\n", tmp->builtin);
-		print_matrix(tmp->command2);
-		printf("questo é index == %d\n", tmp->i);
-		printf("\n");
-		tmp = tmp->next;
-	}
-	ft_printf("fine scroll\n");
-	ft_printf("giusta redir == %d\n", find_correct_redir(general));
-	ft_printf(RESET);
-
 	executor(general);
 	free_lex(general->lexer);
 	general->lexer = NULL;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:25:59 by frdal-sa          #+#    #+#             */
-/*   Updated: 2024/02/09 16:47:15 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/09 21:27:18 by jcardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ int	build_matrix(char *str, t_lex *node, t_general *general)
 	}
 	node->builtin = dumb_builtin_check(node->command2[0]);
 	if (node->builtin != 0)
+		return (0);
+	if (access(node->command2[0], F_OK | X_OK) == 0)
 		return (0);
 	tmp = pathfinder(node->command2[0], general->path);
 	if (tmp != NULL)

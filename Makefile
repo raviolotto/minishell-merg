@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+         #
+#    By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 18:22:29 by jcardina          #+#    #+#              #
-#    Updated: 2024/02/09 16:45:37 by lmorelli         ###   ########.fr        #
+#    Updated: 2024/02/09 22:26:20 by jcardina         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,13 +63,13 @@ $(NAME) : $(OBJ)
 clean:
 	make clean -C lib/libft
 	make clean -C lib/ft_printf
-	rm -f $(OBJ) $(OBJ_BONUS)
+	rm -f $(OBJ)
 	@echo "\033[33mno sauce\033[0m"
 
 fclean: clean
 	make fclean -C lib/libft
 	make fclean -C lib/ft_printf
-	rm -f $(NAME) $(NAME_BONUS)
+	rm -f $(NAME)
 	@echo "\033[33m& no name\033[0m"
 
 re: fclean all
