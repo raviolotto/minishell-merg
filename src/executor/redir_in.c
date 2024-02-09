@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:52:02 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/02/08 18:26:04 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/09 16:11:15 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	fd_redirin2(t_general *general, int index, t_lex *node)
 			file = open(node->command, O_RDONLY);
 			if (file < 0)
 			{
-				ft_putstr_fd("Errore nell'apertura del file", 2);
+				ft_putstr_fd("Error opening the file\n", 2);
 				g_last_exit_status = 1;
 				return (-1);
 			}

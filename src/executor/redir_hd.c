@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 21:34:56 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/02/08 15:27:43 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/09 16:15:23 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ delimited by end-of-file\n");
 			free(str);
 			break ;
 		}
-		expander_result = sostituisci_comando_dollaro(str, general);
+		expander_result = replace_dollar_command(str, general);
 		write(file, expander_result, ft_strlen(expander_result));
 		write(file, &"\n", 1);
 		free(str);

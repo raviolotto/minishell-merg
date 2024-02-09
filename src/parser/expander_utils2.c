@@ -6,47 +6,47 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:32:40 by frdal-sa          #+#    #+#             */
-/*   Updated: 2024/02/08 17:35:05 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/09 16:37:12 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/mini_shell.h"
 
-char	*calcolate_parte_prima(char **parte_prima, char *input, char *posizione)
+char	*calculate_first_part(char **first_part, char *input, char *position)
 {
 	int		len;
 
-	len = posizione - input;
-	*parte_prima = ft_substr(input, 0, len);
-	return (*parte_prima);
+	len = position - input;
+	*first_part = ft_substr(input, 0, len);
+	return (*first_part);
 }
 
-char	*calcolate_parte_dopo(char **second_part, char *fine_comando)
+char	*calculate_final_part(char **second_part, char *end_command)
 {
 	int		len;
 
-	len = strlen(fine_comando);
-	*second_part = ft_substr(fine_comando, 0, len);
+	len = strlen(end_command);
+	*second_part = ft_substr(end_command, 0, len);
 	return (*second_part);
 }
 
-char	*find_fine_comando(char *posizione)
+char	*find_end_command(char *position)
 {
-	char	*fine_comando;
+	char	*end_command;
 
-	fine_comando = posizione + ft_strlen("$");
-	while (*fine_comando != ' ' && *fine_comando != '\0'
-		&& *fine_comando != '\"' && *fine_comando != '$'
-		&& *fine_comando != '\'')
+	end_command = position + ft_strlen("$");
+	while (*end_command != ' ' && *end_command != '\0'
+		&& *end_command != '\"' && *end_command != '$'
+		&& *end_command != '\'')
 	{
-		if (*fine_comando == '?')
+		if (*end_command == '?')
 		{
-			if (*fine_comando + 1 == '\0')
-				return (fine_comando + 2);
+			if (*end_command + 1 == '\0')
+				return (end_command + 2);
 			else
-				return (fine_comando + 1);
+				return (end_command + 1);
 		}
-		fine_comando++;
+		end_command++;
 	}
-	return (fine_comando);
+	return (end_command);
 }

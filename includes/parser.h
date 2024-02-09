@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:35:26 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/08 18:12:00 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/09 16:39:14 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,19 @@ int		list_commander(t_general *general);
 int		menage_token(char *str, int i, t_general *general, int *p);
 int		quotes(char *str, int j);
 int		handle_quotes(char *word);
-int		confronta_sottostringhe(const char *str, const char *sub, size_t len);
+int		compare_substrings(const char *str, const char *sub, size_t len);
 void	lex_add_last(t_lex *head, t_lex *new);
 void	expander(t_general *general);
 void	show_quotes_error(char *word);
 void	show_pathfinder_error(char *command);
 void	manage_memory_error(void);
 char	*find_substring_position(const char *str, const char *sub);
-char	*find_sostituzione(char *comando, t_general *general);
-char	*calcolate_parte_prima(char **parte_prima,
-			char *input, char *posizione);
-char	*calcolate_parte_dopo(char **second_part, char *fine_comando);
-char	*find_fine_comando(char *posizione);
+char	*find_substitution(char *command, t_general *general);
+char	*calculate_first_part(char **first_part,
+			char *input, char *position);
+char	*calculate_final_part(char **second_part, char *end_command);
+char	*find_end_command(char *position);
+char	*replace_dollar_command(char *input, t_general *general);
 t_lex	*new_lex_node(void);
-
-char	*sostituisci_comando_dollaro(char *input, t_general *general);
 
 #endif

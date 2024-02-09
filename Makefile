@@ -6,7 +6,7 @@
 #    By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 18:22:29 by jcardina          #+#    #+#              #
-#    Updated: 2024/02/07 22:00:51 by lmorelli         ###   ########.fr        #
+#    Updated: 2024/02/09 16:45:37 by lmorelli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,15 +32,15 @@ src = \
 		src/parser/expander_utils2.c\
 		src/builtin/pwd.c\
 		src/builtin/env.c\
-		src/builtin/ft_myexport.c\
-		src/builtin/ft_myexport_utils.c\
-		src/builtin/ft_myunset.c\
+		src/builtin/export.c\
+		src/builtin/export_utils.c\
+		src/builtin/unset.c\
 		src/builtin/cd.c\
 		src/builtin/cd_utils.c\
 		src/builtin/cd_utils2.c\
 		src/builtin/builtins_utils.c\
-		src/builtin/ft_myecho.c\
-		src/builtin/ft_myexit.c\
+		src/builtin/echo.c\
+		src/builtin/exit.c\
 		src/executor/executor.c\
 		src/executor/executor_utils.c\
 		src/executor/redir_out.c\

@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 11:44:18 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/08 21:10:29 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/09 17:59:46 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,33 +34,6 @@ int	quotes(char *str, int j)
 	return (0);
 }
 
-int	pipe_status(t_general *general)
-{
-	t_lex	*tmp;
-	int		i;
-
-	tmp = general->lexer;
-	i = 0;
-	while (tmp)
-	{
-		if (tmp->token == 1)
-			i++;
-		tmp = tmp->next;
-	}
-	if (i == 1)
-		return (0);
-	tmp = general->lexer;
-	while (tmp)
-	{
-		if (tmp->token == 1)
-			i--;
-		if (i == 0 && tmp->token == 1)
-			tmp->pipe_status = 2;
-		tmp = tmp->next;
-	}
-	return (0);
-}
-
 t_lex	*noding(t_general *general)
 {
 	t_lex	*tmp;
@@ -78,7 +51,37 @@ t_lex	*noding(t_general *general)
 	return (tmp);
 }
 
-//void	menage_token2(t_lex *tmp, int *p, )
+int	menage_token3(t_lex	*tmp, char *str, int i, int j)
+{
+	while (what_token(str, i + j) == 0 && str[i + j] != '\0')
+	{
+		if (str[i + j] == 34 || str[i + j] == 39)
+			j += quotes(str, j);
+		j++;
+	}
+	tmp->command = ft_substr(str, i, j);
+	return (j);
+}
+
+int	menage_token2(t_lex *tmp, char *str, int i, int j)
+{
+	while (iswhite(str[i + j]) == 0)
+		j++;
+	if (what_token(str, i + j) != 0 || str[i + j] == '\0')
+	{
+		g_last_exit_status = 2;
+		ft_printf("parse error\n");
+	}
+	while (what_token(str, i + j) == 0
+		&& str[i + j] != '\0' && iswhite(str[i + j]) == 1)
+	{
+		if (str[i + j] == 34 || str[i + j] == 39)
+			j += quotes(str, j);
+		j++;
+	}
+	tmp->command = ft_substr(str, i, j);
+	return (j);
+}
 
 int	menage_token(char *str, int i, t_general *general, int *p)
 {
@@ -99,31 +102,8 @@ int	menage_token(char *str, int i, t_general *general, int *p)
 	else if (tmp->token == 3 || tmp->token == 5)
 		j++;
 	if (tmp->token != 0 && tmp->token != 1)
-	{
-		while (iswhite(str[i + j]) == 0)
-			j++;
-		if (what_token(str, i + j) != 0 || str[i + j] == '\0')
-		{
-			g_last_exit_status = 2;
-			ft_printf("parse error\n");
-		}
-		while (what_token(str, i + j) == 0
-			&& str[i + j] != '\0' && iswhite(str[i + j]) == 1)
-		{
-			if (str[i + j] == 34 || str[i + j] == 39)
-				j += quotes(str, j);
-			j++;
-		}
-	}
+		j = menage_token2(tmp, str, i, j);
 	else
-	{
-		while (what_token(str, i + j) == 0 && str[i + j] != '\0')
-		{
-			if (str[i + j] == 34 || str[i + j] == 39)
-				j += quotes(str, j);
-			j++;
-		}
-	}
-	tmp->command = ft_substr(str, i, j);
+		j = menage_token3(tmp, str, i, j);
 	return (j);
 }

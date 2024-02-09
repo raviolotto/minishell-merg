@@ -3,14 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_list_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 12:12:07 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/03 13:34:55 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/02/09 17:59:26 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/mini_shell.h"
+
+int	pipe_status(t_general *general)
+{
+	t_lex	*tmp;
+	int		i;
+
+	tmp = general->lexer;
+	i = 0;
+	while (tmp)
+	{
+		if (tmp->token == 1)
+			i++;
+		tmp = tmp->next;
+	}
+	if (i == 1)
+		return (0);
+	tmp = general->lexer;
+	while (tmp)
+	{
+		if (tmp->token == 1)
+			i--;
+		if (i == 0 && tmp->token == 1)
+			tmp->pipe_status = 2;
+		tmp = tmp->next;
+	}
+	return (0);
+}
 
 t_lex	*lex_last(t_lex *head)
 {

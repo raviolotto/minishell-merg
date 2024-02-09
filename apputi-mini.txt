@@ -1,16 +1,32 @@
-appunti:
-
 controllare corretion sheet
-
-capire se possiamo dichiarare globale sia su main che su .h
-
-cat|cat|cat|
 
 exit status command not found = 127
 
-leaks
+cat|cat|cat|
+
+Gestione segnali durante here_doc
 
 norma
+
+IN KITTY:
+
+ls > file.txt | grep src < file.txt
+/usr/bin/grep: input file '(standard input)' is also the output
+
+IN BASH:
+
+e4r10p3% ls > file.txt | grep src < file.txt
+src
+src
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+capire se possiamo dichiarare globale sia su main che su .h --------> OK
+
+leaks ---------> OK
+
+cambiare nomi a funzioni e variabili ----------> OK
+
 
 REDIRECTION :
 1.
@@ -37,8 +53,6 @@ free e exit in here_doc -------> OK
 8.
 il file here_doc va nascosto ---------> OK
 
-9.
-Gestione segnali durante here_doc
 ........                                                                                                                                                           .....................................
 .........                                                                                                                                                        ..  ...................................
 .............                                                                                                                                                        .. . ..............................

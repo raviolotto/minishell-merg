@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:25:59 by frdal-sa          #+#    #+#             */
-/*   Updated: 2024/02/08 18:26:40 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/09 16:47:15 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	build_matrix(char *str, t_lex *node, t_general *general)
 	{
 		if (handle_quotes(node->command2[i]) == 1)
 			return (1);
-		ft_cd_with_quotes(node->command2[i], general, i);
+		quotes_manager(node->command2[i], general, i);
 		i++;
 	}
 	node->builtin = dumb_builtin_check(node->command2[0]);

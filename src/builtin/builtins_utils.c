@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:15:36 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/30 16:48:03 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/02/09 16:47:06 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	ft_rm_quotes(char *str, int idx_double, t_general *general, int index)
 	return (1);
 }
 
-int	ft_cd_with_quotes(char *str, t_general *general, int index)
+int	quotes_manager(char *str, t_general *general, int index)
 {
 	int	s_quote;
 	int	d_quotes;

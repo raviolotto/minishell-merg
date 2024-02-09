@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 16:17:29 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/08 22:36:39 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/09 16:42:32 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,24 @@ void	core(t_general *general)
 {
 	parser(general);
 	expander(general);
+
 	t_lex *tmp = general->lexer;
-			ft_printf(RED);
-			while (tmp != NULL)
-			{
-				printf("token %i\n", tmp->token);
-				printf("pipe steatus %i\n", tmp->pipe_status);
-				printf("command %s\n", tmp->command);
-				printf("builtin == %i\n", tmp->builtin);
-				print_matrix(tmp->command2);
-				printf("questo é index == %d\n", tmp->i);
-				printf("\n");
-				tmp = tmp->next;
-			}
-			ft_printf("fine scroll\n");
-			ft_printf("giusta redir == %d\n", find_correct_redir(general));
-			ft_printf(RESET);
+	ft_printf(RED);
+	while (tmp != NULL)
+	{
+		printf("token %i\n", tmp->token);
+		printf("pipe steatus %i\n", tmp->pipe_status);
+		printf("command %s\n", tmp->command);
+		printf("builtin == %i\n", tmp->builtin);
+		print_matrix(tmp->command2);
+		printf("questo é index == %d\n", tmp->i);
+		printf("\n");
+		tmp = tmp->next;
+	}
+	ft_printf("fine scroll\n");
+	ft_printf("giusta redir == %d\n", find_correct_redir(general));
+	ft_printf(RESET);
+
 	executor(general);
 	free_lex(general->lexer);
 	general->lexer = NULL;
@@ -67,7 +69,7 @@ int	main(int ac, char **av, char **envp)
 	t_lex		*tmp;
 
 	if (ac != 1)
-		return (printf(RED "error dumb input\n" RESET), 0);
+		return (printf(RED "Error dumb input\n" RESET), 0);
 	signal(SIGINT, handle_sigint);
 	signal(SIGTERM, handle_sigquit);
 	signal(SIGQUIT, handle_sigquit);
