@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structure.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:16:18 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/08 22:49:11 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/14 18:38:17 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ typedef struct s_lex
 
 typedef struct s_general
 {
-	char			*args;
-	char			**envp2;
-	char			**enexp;
+	char			*user_input;
+	char			**environment_variables;
+	char			**expanded_environment;
 	char			**path;
 	struct s_lex	*lexer;
 	int				file_fd;

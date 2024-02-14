@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:35:26 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/09 16:39:14 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/14 18:57:23 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		parser(t_general *general);
 int		what_token(char *str, int i);
 int		pipe_status(t_general *general);
 int		list_commander(t_general *general);
-int		menage_token(char *str, int i, t_general *general, int *p);
+int		manage_token(char *str, int i, t_general *general, int *p);
 int		quotes(char *str, int j);
 int		handle_quotes(char *word);
 int		compare_substrings(const char *str, const char *sub, size_t len);

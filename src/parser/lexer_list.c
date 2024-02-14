@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 11:44:18 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/09 17:59:46 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/14 18:57:23 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	menage_token2(t_lex *tmp, char *str, int i, int j)
 	return (j);
 }
 
-int	menage_token(char *str, int i, t_general *general, int *p)
+int	manage_token(char *str, int i, t_general *general, int *p)
 {
 	t_lex	*tmp;
 	int		j;

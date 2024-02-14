@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:01:40 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/08 20:46:48 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/14 18:27:54 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	free_lex(t_lex *node)
 
 void	free_general(t_general *general)
 {
-	free_matrix(general->envp2);
-	free_matrix(general->enexp);
+	free_matrix(general->environment_variables);
+	free_matrix(general->expanded_environment);
 	if (general->path != NULL)
 		free_matrix(general->path);
 }

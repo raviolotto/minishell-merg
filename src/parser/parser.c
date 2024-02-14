@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:23:21 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/08 18:13:21 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/14 18:58:08 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ int	lexer(t_general *general)
 
 	i = 0;
 	p = 0;
-	while (general->args[i] != '\0')
+	while (general->user_input[i] != '\0')
 	{
-		while (iswhite(general->args[i]) == 0)
+		while (iswhite(general->user_input[i]) == 0)
 			i++;
-		if (general->args[i] == '\0')
+		if (general->user_input[i] == '\0')
 			break ;
-		i += menage_token(general->args, i, general, &p);
+		i += manage_token(general->user_input, i, general, &p);
 	}
 	pipe_status(general);
 	return (i);

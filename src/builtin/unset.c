@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_myunset.c                                       :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 14:28:33 by jcardina          #+#    #+#             */
-/*   Updated: 2024/01/17 16:26:04 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/02/14 18:27:54 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,26 @@ void	ft_unsetenv(t_general *general, t_lex *node)
 	int		index;
 	char	**envtmp;
 
-	index = my_setenv(node->command2[1], NULL, &(general->envp2));
+	index = my_setenv(node->command2[1], NULL, &(general->environment_variables));
 	if (index == -1)
 		return ;
-	envtmp = ft_calloc(matrixlen(general->envp2), sizeof(char *));
+	envtmp = ft_calloc(matrixlen(general->environment_variables), sizeof(char *));
 	i = 0;
 	j = 0;
-	while (general->envp2[i])
+	while (general->environment_variables[i])
 	{
 		if (i == index)
 			i++;
-		if (general->envp2[i])
+		if (general->environment_variables[i])
 		{
-			envtmp[j] = ft_strdup(general->envp2[i]);
+			envtmp[j] = ft_strdup(general->environment_variables[i]);
 			i++;
 		}
 		j++;
 	}
 	envtmp[j] = NULL;
-	free_matrix(general->envp2);
-	general->envp2 = envtmp;
+	free_matrix(general->environment_variables);
+	general->environment_variables = envtmp;
 }
 
 void	ft_unsetexp(t_general *general, t_lex *node)
@@ -48,26 +48,26 @@ void	ft_unsetexp(t_general *general, t_lex *node)
 	int		index;
 	char	**envtmp;
 
-	index = my_setenv(node->command2[1], NULL, &(general->enexp));
+	index = my_setenv(node->command2[1], NULL, &(general->expanded_environment));
 	if (index == -1)
 		return ;
-	envtmp = ft_calloc(matrixlen(general->enexp), sizeof(char *));
+	envtmp = ft_calloc(matrixlen(general->expanded_environment), sizeof(char *));
 	i = 0;
 	j = 0;
-	while (general->enexp[i])
+	while (general->expanded_environment[i])
 	{
 		if (i == index)
 			i++;
-		if (general->enexp[i])
+		if (general->expanded_environment[i])
 		{
-			envtmp[j] = ft_strdup(general->enexp[i]);
+			envtmp[j] = ft_strdup(general->expanded_environment[i]);
 			i++;
 		}
 		j++;
 	}
 	envtmp[j] = NULL;
-	free_matrix(general->enexp);
-	general->enexp = envtmp;
+	free_matrix(general->expanded_environment);
+	general->expanded_environment = envtmp;
 }
 
 void	handle_unset(t_general *general, t_lex *node)

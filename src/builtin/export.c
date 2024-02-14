@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_myexport.c                                      :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:51:44 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/02/01 15:34:31 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/02/14 18:27:54 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,10 @@ void	handle_export(t_general *general, t_lex *node)
 
 	i = 1;
 	if (node->command2[i] == NULL)
-		print_export(general->enexp);
+		print_export(general->expanded_environment);
 	while (node->command2[i])
 	{
-		my_export(node->command2[i], &(general->envp2), &(general->enexp));
+		my_export(node->command2[i], &(general->environment_variables), &(general->expanded_environment));
 		i++;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 14:13:40 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/08 20:58:47 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/14 18:27:54 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	ft_new_pwd(t_general *general)
 	if (getcwd(current_directory, PATH_MAX) == NULL)
 		return ;
 	new_directory = ft_strjoin("=", current_directory);
-	my_setenv("PWD", new_directory, &(general->envp2));
-	my_setenv("PWD", new_directory, &(general->enexp));
+	my_setenv("PWD", new_directory, &(general->environment_variables));
+	my_setenv("PWD", new_directory, &(general->expanded_environment));
 	free(new_directory);
 }
 
@@ -30,8 +30,8 @@ void	ft_old_pwd(t_general *general, char *old_dir)
 	char	*old_directory;
 
 	old_directory = ft_strjoin("=", old_dir);
-	my_setenv("OLDPWD", old_directory, &(general->envp2));
-	my_setenv("OLDPWD", old_directory, &(general->enexp));
+	my_setenv("OLDPWD", old_directory, &(general->environment_variables));
+	my_setenv("OLDPWD", old_directory, &(general->expanded_environment));
 	free(old_directory);
 }
 

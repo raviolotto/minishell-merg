@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:32:40 by frdal-sa          #+#    #+#             */
-/*   Updated: 2024/02/09 16:39:20 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/14 18:27:43 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ char	*find_substitution(char *command, t_general *general)
 	}
 	else
 	{
-		index = my_setenv(command + 1, NULL, &general->envp2);
+		index = my_setenv(command + 1, NULL, &general->environment_variables);
 		if (index >= 0)
 		{
-			replacement = ft_strchr(general->envp2[index], '=') + 1;
+			replacement = ft_strchr(general->environment_variables[index], '=') + 1;
 			return (replacement);
 		}
 		else

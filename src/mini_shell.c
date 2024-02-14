@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 16:17:29 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/09 22:29:48 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/02/14 19:06:15 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	g_last_exit_status;
 
-void	init(t_general *general, char **envp)
+void	init(t_general *general, char **environment_variables)
 {
 	general->lexer = NULL;
-	general->envp2 = matrix_dup(envp);
-	general->enexp = matrix_dup(general->envp2);
+	general->environment_variables = matrix_dup(environment_variables);
+	general->expanded_environment = matrix_dup(general->environment_variables);
 	general->path = NULL;
 	general->save_exit_status = 0;
 	printf(PINK"\n%s\n", INTRO);
@@ -27,7 +27,7 @@ void	init(t_general *general, char **envp)
 
 void	handle_sigint(int sig)
 {
-	rl_replace_line("", 0);
+	//rl_replace_line("", 0);
 	rl_on_new_line();
 	ft_printf("\n");
 	rl_redisplay();
@@ -48,7 +48,7 @@ void	core(t_general *general)
 	general->lexer = NULL;
 }
 
-int	main(int ac, char **av, char **envp)
+int	main(int ac, char **av, char **environment_variables)
 {
 	t_general	general;
 	t_lex		*tmp;
@@ -58,19 +58,21 @@ int	main(int ac, char **av, char **envp)
 	signal(SIGINT, handle_sigint);
 	signal(SIGTERM, handle_sigquit);
 	signal(SIGQUIT, handle_sigquit);
-	init(&general, envp);
+	init(&general, environment_variables);
+
 	while (1)
 	{
 		g_last_exit_status = 0;
-		general.args = readline(YELLOW "kitty shell> " RESET);
-		if (general.args == NULL)
+		general.user_input = readline(YELLOW "kitty shell> " RESET);
+		printf("user_input: %s\n", general.user_input);
+		if (general.user_input == NULL)
 		{
 			ft_printf("exit\n");
 			free_and_exit(general.save_exit_status, &general);
 		}
-		if (general.args && *general.args)
-			add_history(general.args);
-		if (!is_whitespace_input(general.args))
+		if (general.user_input && *general.user_input)
+			add_history(general.user_input);
+		if (!is_whitespace_input(general.user_input))
 			core(&general);
 	}
 }

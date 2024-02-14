@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:16:09 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/01/25 18:13:35 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/14 18:27:43 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	handle_cd(t_general *general, t_lex *node)
 	old_directory = current_directory;
 	if (!node->command2[1])
 	{
-		if (ft_cd_only(general->envp2, node->command2, general,
+		if (ft_cd_only(general->environment_variables, node->command2, general,
 				old_directory) != 1)
 			return ;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:25:59 by frdal-sa          #+#    #+#             */
-/*   Updated: 2024/02/09 21:27:18 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/02/14 18:27:43 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	pathpiker(t_general *general)
 {
 	int	index;
 
-	index = my_setenv("PATH", NULL, &general->envp2);
+	index = my_setenv("PATH", NULL, &general->environment_variables);
 	if (index == -1)
 	{
 		if (general->path != NULL)
@@ -72,7 +72,7 @@ void	pathpiker(t_general *general)
 	}
 	if (general->path != NULL)
 		free_matrix(general->path);
-	general->path = ft_split((general->envp2[index] + 5), ':');
+	general->path = ft_split((general->environment_variables[index] + 5), ':');
 }
 
 int	build_matrix(char *str, t_lex *node, t_general *general)
