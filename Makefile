@@ -49,6 +49,8 @@ src = \
 
 OBJ = $(src:%.c=%.o)
 
+OBJ_DIR = obj
+
 FLAGS = -Wall -Werror -Wextra -g
 
 CC = gcc
@@ -59,11 +61,14 @@ $(NAME) : $(OBJ)
 	make all bonus -C lib/libft
 	make -C lib/ft_printf
 	$(CC) $(OBJ) $(FLAGS) $(LIBFT) $(PRINTF)  -o minishell -lreadline -lhistory -L /Users/$(USER)/.brew/opt/readline/lib -I /Users/$(USER)/.brew/opt/readline/include
+	mkdir -p $(OBJ_DIR)
+	mv $(OBJ) $(OBJ_DIR)
 	@echo "\033[32mmeow compiled\033[0m"
 clean:
 	make clean -C lib/libft
 	make clean -C lib/ft_printf
 	rm -f $(OBJ)
+	rm -rf $(OBJ_DIR)
 	@echo "\033[33mno sauce\033[0m"
 
 fclean: clean
