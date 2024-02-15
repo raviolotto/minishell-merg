@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcardina <jcardina@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:49:11 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/02/09 22:29:31 by jcardina         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:21:44 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	piping(int *fd, int *save_fd, t_lex *node, t_general *general)
 		builtinmanager(node, general);
 		exit (g_last_exit_status);
 	}
-	execve(node->command2[0], node->command2, NULL);
+	execve(node->arguments[0], node->arguments, NULL);
 	perror("execve: Command not found\n");
 }
 
@@ -50,7 +50,7 @@ void	execute_command2(t_lex *node, t_general *general, int *save_fd, int *fd)
 			builtinmanager(node, general);
 			exit (g_last_exit_status);
 		}
-		execve(node->command2[0], node->command2, NULL);
+		execve(node->arguments[0], node->arguments, NULL);
 	}
 }
 

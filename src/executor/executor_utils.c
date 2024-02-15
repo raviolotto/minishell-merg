@@ -6,7 +6,7 @@
 /*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:59:20 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/01 18:11:06 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:21:44 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ void	builtinmanager(t_lex *node, t_general *general)
 	if (node->builtin == 6)
 		handle_env(general);
 	if (node->builtin == 7)
-		handle_exit(node->command2, general);
+		handle_exit(node->arguments, general);
 }

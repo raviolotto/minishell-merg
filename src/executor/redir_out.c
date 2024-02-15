@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_out.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:29:54 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/08 18:09:55 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:21:44 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	open_fd(t_general *general, int i)
 	{
 		if (node->token == 2)
 		{
-			file = open(node->command, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+			file = open(node->main_command, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 			if (i == node->i)
 				general->file_fd = file;
 			else
@@ -59,7 +59,7 @@ int	open_fd(t_general *general, int i)
 		}
 		else if (node->token == 3)
 		{
-			file = open(node->command, O_WRONLY | O_CREAT | O_APPEND, 0777);
+			file = open(node->main_command, O_WRONLY | O_CREAT | O_APPEND, 0777);
 			if (i == node->i)
 				general->file_fd = file;
 			else
@@ -97,5 +97,5 @@ int	re_out(t_lex *node, t_general *general, int *save_fd)
 		dup2(save_fd[1], STDOUT_FILENO);
 		exit (g_last_exit_status);
 	}
-	execve(node->command2[0], node->command2, NULL);
+	execve(node->arguments[0], node->arguments, NULL);
 }

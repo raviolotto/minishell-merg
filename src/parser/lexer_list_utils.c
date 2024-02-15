@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_list_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 12:12:07 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/09 17:59:26 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:21:44 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_lex	*new_lex_node(void)
 	{
 		tmp->token = 0;
 		tmp->pipe_status = 0;
-		tmp->command2 = NULL;
+		tmp->arguments = NULL;
 		tmp->builtin = -1;
 		tmp->next = NULL;
 	}

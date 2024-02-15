@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_hd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 21:34:56 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/02/09 16:15:23 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:11:02 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	hd_son_routine(t_lex *node, t_general *general, int file)
 delimited by end-of-file\n");
 			exit(g_last_exit_status);
 		}
-		if (ft_strncmp(str, node->command, ft_strlen(node->command)) == 0)
+		if (ft_strncmp(str, node->main_command, ft_strlen(node->main_command)) == 0)
 		{
 			free(str);
 			break ;

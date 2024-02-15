@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general_utils3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:25:03 by frdal-sa          #+#    #+#             */
-/*   Updated: 2024/02/08 17:39:30 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:11:02 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,21 @@ void	file_name_handler(t_lex *node)
 
 	if (node->token == 3 || node->token == 5)
 	{
-		str = node->command + 2;
+		str = node->main_command + 2;
 		str = ft_strtrim(str, " ");
 		tmp = cleaner(str);
 		free(str);
-		free(node->command);
-		node->command = tmp;
+		free(node->main_command);
+		node->main_command = tmp;
 	}
 	else
 	{
-		str = node->command + 1;
+		str = node->main_command + 1;
 		str = ft_strtrim(str, " ");
 		tmp = cleaner(str);
 		free(str);
-		free(node->command);
-		node->command = tmp;
+		free(node->main_command);
+		node->main_command = tmp;
 	}
 }
 

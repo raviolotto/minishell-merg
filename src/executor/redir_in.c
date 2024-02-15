@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:52:02 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/02/09 16:11:15 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:11:02 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	fd_redirin2(t_general *general, int index, t_lex *node)
 	{
 		if (node->token == 4)
 		{
-			file = open(node->command, O_RDONLY);
+			file = open(node->main_command, O_RDONLY);
 			if (file < 0)
 			{
 				ft_putstr_fd("Error opening the file\n", 2);

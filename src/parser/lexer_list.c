@@ -6,7 +6,7 @@
 /*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 11:44:18 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/14 18:57:23 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:11:02 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	menage_token3(t_lex	*tmp, char *str, int i, int j)
 			j += quotes(str, j);
 		j++;
 	}
-	tmp->command = ft_substr(str, i, j);
+	tmp->main_command = ft_substr(str, i, j);
 	return (j);
 }
 
@@ -79,7 +79,7 @@ int	menage_token2(t_lex *tmp, char *str, int i, int j)
 			j += quotes(str, j);
 		j++;
 	}
-	tmp->command = ft_substr(str, i, j);
+	tmp->main_command = ft_substr(str, i, j);
 	return (j);
 }
 
@@ -96,7 +96,7 @@ int	manage_token(char *str, int i, t_general *general, int *p)
 		tmp->pipe_status = *p;
 		if (*p == 0)
 			*p = 1;
-		tmp->command = ft_substr(str, i, j);
+		tmp->main_command = ft_substr(str, i, j);
 		return (j);
 	}
 	else if (tmp->token == 3 || tmp->token == 5)

@@ -6,7 +6,7 @@
 /*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:01:40 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/14 18:27:54 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:21:44 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	afalcons(t_lex *node)
 {
 	if (node->next)
 		afalcons(node->next);
-	free_matrix(node->command2);
-	free(node->command);
+	free_matrix(node->arguments);
+	free(node->main_command);
 	free(node);
 }
 
@@ -40,9 +40,9 @@ void	free_lex(t_lex *node)
 		return ;
 	if (node->next)
 		free_lex(node->next);
-	if (node->command2 != NULL)
-		free_matrix(node->command2);
-	free(node->command);
+	if (node->arguments != NULL)
+		free_matrix(node->arguments);
+	free(node->main_command);
 	free(node);
 }
 

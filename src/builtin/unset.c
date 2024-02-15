@@ -6,7 +6,7 @@
 /*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 14:28:33 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/14 18:27:54 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:21:44 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_unsetenv(t_general *general, t_lex *node)
 	int		index;
 	char	**envtmp;
 
-	index = my_setenv(node->command2[1], NULL, &(general->environment_variables));
+	index = my_setenv(node->arguments[1], NULL, &(general->environment_variables));
 	if (index == -1)
 		return ;
 	envtmp = ft_calloc(matrixlen(general->environment_variables), sizeof(char *));
@@ -48,7 +48,7 @@ void	ft_unsetexp(t_general *general, t_lex *node)
 	int		index;
 	char	**envtmp;
 
-	index = my_setenv(node->command2[1], NULL, &(general->expanded_environment));
+	index = my_setenv(node->arguments[1], NULL, &(general->expanded_environment));
 	if (index == -1)
 		return ;
 	envtmp = ft_calloc(matrixlen(general->expanded_environment), sizeof(char *));
@@ -72,7 +72,7 @@ void	ft_unsetexp(t_general *general, t_lex *node)
 
 void	handle_unset(t_general *general, t_lex *node)
 {
-	if (!node->command2[1])
+	if (!node->arguments[1])
 		return ;
 	ft_unsetenv(general, node);
 	ft_unsetexp(general, node);

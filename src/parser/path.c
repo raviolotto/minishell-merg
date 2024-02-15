@@ -6,7 +6,7 @@
 /*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:25:59 by frdal-sa          #+#    #+#             */
-/*   Updated: 2024/02/14 18:27:43 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:21:44 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,24 +82,24 @@ int	build_matrix(char *str, t_lex *node, t_general *general)
 
 	i = 0;
 	pathpiker(general);
-	node->command2 = maxxisplit (str, ' ');
-	while (i < matrixlen(node->command2))
+	node->arguments = maxxisplit (str, ' ');
+	while (i < matrixlen(node->arguments))
 	{
-		if (handle_quotes(node->command2[i]) == 1)
+		if (handle_quotes(node->arguments[i]) == 1)
 			return (1);
-		quotes_manager(node->command2[i], general, i);
+		quotes_manager(node->arguments[i], general, i);
 		i++;
 	}
-	node->builtin = dumb_builtin_check(node->command2[0]);
+	node->builtin = dumb_builtin_check(node->arguments[0]);
 	if (node->builtin != 0)
 		return (0);
-	if (access(node->command2[0], F_OK | X_OK) == 0)
+	if (access(node->arguments[0], F_OK | X_OK) == 0)
 		return (0);
-	tmp = pathfinder(node->command2[0], general->path);
+	tmp = pathfinder(node->arguments[0], general->path);
 	if (tmp != NULL)
 	{
-		free(node->command2[0]);
-		node->command2[0] = tmp;
+		free(node->arguments[0]);
+		node->arguments[0] = tmp;
 	}
 	return (0);
 }
@@ -112,7 +112,7 @@ int	list_commander(t_general *general)
 	while (tmp)
 	{
 		if (tmp->token == 0)
-			build_matrix(tmp->command, tmp, general);
+			build_matrix(tmp->main_command, tmp, general);
 		else if (tmp->token != 0 && tmp->token != 1)
 			file_name_handler(tmp);
 		tmp = tmp->next;

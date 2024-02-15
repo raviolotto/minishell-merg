@@ -6,7 +6,7 @@
 /*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:51:44 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/02/14 18:27:54 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:21:44 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,11 @@ void	handle_export(t_general *general, t_lex *node)
 	int	i;
 
 	i = 1;
-	if (node->command2[i] == NULL)
+	if (node->arguments[i] == NULL)
 		print_export(general->expanded_environment);
-	while (node->command2[i])
+	while (node->arguments[i])
 	{
-		my_export(node->command2[i], &(general->environment_variables), &(general->expanded_environment));
+		my_export(node->arguments[i], &(general->environment_variables), &(general->expanded_environment));
 		i++;
 	}
 }

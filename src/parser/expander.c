@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 14:11:22 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/09 16:36:00 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:22:14 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,17 @@ char	*ft_str_dollar_cpy(char *src)
 	return (dest);
 }
 
-void	node_expander(char **command2, t_general *general)
+void	node_expander(char **arguments, t_general *general)
 {
 	int		i;
 
 	i = -1;
-	while (command2[++i])
+	while (arguments[++i])
 	{
+		//printf("command2[i]: %s\n", arguments[i]);
 		if (general->flag_quotes[i] != 1)
 		{
-			ft_expander_case(&command2[i], general);
+			ft_expander_case(&arguments[i], general);
 		}
 	}
 }
@@ -90,8 +91,16 @@ void	expander(t_general *general)
 	tmp = general->lexer;
 	while (tmp)
 	{
+	printf("tmp->command: %s\n", tmp->main_command);
+	printf("tmp->arguments: %s\n", tmp->arguments[0]);
+	printf("tmp->token: %d\n", tmp->token);
+	printf("tmp->pipe_status: %d\n", tmp->pipe_status);
+	printf("tmp->builtin: %d\n", tmp->builtin);
+	printf("tmp->i: %d\n", tmp->i);
+	printf("tmp->next: %s\n", tmp->next);
+
 		if (tmp->token == 0)
-			node_expander(tmp->command2, general);
+			node_expander(tmp->arguments, general);
 		tmp = tmp->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:16:09 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/02/14 18:27:43 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:21:44 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ void	handle_cd(t_general *general, t_lex *node)
 	if (getcwd(current_directory, PATH_MAX) == NULL)
 		return ;
 	old_directory = current_directory;
-	if (!node->command2[1])
+	if (!node->arguments[1])
 	{
-		if (ft_cd_only(general->environment_variables, node->command2, general,
+		if (ft_cd_only(general->environment_variables, node->arguments, general,
 				old_directory) != 1)
 			return ;
 	}
-	else if (ft_change_dir(node->command2[1], node->command2, general,
+	else if (ft_change_dir(node->arguments[1], node->arguments, general,
 			old_directory) != 1)
 		return ;
 }

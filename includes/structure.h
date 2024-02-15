@@ -6,7 +6,7 @@
 /*   By: frdal-sa <frdal-sa@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:16:18 by jcardina          #+#    #+#             */
-/*   Updated: 2024/02/14 18:38:17 by frdal-sa         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:21:44 by frdal-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 typedef struct s_lex
 {
-	char			*command;
-	char			**command2;
+	char			*main_command;
+	char			**arguments;
 	int				token;
 	// 0= comando, 1 = |, 2 = >, 3 = >>, 4 = <, 5 = << COMMENTO DA NON ELIMINARE
 	int				pipe_status;
