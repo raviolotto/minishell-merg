@@ -36,7 +36,7 @@ void	ft_unsetenv(t_general *general, t_lex *node)
 		}
 		j++;
 	}
-	envtmp[j] = NULL;
+	envtmp[j] == NULL;
 	free_matrix(general->environment_variables);
 	general->environment_variables = envtmp;
 }
@@ -65,7 +65,7 @@ void	ft_unsetexp(t_general *general, t_lex *node)
 		}
 		j++;
 	}
-	envtmp[j] = NULL;
+	envtmp[j] == NULL;
 	free_matrix(general->expanded_environment);
 	general->expanded_environment = envtmp;
 }

@@ -91,13 +91,13 @@ void	expander(t_general *general)
 	tmp = general->lexer;
 	while (tmp)
 	{
-	printf("tmp->command: %s\n", tmp->main_command);
-	printf("tmp->arguments: %s\n", tmp->arguments[0]);
-	printf("tmp->token: %d\n", tmp->token);
-	printf("tmp->pipe_status: %d\n", tmp->pipe_status);
-	printf("tmp->builtin: %d\n", tmp->builtin);
-	printf("tmp->i: %d\n", tmp->i);
-	printf("tmp->next: %s\n", tmp->next);
+	// printf("tmp->command: %s\n", tmp->main_command);
+	// printf("tmp->arguments: %s\n", tmp->arguments[0]);
+	// printf("tmp->token: %d\n", tmp->token);
+	// printf("tmp->pipe_status: %d\n", tmp->pipe_status);
+	// printf("tmp->builtin: %d\n", tmp->builtin);
+	// printf("tmp->i: %d\n", tmp->i);
+	//printf("tmp->next: %s\n", tmp->next);
 
 		if (tmp->token == 0)
 			node_expander(tmp->arguments, general);
